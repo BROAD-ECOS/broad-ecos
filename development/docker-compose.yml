@@ -1,24 +1,26 @@
 nginx:
   build: docker/nginx
   links:
-    - phpfpm
+    - moodle
   ports:
     - "80:80"
     - "443:443"
   volumes_from:
-    - phpfpm
+    - moodle
   volumes:
     - config/nginx:/etc/nginx/conf.d/
     - log/nginx:/var/log/nginx
-phpfpm:
-  build: docker/phpfpm
+
+moodle:
+  build: docker/moodle
   links:
     - mariadb
     - memcached
   ports:
     - "9000:9000"
   volumes:
-    - src/php:/var/www/html
+    - src/broad-ecos-moodle-mod:/var/www/html/moodle/mod/broadecosmod
+
 mariadb:
   build: docker/mariadb
   ports:
@@ -26,8 +28,8 @@ mariadb:
   volumes:
     - log/mariadb:/var/log/mysql
     - data/mariadb:/var/lib/mysql
-  environment:
-    DB_ADMIN_PASS: pass
+  env_file: envvars/mariadb.env
+
 memcached:
   build: docker/memcached
   ports:

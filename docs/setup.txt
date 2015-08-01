@@ -2,16 +2,20 @@ Docker: https://docs.docker.com/installation/ubuntulinux/
 
 
 
-  try_files $uri @rewriteapp;
+  FROM php:fpm
+  MAINTAINER Welington Veiga <welington.veiga@gmail.com>
 
-location @rewriteapp {
-    rewrite ^(.*)$ /app.php/$1 last;
-}
+  # PHP config
+  ADD ./php.ini /usr/local/etc/php/
 
-location ~ ^/(app|app_dev|config)\.php(/|$) {
-    fastcgi_pass phpfcgi;
-    fastcgi_split_path_info ^(.+\.php)(/.*)$;
-    include fastcgi_params;
-    fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    fastcgi_param  HTTPS off;
-}
+  # Install modules
+  RUN apt-get update \
+      && apt-get install -y \
+          php5-xdebug \
+          php5-intl \
+      && docker-php-ext-install \
+          pdo_mysql \
+          mbstring \
+          opcache
+
+  CMD ["php-fpm"]
