@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines backup_newmodule_activity_task class
+ * Defines backup_broadecosmod_activity_task class
  *
- * @package   mod_newmodule
+ * @package   mod_broadecosmod
  * @category  backup
  * @copyright 2015 Your Name <your@email.adress>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,17 +25,17 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-require_once($CFG->dirroot . '/mod/newmodule/backup/moodle2/backup_newmodule_stepslib.php');
+require_once($CFG->dirroot . '/mod/broadecosmod/backup/moodle2/backup_broadecosmod_stepslib.php');
 
 /**
- * Provides the steps to perform one complete backup of the newmodule instance
+ * Provides the steps to perform one complete backup of the broadecosmod instance
  *
- * @package   mod_newmodule
+ * @package   mod_broadecosmod
  * @category  backup
  * @copyright 2015 Your Name <your@email.adress>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class backup_newmodule_activity_task extends backup_activity_task {
+class backup_broadecosmod_activity_task extends backup_activity_task {
 
     /**
      * No specific settings for this activity
@@ -44,10 +44,10 @@ class backup_newmodule_activity_task extends backup_activity_task {
     }
 
     /**
-     * Defines a backup step to store the instance data in the newmodule.xml file
+     * Defines a backup step to store the instance data in the broadecosmod.xml file
      */
     protected function define_my_steps() {
-        $this->add_step(new backup_newmodule_activity_structure_step('newmodule_structure', 'newmodule.xml'));
+        $this->add_step(new backup_broadecosmod_activity_structure_step('broadecosmod_structure', 'broadecosmod.xml'));
     }
 
     /**
@@ -61,12 +61,12 @@ class backup_newmodule_activity_task extends backup_activity_task {
 
         $base = preg_quote($CFG->wwwroot, '/');
 
-        // Link to the list of newmodules.
-        $search = '/('.$base.'\/mod\/newmodule\/index.php\?id\=)([0-9]+)/';
+        // Link to the list of broadecosmods.
+        $search = '/('.$base.'\/mod\/broadecosmod\/index.php\?id\=)([0-9]+)/';
         $content = preg_replace($search, '$@NEWMODULEINDEX*$2@$', $content);
 
-        // Link to newmodule view by moduleid.
-        $search = '/('.$base.'\/mod\/newmodule\/view.php\?id\=)([0-9]+)/';
+        // Link to broadecosmod view by moduleid.
+        $search = '/('.$base.'\/mod\/broadecosmod\/view.php\?id\=)([0-9]+)/';
         $content = preg_replace($search, '$@NEWMODULEVIEWBYID*$2@$', $content);
 
         return $content;

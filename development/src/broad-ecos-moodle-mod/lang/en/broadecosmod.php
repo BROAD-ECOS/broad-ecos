@@ -16,24 +16,24 @@
 
 
 /**
- * English strings for newmodule
+ * English strings for broadecosmod
  *
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_newmodule
+ * @package    mod_broadecosmod
  * @copyright  2015 Your Name
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['modulename'] = 'newmodule';
-$string['modulenameplural'] = 'newmodules';
-$string['modulename_help'] = 'Use the newmodule module for... | The newmodule module allows...';
-$string['newmodulefieldset'] = 'Custom example fieldset';
-$string['newmodulename'] = 'newmodule name';
-$string['newmodulename_help'] = 'This is the content of the help tooltip associated with the newmodulename field. Markdown syntax is supported.';
-$string['newmodule'] = 'newmodule';
-$string['pluginadministration'] = 'newmodule administration';
-$string['pluginname'] = 'newmodule';
+$string['modulename'] = 'broadecosmod';
+$string['modulenameplural'] = 'broadecosmods';
+$string['modulename_help'] = 'Use the broadecosmod module for... | The broadecosmod module allows...';
+$string['broadecosmodfieldset'] = 'Custom example fieldset';
+$string['broadecosmodname'] = 'broadecosmod name';
+$string['broadecosmodname_help'] = 'This is the content of the help tooltip associated with the broadecosmodname field. Markdown syntax is supported.';
+$string['broadecosmod'] = 'broadecosmod';
+$string['pluginadministration'] = 'broadecosmod administration';
+$string['pluginname'] = 'broadecosmod';
