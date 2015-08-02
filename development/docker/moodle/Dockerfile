@@ -5,21 +5,38 @@ MAINTAINER Welington Veiga <welington.veiga@gmail.com>
 ADD ./php.ini /usr/local/etc/php/
 
 # Install modules
+# Install PHP modules
 RUN apt-get update \
-    && apt-get install -y \
-        php5-xdebug \
-        php5-intl \
-    && docker-php-ext-install \
-        pdo_mysql \
-        mbstring \
-        opcache
+&& apt-get install -y zlib1g-dev \
+ libxml2-dev \
+ libpng12-dev \
+ libfreetype6-dev \
+ libjpeg62-turbo-dev \
+ libicu-dev \
+ g++ \
+ ghostscript \
+ graphviz \
+ aspell \
+&& rm -r /var/lib/apt/lists/* \
+&& docker-php-ext-configure gd \
+ --with-freetype-dir=/usr/include/ \
+ --with-gd-dir=usr/include/ \
+&& docker-php-ext-install zip \
+ mysqli \
+ gd \
+ mbstring \
+ xmlrpc \
+ soap \
+ intl \
+ opcache
 
 RUN curl -O https://download.moodle.org/download.php/direct/stable29/moodle-latest-29.tgz \
 && tar -xzf moodle-latest-29.tgz -C /var/www \
 && rm -Rf /var/www/html/moodle \
 && mv /var/www/moodle /var/www/html/moodle \
-&& chmod -R 0777 /var/www/html/moodle \
-&& chown -R root:root /var/www/html/moodle
+&& mkdir -p  /var/www/moodledata \
+&& chmod -R 0777 /var/www/ \
+&& chown -R root:root /var/www/
 
 VOLUME /var/www/html
 CMD ["php-fpm"]

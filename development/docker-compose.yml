@@ -20,6 +20,7 @@ moodle:
     - "9000:9000"
   volumes:
     - src/broad-ecos-moodle-mod:/var/www/html/moodle/mod/broadecosmod
+#    - data/moodle/moodledata:/var/www/moodledata:rw
 
 mariadb:
   build: docker/mariadb
@@ -28,7 +29,8 @@ mariadb:
   volumes:
     - log/mariadb:/var/log/mysql
     - data/mariadb:/var/lib/mysql
-  env_file: envvars/mariadb.env
+  env_file:
+    - ./envvars/mariadb.env
 
 memcached:
   build: docker/memcached

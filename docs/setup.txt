@@ -19,3 +19,6 @@ Docker: https://docs.docker.com/installation/ubuntulinux/
           opcache
 
   CMD ["php-fpm"]
+
+
+find . -depth -name '*newmodule*' -execdir bash -c 'mv -i "$1" "${1//newmodule/broadecosmod}"' bash {} \;
