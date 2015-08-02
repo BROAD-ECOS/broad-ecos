@@ -1,5 +1,7 @@
 Docker: https://docs.docker.com/installation/ubuntulinux/
 
+admin
+Adm!n2015
 
 
   FROM php:fpm

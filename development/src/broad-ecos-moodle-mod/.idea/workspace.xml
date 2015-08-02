@@ -74,7 +74,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-14.375">
               <caret line="36" column="35" selection-start-line="36" selection-start-column="35" selection-end-line="36" selection-end-column="35" />
-              <folding />
+              <folding>
+                <marker date="1438519219753" expanded="true" signature="694:718" placeholder=" English strings for newmodule ..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -94,7 +96,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="17.083334">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+              <folding>
+                <marker date="1438519219749" expanded="true" signature="693:729" placeholder=" Prints a particular instance of newmodule ..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -102,7 +106,7 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.89041096">
+            <state vertical-scroll-proportion="-0.21232876">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -121,6 +125,13 @@
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
       <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/index.php" />
+      </list>
     </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" />
@@ -284,12 +295,12 @@
       <created>1438474359114</created>
       <option name="number" value="Default" />
       <updated>1438474359114</updated>
-      <workItem from="1438474363821" duration="686000" />
+      <workItem from="1438474363821" duration="1284000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="686000" />
+    <option name="totallyTimeSpent" value="1284000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1971" y="204" width="1549" height="876" extended-state="6" />
@@ -398,7 +409,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-14.375">
           <caret line="36" column="35" selection-start-line="36" selection-start-column="35" selection-end-line="36" selection-end-column="35" />
-          <folding />
+          <folding>
+            <marker date="1438519219753" expanded="true" signature="694:718" placeholder=" English strings for newmodule ..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -414,13 +427,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="17.083334">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1438519219749" expanded="true" signature="693:729" placeholder=" Prints a particular instance of newmodule ..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.89041096">
+        <state vertical-scroll-proportion="-0.21232876">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>

@@ -30,10 +30,12 @@ RUN apt-get update \
  intl \
  opcache
 
+# Download and placing moodle
 RUN curl -O https://download.moodle.org/download.php/direct/stable29/moodle-latest-29.tgz \
 && tar -xzf moodle-latest-29.tgz -C /var/www \
-&& rm -Rf /var/www/html/moodle \
+&& rm -Rf /var/www/html/moodle/ \
 && mv /var/www/moodle /var/www/html/moodle \
+&& rm  /var/www/html/moodle/config-dist.php \
 && mkdir -p  /var/www/moodledata \
 && chmod -R 0777 /var/www/ \
 && chown -R root:root /var/www/
