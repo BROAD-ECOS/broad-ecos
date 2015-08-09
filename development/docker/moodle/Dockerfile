@@ -13,6 +13,7 @@ RUN apt-get update \
  libfreetype6-dev \
  libjpeg62-turbo-dev \
  libicu-dev \
+ libcurl4-gnutls-dev \
  g++ \
  ghostscript \
  graphviz \
@@ -28,7 +29,8 @@ RUN apt-get update \
  xmlrpc \
  soap \
  intl \
- opcache
+ opcache \
+ curl
 
 # Download and placing moodle
 RUN curl -O https://download.moodle.org/download.php/direct/stable29/moodle-latest-29.tgz \

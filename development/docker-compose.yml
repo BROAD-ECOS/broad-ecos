@@ -16,12 +16,22 @@ moodle:
   links:
     - mariadb
     - memcached
+    - broadauth
   ports:
     - "9000:9000"
   volumes:
     - src/broad-ecos-moodle-mod:/var/www/html/moodle/mod/broadecosmod
     - config/moodle/config.php:/var/www/html/moodle/config.php
-#    - data/moodle/moodledata:/var/www/moodledata:rw
+
+broadauth:
+    build: docker/broad/auth
+    hostname: dev.broadecos.auth
+    ports:
+      - "9999:9999"
+    volumes:
+      - src/AuthService/build/libs/demo-0.0.1.jar:/opt/app.jar
+      - config/broad/auth/application.properties:/opt/application.properties
+      - log/broad/auth/:/var/log
 
 mariadb:
   build: docker/mariadb
