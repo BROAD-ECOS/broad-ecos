@@ -67,7 +67,8 @@ class mod_broadecosmod_mod_form extends moodleform_mod {
         $mform->addElement('static', 'label1', 'broadecosmodsetting1', 'Your broadecosmod fields go here. Replace me!');
 
         $mform->addElement('header', 'broadecosmodfieldset', get_string('broadecosmodfieldset', 'broadecosmod'));
-        $mform->addElement('static', 'label2', 'broadecosmodsetting2', 'Your broadecosmod fields go here. Replace me!');
+        $mform->addElement('static', 'label2', 'broadecosmodsetting2', 'Your  broadecosmod fields go here. Replace me!');
+
 
         // Add standard grading elements.
         $this->standard_grading_coursemodule_elements();
