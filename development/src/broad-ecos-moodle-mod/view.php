@@ -67,6 +67,11 @@ $PAGE->set_heading(format_string($course->fullname));
  * $PAGE->set_focuscontrol('some-html-id');
  * $PAGE->add_body_class('broadecosmod-'.$somevar);
  */
+if (!isset($_COOKIE['broadecos.token'])) {
+    $sessionToken = bin2hex(openssl_random_pseudo_bytes(16));
+    var_dump(setcookie("broadecos.token", $sessionToken));
+    var_dump($sessionToken);
+}
 
 // Output starts here.
 echo $OUTPUT->header();
@@ -76,8 +81,12 @@ if ($broadecosmod->intro) {
     echo $OUTPUT->box(format_module_intro('broadecosmod', $broadecosmod, $cm->id), 'generalbox mod_introbox', 'broadecosmodintro');
 }
 
+
+
 // Replace the following lines with you own code.
-echo $OUTPUT->heading('Yay! It works!');
+echo $OUTPUT->heading('Acesso à Serviço Externo');
+echo '<hr />';
+echo '<iframe src="http://www.w3schools.com?"  width="100%" height="779px" frameborder="0"></iframe>';
 
 // Finish the page.
 echo $OUTPUT->footer();

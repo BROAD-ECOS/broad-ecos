@@ -8,38 +8,48 @@ nginx:
   volumes_from:
     - moodle
   volumes:
-    - config/nginx:/etc/nginx/conf.d/
-    - log/nginx:/var/log/nginx
+    - ./config/nginx:/etc/nginx/conf.d/
+    - ./log/nginx:/var/log/nginx
 
 moodle:
   build: docker/moodle
   links:
     - mariadb
     - memcached
-    - broadauth
+#    - broadauth
   ports:
     - "9000:9000"
   volumes:
-    - src/broad-ecos-moodle-mod:/var/www/html/moodle/mod/broadecosmod
-    - config/moodle/config.php:/var/www/html/moodle/config.php
+    - ./src/broad-ecos-moodle-mod:/var/www/html/moodle/mod/broadecosmod
+    - ./config/moodle/config.php:/var/www/html/moodle/config.php
 
-broadauth:
-    build: docker/broad/auth
-    hostname: dev.broadecos.auth
-    ports:
-      - "9999:9999"
-    volumes:
-      - src/AuthService/build/libs/demo-0.0.1.jar:/opt/app.jar
-      - config/broad/auth/application.properties:/opt/application.properties
-      - log/broad/auth/:/var/log
+#postgresql:
+#  build: docker/broad/postgresql
+#  ports:
+#    - "5433:5432"
+#  volumes:
+#    - ./data/broad/postgresql:/var/lib/postgresql
+#  env_file:
+#    - ./envvars/postgresql.env
+
+#broadauth:
+#  build: docker/broad/auth
+#  links:
+#    - postgresql
+#  ports:
+#    - "9999:9999"
+#  volumes:
+#    - ./src/broad-ecos-auth-service/build/libs/demo-0.0.1.jar:/opt/app.jar
+#  env_file:
+#    - ./envvars/broad/auth.env
 
 mariadb:
   build: docker/mariadb
   ports:
     - "3307:3306"
   volumes:
-    - log/mariadb:/var/log/mysql
-    - data/mariadb:/var/lib/mysql
+    - ./log/mariadb:/var/log/mysql
+    - ./data/mariadb:/var/lib/mysql
   env_file:
     - ./envvars/mariadb.env
 

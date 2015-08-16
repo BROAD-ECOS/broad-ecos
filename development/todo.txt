@@ -1,0 +1,4 @@
+[ ]
+[ ] Refatorar scripts do mod_form.js
+[ ] Estilizar "loading" de serviços, escopos são requeridos.
+[ ] Ajustar Internacionalização

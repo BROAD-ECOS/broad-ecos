@@ -6,9 +6,9 @@ require('lib/OAuth2/GrantType/AuthorizationCode.php');
 const CLIENT_ID     = 'acme';
 const CLIENT_SECRET = 'acmesecret';
 
-const REDIRECT_URI           = 'http://broadauth/moodle/mod/broadecosmod/info.php';
-const AUTHORIZATION_ENDPOINT = 'http://broadauth:9999/uaa/oauth/authorize';
-const TOKEN_ENDPOINT         = 'http://acme:acmesecret@broadauth:9999/uaa/oauth/token';
+const REDIRECT_URI           = 'http://dev.broadecos/moodle/mod/broadecosmod/info.php';
+const AUTHORIZATION_ENDPOINT = 'http://user:password@dev.broadecos:9999/uaa/oauth/authorize';
+const TOKEN_ENDPOINT         = 'http://dev.broadecos:9999/uaa/oauth/token';
 
 
 
@@ -29,6 +29,9 @@ else
 
     $client->setAccessToken($info['access_token']);
 
-    $response = $client->fetch('http://acme:acmesecret@broadauth:9999/uaa/oauth/check_token?token='.$info['access_token'].'&');
+    $response = $client->fetch('http://dev.broadecos:9999/uaa/oauth/check_token?token='.$info['access_token'].'&');
     var_dump($response);
 }
+
+// --------------
+

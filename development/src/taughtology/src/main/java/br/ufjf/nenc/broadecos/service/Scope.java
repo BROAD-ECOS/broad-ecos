@@ -11,7 +11,7 @@ public enum Scope {
         this.name = name;
     }
 
-    public String getName() {
+    public String scope() {
         return name;
     }
 }

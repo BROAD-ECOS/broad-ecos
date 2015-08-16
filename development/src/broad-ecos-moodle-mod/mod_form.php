@@ -29,6 +29,8 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot.'/course/moodleform_mod.php');
 
+
+
 /**
  * Module instance settings form
  *
@@ -42,9 +44,9 @@ class mod_broadecosmod_mod_form extends moodleform_mod {
      * Defines forms elements
      */
     public function definition() {
+        global $DB;
 
         $mform = $this->_form;
-
         // Adding the "general" fieldset, where all the common settings are showed.
         $mform->addElement('header', 'general', get_string('general', 'form'));
 
@@ -59,15 +61,40 @@ class mod_broadecosmod_mod_form extends moodleform_mod {
         $mform->addRule('name', get_string('maximumchars', '', 255), 'maxlength', 255, 'client');
         $mform->addHelpButton('name', 'broadecosmodname', 'broadecosmod');
 
+
         // Adding the standard "intro" and "introformat" fields.
-        $this->add_intro_editor();
+        $this->standard_intro_elements();
 
         // Adding the rest of broadecosmod settings, spreading all them into this fieldset
         // ... or adding more fieldsets ('header' elements) if needed for better logic.
         $mform->addElement('static', 'label1', 'broadecosmodsetting1', 'Your broadecosmod fields go here. Replace me!');
 
-        $mform->addElement('header', 'broadecosmodfieldset', get_string('broadecosmodfieldset', 'broadecosmod'));
-        $mform->addElement('static', 'label2', 'broadecosmodsetting2', 'Your  broadecosmod fields go here. Replace me!');
+
+        // Adding the "general" fieldset, where all the common settings are showed.
+        $mform->addElement('header', 'serviceconfig', get_string('serviceconfig', 'broadecosmod'));
+
+        $mform->addElement('hidden', 'external_service_uri');
+        $mform->setType('external_service_uri', PARAM_RAW);
+
+        $scopes = array();
+        if ($this->_instance) {
+
+            $searchScopes = "
+                   SELECT name
+                     FROM {broadecosmod_scopes}
+                    WHERE broadecosmod_id = ?";
+
+            $scopesRescords =  $DB->get_records_sql($searchScopes, array($this->_instance));
+
+            foreach ($scopesRescords as $scope) {
+                array_push($scopes, $scope->name);
+            }
+        }
+
+        $mform->addElement('hidden', 'broadecos_activity_scopes', implode(',', $scopes));
+        $mform->setType('broadecos_activity_scopes', PARAM_RAW);
+
+
 
 
         // Add standard grading elements.
@@ -76,7 +103,16 @@ class mod_broadecosmod_mod_form extends moodleform_mod {
         // Add standard elements, common to all modules.
         $this->standard_coursemodule_elements();
 
-        // Add standard buttons, common to all modules.
         $this->add_action_buttons();
+
+    }
+
+    function display() {
+        $mform = $this->_form;
+
+        // Add standard buttons, common to all modules.]
+        $jsfile = dirname(__FILE__).'/static/mod_form.js';
+        echo "<script type='text/javascript'>".file_get_contents($jsfile)."</script>";
+        $mform->display();
     }
 }

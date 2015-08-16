@@ -1,7 +1,7 @@
 package br.ufjf.nenc.thautology.rest;
 
-/**
- * Created by welingtonveiga on 16/08/15.
- */
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@RequestMapping(value = "/play")
 public class EntryPointResource {
 }

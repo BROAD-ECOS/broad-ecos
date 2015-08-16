@@ -10,9 +10,9 @@ import java.security.Principal;
 @EnableResourceServer
 public class ClientResource {
 
-
     @RequestMapping("/user")
     public Principal user(Principal user) {
         return user;
     }
+
 }
