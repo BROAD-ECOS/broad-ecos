@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3><i class="mdi-action-done-all"></i> Desafios Aceitos</h3>
+                <hr />
+                <div class="row">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3><i class="mdi-content-send"></i> Desafios Enviados</h3>
+                <hr />
+                <div class="row">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3><i class="mdi-action-list"></i> Todos os desafios</h3>
+                <hr />
+                <div class="row" ng-repeat="(level, levelAnswers) in answers">
+                    <div class="col-md-2">
+                        <h3>{{levelName(level)}} {{answers[level].length}}/4</h3>
+                    </div>
+                    <div  class="col-md-10">
+                        <div class="list-group">
+                            <a  ng-repeat="levelAnswer in levelAnswers track by $index" href="#/answer-feedback/{{levelAnswer.id}}" class="list-group-item" >
+                                <h4 class="list-group-item-heading">
+                                    # {{$index+1}}
+                                    {{levelAnswer.question.title}}
+                                    <span class="label label-success" ng-if="levelAnswer.correct">ACERTOU</span>
+                                    <span class="label label-danger"  ng-if="!levelAnswer.correct">ERROU</span>
+                                </h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

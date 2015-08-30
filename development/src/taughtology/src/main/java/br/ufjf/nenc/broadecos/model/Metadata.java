@@ -1,4 +1,4 @@
-package br.ufjf.nenc.broadecos.service;
+package br.ufjf.nenc.broadecos.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

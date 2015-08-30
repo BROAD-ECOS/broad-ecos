@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<api>
+    <resourse>
+        <method>GET</method>
+        <path>/me</path>
+        <required-scopes>
+            <required-scope>participant.profile</required-scope>
+            <required-scope/>
+        </required-scopes>
+        <parameters>
+            <param>
+                <name>id</name>
+                <required>false</required>
+                <default>1=1</default>
+            </param>
+            <param />
+        </parameters>
+        <query><![CDATA[
+            select
+                id,
+
+            from
+                {user}
+            where
+                id={{context.participantId}}
+        ]]></query>
+    </resourse>
+    <resourse/>
+</api>

@@ -1,4 +1,4 @@
-package br.ufjf.nenc.broadecos.service;
+package br.ufjf.nenc.broadecos.model;
 
 
 public enum Scope {
