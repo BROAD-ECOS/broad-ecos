@@ -1,7 +1,13 @@
 package br.ufjf.nenc.thautology.model;
 
-/**
- * Created by welingtonveiga on 19/08/15.
- */
-public class Option {
+import lombok.*;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+public class Option extends Entity {
+
+    private String content;
 }

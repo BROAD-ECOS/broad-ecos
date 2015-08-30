@@ -1,7 +1,37 @@
 package br.ufjf.nenc.thautology.model;
 
-/**
- * Created by welingtonveiga on 19/08/15.
- */
-public class Question {
+
+import com.google.common.collect.BiMap;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+
+import java.io.Serializable;
+import java.util.Date;
+
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class Question extends Entity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @NonNull
+    private String title;
+
+    @NonNull
+    private String content;
+
+    private String image;
+
+    @NonNull
+    private Boolean solution;
+
+    @NonNull
+    private Level level;
+
+
+
 }

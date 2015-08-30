@@ -2,11 +2,13 @@
 
 (function() {
     var app = angular.module('taughtology');
-    app.controller('userMenuCtrl', ['$scope', 'User', function ($scope, User) {
+    app.controller('participantMenuCtrl', ['$scope', 'userService', function ($scope, userService) {
 
-        User.me().$promise.then(function(){
-            console.log(me);
-        })
+        $scope.user = {};
+
+        userService.contextUser().then(function(user){
+            $scope.user = user;
+        });
 
     }]);
 })();

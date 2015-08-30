@@ -1,8 +1,10 @@
 'use strict';
 
-app.controller('IndexCtrl',  ['$scope',function($scope) {
+(function() {
+    var app = angular.module('taughtology')
+    app.controller('IndexCtrl', ['$scope', '$location', 'broadcontext', function ($scope, broadcontext, $location) {
 
-    $scope.name = 'Ola Mundo!';
+        
 
-
-}]);
+    }]);
+})();

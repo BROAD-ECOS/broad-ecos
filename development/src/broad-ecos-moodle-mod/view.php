@@ -67,26 +67,27 @@ $PAGE->set_heading(format_string($course->fullname));
  * $PAGE->set_focuscontrol('some-html-id');
  * $PAGE->add_body_class('broadecosmod-'.$somevar);
  */
+$sessionToken=null;
 if (!isset($_COOKIE['broadecos.token'])) {
     $sessionToken = bin2hex(openssl_random_pseudo_bytes(16));
-    var_dump(setcookie("broadecos.token", $sessionToken));
-    var_dump($sessionToken);
+
 }
+
+// 1 - Verificar se há token
+    // 2 - Gerar código
+    // 3 - Enviar código
+// 3 - Carregar com token
+
+
 
 // Output starts here.
 echo $OUTPUT->header();
 
-// Conditions to show the intro can change to look for own settings or whatever.
-if ($broadecosmod->intro) {
-    echo $OUTPUT->box(format_module_intro('broadecosmod', $broadecosmod, $cm->id), 'generalbox mod_introbox', 'broadecosmodintro');
-}
-
-
-
-// Replace the following lines with you own code.
-echo $OUTPUT->heading('Acesso à Serviço Externo');
 echo '<hr />';
-echo '<iframe src="http://www.w3schools.com?"  width="100%" height="779px" frameborder="0"></iframe>';
+echo '<iframe src="'.($broadecosmod->external_service_entrypoint)
+        .'?token='.$sessionToken
+        .'&platform='.urlencode('http://dev.broadecos/moodle/mod/broadecosmod/ws.php')
+        .'"  width="100%" height="779px" frameborder="0"></iframe>';
 
 // Finish the page.
 echo $OUTPUT->footer();

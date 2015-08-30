@@ -1,4 +1,7 @@
-[ ]
-[ ] Refatorar scripts do mod_form.js
-[ ] Estilizar "loading" de serviços, escopos são requeridos.
-[ ] Ajustar Internacionalização
+
+[ ] [env] Corrigir portas mapeadas
+[ ] [mod_broad] Adiconar ícones e formalizar metadados
+[ ] [mod_broad] Refatorar scripts do mod_form.js
+[ ] [mod_broad] Ajustar Internacionalização
+[ ] [mod_broad] Descrever permissões.
+[ ] [mod_broad] Estilizar "loading" de serviços, escopos são requeridos.

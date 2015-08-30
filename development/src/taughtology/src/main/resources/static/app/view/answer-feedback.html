@@ -1,10 +1,122 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<div ng-if="answer.correct" class="alert alert-dismissable alert-success">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <p><i class="fa fa-trophy  fa-fg"></i> <strong>Parabens !</strong> Você acaba de acertar o desafio <strong>{{answer.question.title}}</strong> nível <strong>{{levelName}}</strong>!</p>
+</div>
 
-</body>
-</html>
+<div ng-if="!answer.correct" class="alert alert-dismissable alert-danger">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <p><i class="fa fa-frown-o fa-lg"></i> <strong>Não foi dessa vez...</strong> Você errou o desafio <strong>{{answer.question.title}}</strong> nível <strong>{{levelName}}</strong></p>
+</div>
+
+
+<div ng-if="achievement.value>0" class="alert alert-dismissable alert-success">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <p><i class="fa fa-star fa-fg"></i> Essa conquista vale <strong>{{achievement.value}} pontos</strong>!</p>
+</div>
+
+<h1> <i class="fa fa-bookmark"></i> Desafio</h1>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>{{answer.question.title}}</h2>
+                <hr>
+                <p class="lead">{{answer.question.content}}</p>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-1">
+                <span class="fa-stack fa-2x" style="color:red;"  ng-if="!answer.correct">
+                  <i class="fa fa-circle-o fa-stack-2x"></i>
+                  <i class="fa fa-frown-o fa-stack-1x"></i>
+                </span>
+                <span class="fa-stack fa-2x" style="color:green;"  ng-if="answer.correct">
+                  <i class="fa fa-circle-o fa-stack-2x"></i>
+                  <i class="fa fa-trophy fa-stack-1x"></i>
+                </span>
+            </div>
+            <div class="col-md-5">
+                <h4 ng-if="!answer.correct">
+                 Sinto muito, você respondeu
+                    <span class="label {{answeredClass}}">{{answeredMessage}}</span>,
+                    porém a resposta correta é
+                    <span class="label {{correctAnswerClass}}">{{correctAnswerMessage}}</span>
+                </h4>
+                <h4 ng-if="answer.correct">Você acertou, a resposta correta é
+                    <span class="label {{answeredClass}}">{{answeredMessage}}</span>!
+                </h4>
+
+            </div>
+            <div class="col-md-3">
+                <a ng-if="!answer.correct" class="btn btn-default btn-raised" href="#/question"  role="button"><i class="fa fa-paper-plane fa-fg"></i> Enviar Desafio</a>
+            </div>
+            <div class="col-md-2">
+                <a class="btn btn-primary" href="#/question" role="button">Continuar <i class="fa fa-angle-double-right fa-lg"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <h3><i class="fa fa-commenting-o"></i> Enviar Comentário</h3>
+                <hr />
+            </div>
+        </div>
+        <form class="form-horizontal">
+            <fieldset>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <textarea  ng-model="comment" rows="3" class="form-control"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="row">
+                <div class="col-md-offset-9 col-md-2">
+                    <a class="btn btn-primary" ng-click="publishComment()" role="button">Publicar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3> <i class="fa fa-comments-o fa-lg"></i> {{comments.totalElements}} Comentários </h3>
+                <hr />
+            </div>
+        </div>
+        <div ng-if="comments.totalElements===0" class="row" >
+            <div class="col-md-offset-3 col-md-10">
+                <p class="lead">Nenhum comentário para esse desafio, seja o primeiro.</p>
+            </div>
+        </div>
+
+        <div ng-if="comments.totalElements>0" ng-repeat="comment in comments.content" class="row">
+
+            <div class="col-sm-1">
+                <div class="thumbnail">
+                    <img class="img-responsive user-photo" ng-src="{{answer.author.picture}}">
+                </div>
+            </div>
+
+            <div class="col-sm-11">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>{{comment.author.participantProfile.firstName}} {{comment.author.participantProfile.lastName}} </strong> <span class="text-muted"> {{fromNow(comment.created)}}</span>
+                    </div>
+                    <div class="panel-body">
+                        {{comment.message}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

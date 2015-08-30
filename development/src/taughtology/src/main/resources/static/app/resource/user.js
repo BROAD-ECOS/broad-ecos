@@ -2,8 +2,8 @@
 
 (function() {
     var app = angular.module('taughtology');
-    app.factory('Participant', ['$resource', function ($resource) {
-        return $resource('/participants/:id', null,
+    app.factory('User', ['$resource', function ($resource) {
+        return $resource('/users/:id', null,
             {
                 'me': { method:'GET', params: {id:'me'} }
             });

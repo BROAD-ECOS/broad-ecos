@@ -1,8 +1,8 @@
 package br.ufjf.nenc.thautology.resolver;
 
 import br.ufjf.nenc.broadecos.Context;
-import br.ufjf.nenc.thautology.model.CurrentUser;
-import br.ufjf.nenc.thautology.provider.CurrentUserProvider;
+import br.ufjf.nenc.broadecos.model.Course;
+import br.ufjf.nenc.thautology.provider.CurrentCourseProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -12,17 +12,17 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 public class CurrentCourseArgumentResolver extends AbstractContextArgumentResolver {
 
-    private final CurrentUserProvider currentUserProvider;
+    private final CurrentCourseProvider currentCourseProvider;
 
     @Autowired
-    public CurrentCourseArgumentResolver(CurrentUserProvider currentUserProvider) {
-        this.currentUserProvider = currentUserProvider;
+    public CurrentCourseArgumentResolver(CurrentCourseProvider currentCourseProvider) {
+        this.currentCourseProvider = currentCourseProvider;
     }
 
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.getParameterType().isAssignableFrom(CurrentUser.class);
+        return parameter.getParameterType().isAssignableFrom(Course.class);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class CurrentCourseArgumentResolver extends AbstractContextArgumentResolv
             WebDataBinderFactory binderFactory) throws Exception {
 
         Context context = buildContext(webRequest);
-        return currentUserProvider.currentUser(context);
+        return currentCourseProvider.currentCourse(context);
     }
 
 }

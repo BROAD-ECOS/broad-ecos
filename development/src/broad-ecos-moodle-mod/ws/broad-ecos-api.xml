@@ -2,7 +2,7 @@
 <api>
     <resourse>
         <method>GET</method>
-        <path>/me</path>
+        <path>/me/profile</path>
         <required-scopes>
             <required-scope>participant.profile</required-scope>
             <required-scope/>
@@ -17,13 +17,109 @@
         </parameters>
         <query><![CDATA[
             select
-                id,
+                u.id,
+                u.firstname as `firstName`,
+                u.lastname  as `lastName`,
+                CONCAT(
+                    '{{context.baseUrl}}{{context.baseImagePath}}','/',
+                    f.contextId,'/',
+                    f.component,'/',
+                    f.filearea,
+                    f.filepath,
+                    f.filename) as 'picture',
+                u.lang as 'locale'
 
             from
-                {user}
+                {user} u
+            left join
+                {files} f on f.id = u.picture AND f.filename like 'f1%'
             where
-                id={{context.participantId}}
+                u.id={{context.participantId}}
         ]]></query>
+        <isarray>false</isarray>
     </resourse>
-    <resourse/>
+    <resourse>
+        <method>GET</method>
+        <path>/platform-info</path>
+        <required-scopes>
+            <required-scope/>
+            <required-scope/>
+        </required-scopes>
+        <parameters>
+            <param />
+            <param />
+        </parameters>
+        <query><![CDATA[
+            select
+                '{{context.baseUrl}}' as url,
+                '{{context.platformName}}' as name,
+                '{{context.platformLogo}}' as logo,
+                '{{context.moreInfo}}' as moreInfo
+        ]]></query>
+        <isarray>false</isarray>
+    </resourse>
+    <resourse>
+        <method>GET</method>
+        <path>/courses/current</path>
+        <required-scopes>
+            <required-scope>courses.current</required-scope>
+            <required-scope/>
+        </required-scopes>
+        <parameters>
+            <param />
+            <param />
+        </parameters>
+        <query><![CDATA[
+          select
+              id,
+              fullname,
+              shortname,
+              summary,
+              startdate,
+              lang as 'language'
+            from
+              {course}
+            where
+              id = {{context.courseId}}
+
+        ]]></query>
+        <isarray>false</isarray>
+    </resourse>
+    <resourse>
+        <method>GET</method>
+            <path>/courses/current/participants</path>
+        <required-scopes>
+            <required-scope>courses.current.participants</required-scope>
+            <required-scope/>
+        </required-scopes>
+        <parameters>
+            <param />
+            <param />
+        </parameters>
+        <query><![CDATA[
+          SELECT
+            u.id,
+            u.firstname as `firstName`,
+            u.lastname  as `lastName`,
+            CONCAT(
+                '{{context.baseUrl}}{{context.baseImagePath}}','/',
+                f.contextId,'/',
+                f.component,'/',
+                f.filearea,
+                f.filepath,
+                f.filename) as 'picture',
+            u.lang as 'locale'
+
+          FROM {user} u
+            JOIN {role_assignments} ra ON u.id = ra.userid
+            JOIN {role} r ON ra.roleid = r.id
+            JOIN {context} c ON ra.contextid = c.id
+            left join {files} f on f.id = u.picture AND f.filename like 'f1%'
+          WHERE c.contextlevel = 50
+            AND c.instanceid = {{context.courseId}}
+            AND r.archetype = "student"
+
+        ]]></query>
+        <isarray>true</isarray>
+    </resourse>
 </api>

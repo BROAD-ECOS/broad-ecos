@@ -15,9 +15,13 @@ import java.util.stream.Collectors;
 @ToString
 public class Metadata {
 
+    private String id;
+
     private String name;
 
     private String description;
+
+    private String entryPoint;
 
     @Singular
     @JsonIgnore

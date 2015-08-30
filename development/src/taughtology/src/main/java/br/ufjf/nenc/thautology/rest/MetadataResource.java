@@ -1,7 +1,7 @@
 package br.ufjf.nenc.thautology.rest;
 
-import br.ufjf.nenc.broadecos.service.Metadata;
-import br.ufjf.nenc.broadecos.service.Scope;
+import br.ufjf.nenc.broadecos.model.Metadata;
+import br.ufjf.nenc.broadecos.model.Scope;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,10 +13,14 @@ public class MetadataResource {
     @RequestMapping(value = "/metadata")
     public Metadata getMetadata(){
         return Metadata.builder()
+                .id("thautology")
                 .name("Thautology")
                 .description("A collaborative logic game.")
+                .entryPoint("http://dev.broadecos:8080/#/index")
                 .scope(Scope.PARTICIPANT_PROFILE)
                 .scope(Scope.PARTICIPANT_EMAIL)
+                .scope(Scope.COURSES_CURRENT)
+                .scope(Scope.COURSES_CURRENT_PARTICIPANTES)
                 .build();
     }
 

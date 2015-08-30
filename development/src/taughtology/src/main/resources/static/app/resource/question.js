@@ -2,10 +2,10 @@
 
 (function() {
     var app = angular.module('taughtology');
-    app.factory('Participant', ['$resource', function ($resource) {
-        return $resource('/participants/:id', null,
+    app.factory('Question', ['$resource', function ($resource) {
+        return $resource('/questions/:id', null,
             {
-                'me': { method:'GET', params: {id:'me'} }
+                'random': { method:'GET', params: {id:'random'} }
             });
     }]);
 })();

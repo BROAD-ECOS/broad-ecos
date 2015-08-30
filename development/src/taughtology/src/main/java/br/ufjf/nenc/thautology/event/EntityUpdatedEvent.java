@@ -1,7 +1,9 @@
 package br.ufjf.nenc.thautology.event;
 
-/**
- * Created by welingtonveiga on 21/08/15.
- */
+import br.ufjf.nenc.thautology.model.Answer;
+
 public class EntityUpdatedEvent {
+    public static Object from(Answer savedAnswer) {
+        return null;
+    }
 }

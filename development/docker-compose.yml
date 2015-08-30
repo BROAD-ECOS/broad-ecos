@@ -23,6 +23,33 @@ moodle:
     - ./src/broad-ecos-moodle-mod:/var/www/html/moodle/mod/broadecosmod
     - ./config/moodle/config.php:/var/www/html/moodle/config.php
 
+mariadb:
+  build: docker/mariadb
+  ports:
+    - "3307:3306"
+  volumes:
+    - ./log/mariadb:/var/log/mysql
+    - ./data/mariadb:/var/lib/mysql
+  env_file:
+    - ./envvars/mariadb.env
+
+mongodb:
+  build: docker/mongodb
+  volumes:
+    - ./data/mongodb:/data
+  ports:
+    - "27017:27017"
+
+memcached:
+  build: docker/memcached
+  ports:
+    - "11211:11211"
+
+redis:
+  build: docker/redis
+  ports:
+    - "6379:6379"
+
 #postgresql:
 #  build: docker/broad/postgresql
 #  ports:
@@ -42,18 +69,3 @@ moodle:
 #    - ./src/broad-ecos-auth-service/build/libs/demo-0.0.1.jar:/opt/app.jar
 #  env_file:
 #    - ./envvars/broad/auth.env
-
-mariadb:
-  build: docker/mariadb
-  ports:
-    - "3307:3306"
-  volumes:
-    - ./log/mariadb:/var/log/mysql
-    - ./data/mariadb:/var/lib/mysql
-  env_file:
-    - ./envvars/mariadb.env
-
-memcached:
-  build: docker/memcached
-  ports:
-    - "11211:11211"

@@ -11,16 +11,23 @@ function loadTokenInfo($token){
         'participantId' => '2',
         'courseId' => '3',
         'serviceURI' => '',
-        'approved_scopes'=> array('participant.profile')
+        'approved_scopes'=> array('participant.profile', 'courses.current', 'courses.current.participants'),
+        'baseUrl'=> 'http://dev.broadecos/moodle',
+        'baseImagePath'=> '/pluginfile.php',
+        'platformName' => 'Universidade Federal de Juiz de Fora (UFJF)',
+        'platformLogo' => 'http://dev.broadecos/moodle/theme/image.php/clean/core/1439983890/moodlelogo',
+        'moreInfo' => 'http://dev.broadecos/moodle'
     );
 }
 
-// @todo Verificar URI do cliente!
+if (!array_key_exists('HTTP_BROAD_ECOS_TOKEN',$_SERVER))
+    die(403);
 
-$context = loadTokenInfo($_REQUEST['token']);
+// @todo Verificar URI do cliente!
+$context = loadTokenInfo($_SERVER['HTTP_BROAD_ECOS_TOKEN']);
 $pathInfo = $_SERVER['PATH_INFO'];
 $requestMethod = $_SERVER['REQUEST_METHOD'];
-echo '<pre>';
+
 foreach ($api['resourse'] as $resource) {
     if (!array_key_exists('method', $resource))
         continue;
@@ -62,9 +69,16 @@ foreach ($api['resourse'] as $resource) {
                 continue;
             $query = str_replace("{{context.$param}}", $value, $query);
         }
-        $return = $DB->get_records_sql($query);
-        die(json_encode($return));
+        $data = null;
+        if ($resource['isarray']==='true'){
+            $data = array_values($DB->get_records_sql($query));
+        } else {
+            $data = $DB->get_record_sql($query);
+        }
 
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        die();
     }
 }
 

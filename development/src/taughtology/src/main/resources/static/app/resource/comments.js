@@ -2,7 +2,7 @@
 
 (function() {
     var app = angular.module('taughtology');
-    app.factory('Achievement', ['$resource', function ($resource) {
-        return $resource('/achievements/:id');
+    app.factory('Comment', ['$resource', function ($resource) {
+        return $resource('/comments/:id');
     }]);
 })();

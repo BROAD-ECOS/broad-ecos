@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+<h1> <i class="fa fa-bookmark"></i> Desafio</h1>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>{{question.title}}</h2>
+                <hr>
+                <p class="lead">{{question.content}}</p>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-offset-4">
+                <a class="btn btn-lg btn-success " ng-click="answer(true)" role="button"><i class="mdi-action-thumb-up"></i> Verdadeiro</a>
+                <a class="btn btn-lg btn-danger " ng-click="answer(false)" role="button"> Falso <i class="mdi-action-thumb-down"></i></a>
+            </div>
+        </div>
+    </div>
+</div>

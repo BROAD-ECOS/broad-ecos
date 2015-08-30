@@ -3,10 +3,18 @@ package br.ufjf.nenc.thautology.model;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-public abstract class Achievement extends Entity {
+@ToString
+public class Achievement extends Entity {
 
-    private Reference<Entity> related;
+    @DBRef
+    private Answer relatedAnswer;
+
+    @NotNull
+    private Long value;
 }

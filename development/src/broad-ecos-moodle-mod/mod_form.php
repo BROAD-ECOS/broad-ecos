@@ -65,16 +65,19 @@ class mod_broadecosmod_mod_form extends moodleform_mod {
         // Adding the standard "intro" and "introformat" fields.
         $this->standard_intro_elements();
 
-        // Adding the rest of broadecosmod settings, spreading all them into this fieldset
-        // ... or adding more fieldsets ('header' elements) if needed for better logic.
-        $mform->addElement('static', 'label1', 'broadecosmodsetting1', 'Your broadecosmod fields go here. Replace me!');
-
 
         // Adding the "general" fieldset, where all the common settings are showed.
         $mform->addElement('header', 'serviceconfig', get_string('serviceconfig', 'broadecosmod'));
 
+        $mform->addElement('hidden', 'external_service_id');
+        $mform->setType('external_service_id', PARAM_RAW);
+
         $mform->addElement('hidden', 'external_service_uri');
         $mform->setType('external_service_uri', PARAM_RAW);
+
+        $mform->addElement('hidden', 'external_service_entrypoint');
+        $mform->setType('external_service_entrypoint', PARAM_RAW);
+
 
         $scopes = array();
         if ($this->_instance) {

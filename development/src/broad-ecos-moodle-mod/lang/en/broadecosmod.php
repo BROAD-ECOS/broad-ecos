@@ -29,7 +29,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['modulename'] = 'broadecosmod';
-$string['external_service_uri'] = 'Endereço do Serviço Externo (URI)';
+$string['external_service_uri'] = 'Service URI';
+$string['serviceconfig'] ='Configure Service';
 $string['external_service_uri_help'] = 'Use the broadecosmod module for... | The broadecosmod module allows...';
 $string['modulenameplural'] = 'broadecosmods';
 $string['modulename_help'] = 'Use the broadecosmod module for... | The broadecosmod module allows...';
@@ -39,4 +40,3 @@ $string['broadecosmodname_help'] = 'This is the content of the help tooltip asso
 $string['broadecosmod'] = 'broadecosmod';
 $string['pluginadministration'] = 'broadecosmod administration';
 $string['pluginname'] = 'broadecosmod';
-

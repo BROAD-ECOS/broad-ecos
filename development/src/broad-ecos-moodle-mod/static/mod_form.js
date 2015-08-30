@@ -140,6 +140,9 @@
                         Jquery('[name=broadecos_activity_scopes]').val(approvedScopes.join(','));
                     });
 
+                    Jquery('[name=external_service_entrypoint]').val(metadata.entryPoint);
+                    Jquery('[name=external_service_id]').val(metadata.id);
+                    console.log(Jquery('[name=external_service_id]').val(), metadata.id);
                     callback(null, metadata);
 
                 }).fail(function() {

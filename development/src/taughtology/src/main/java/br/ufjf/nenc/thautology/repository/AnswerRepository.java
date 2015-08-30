@@ -1,16 +1,16 @@
 package br.ufjf.nenc.thautology.repository;
 
+import br.ufjf.nenc.thautology.model.Answer;
 import br.ufjf.nenc.thautology.model.Level;
-import br.ufjf.nenc.thautology.model.Question;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface AnswerRepository extends PagingAndSortingRepository<Question, String>{
+public interface AnswerRepository extends PagingAndSortingRepository<Answer, String> {
 
-    long countByLevel(Level level);
+    Iterable<Answer> findByUserIdAndQuestionId(String userId, String questionId);
 
-    Page<Question> findByLevel(Level level, Pageable pageRequest);
+    Iterable<Answer> findAllByUserId(String userId);
 }

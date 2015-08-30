@@ -37,6 +37,11 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-ws")
+    compile("org.springframework.data:spring-data-redis")
+    compile("redis.clients:jedis:2.7.3")
+    compile("com.sun.jersey:jersey-client:1.19")
+    compile("com.google.guava:guava:18.0");
+    compile("com.sun.jersey:jersey-json:1.19")
     testCompile("org.springframework.boot:spring-boot-starter-test") 
 }
 

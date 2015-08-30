@@ -2,11 +2,10 @@ package br.ufjf.nenc.thautology.resolver;
 
 import br.ufjf.nenc.broadecos.Context;
 import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 
-/**
- * Created by welingtonveiga on 29/08/15.
- */
-public class AbstractContextArgumentResolver {
+public abstract class AbstractContextArgumentResolver implements HandlerMethodArgumentResolver {
+
     private static final String TOKEN_HEADER = "broad-ecos-token";
     private static final String PLATFORM_HEADER = "broad-ecos-platform";
 

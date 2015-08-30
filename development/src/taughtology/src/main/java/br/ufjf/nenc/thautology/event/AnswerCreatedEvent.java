@@ -1,7 +1,11 @@
 package br.ufjf.nenc.thautology.event;
 
-/**
- * Created by welingtonveiga on 24/08/15.
- */
-public class AnswerCreatedEvent {
+import br.ufjf.nenc.thautology.model.Answer;
+
+
+public class AnswerCreatedEvent extends EntityCreatedEvent<Answer>  {
+
+    public AnswerCreatedEvent(Answer entity) {
+        super(entity);
+    }
 }

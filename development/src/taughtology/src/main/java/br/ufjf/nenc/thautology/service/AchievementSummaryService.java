@@ -3,11 +3,13 @@ package br.ufjf.nenc.thautology.service;
 import br.ufjf.nenc.thautology.event.AchievementCreatedEvent;
 import br.ufjf.nenc.thautology.model.*;
 import br.ufjf.nenc.thautology.repository.AchievementRepository;
+import br.ufjf.nenc.thautology.util.IterableList;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -15,67 +17,47 @@ import static com.google.common.base.Preconditions.checkArgument;
 @Service
 public class AchievementSummaryService {
 
+    private final AchievementService achievementService;
+
+    private final UserService userService;
+
+    private final AnswerService answerService;
+
     @Autowired
-    public AchievementSummaryService(AchievementRepository achievementRepository, ApplicationEventPublisher publisher) {
-        this.achievementRepository = achievementRepository;
-        this.publisher = publisher;
+    public AchievementSummaryService(AchievementService achievementService, UserService userService, AnswerService answerService) {
+        this.achievementService = achievementService;
+        this.userService = userService;
+        this.answerService = answerService;
     }
 
-    private final AchievementRepository achievementRepository;
 
-    private final ApplicationEventPublisher publisher;
+    public AchievementSummary getUseAchievementrSummary(String userId) {
 
+        AchievementSummary summary;
 
-    public void calculateAchievements(Answer answer) {
-        checkArgument(answer != null);
-
-        Achievement achievement = createPointAchievement(answer);
-
-        publisher.publishEvent(new AchievementCreatedEvent(achievement));
-
-        achievementRepository.save(achievement);
-    }
-
-    private Achievement createPointAchievement(Answer answer) {
-        Achievement achievement = new Achievement();
-        achievement.setRelatedAnswer(answer);
-        achievement.setValue(calculatePoints(answer));
-        return achievement;
-    }
-
-    private Long calculatePoints(Answer answer){
-        Long points = 0l;
-        if (answer.getCorrect()) {
-            Level level = answer.getQuestion().getLevel();
-            points = LevelPoints.getPoints(level);
-        }
-        return points;
-    }
-
-    public Optional<Achievement> findByAnswerId(Optional<String> answerId) {
-        return achievementRepository.findOneByRelatedAnswerId(answerId.get());
-    }
-
-    private enum LevelPoints {
-        EASY(Level.EASY, 5l),
-        MEDIUM(Level.MEDIUM, 10l),
-        HARD(Level.HARD, 25l),
-        INSANE(Level.INSANE, 100l);
-
-        @Getter private final Long points;
-        @Getter private final Level level;
-
-        LevelPoints(Level level, Long points) {
-            this.level = level;
-            this.points = points;
+        Optional<User> userOptional = userService.getUser(userId);
+        if (userOptional.isPresent()) {
+            summary = buildSummaryByUser(userOptional.get());
+        } else {
+           throw new IllegalArgumentException("Unknown user id: "+userId);
         }
 
-        static Long getPoints(Level level) {
-            for(LevelPoints levelPoints : values()) {
-                if (level == levelPoints.level);
-                return levelPoints.points;
-            }
-            throw new IllegalStateException("Unknow points for level "+level);
-        }
+        return summary;
+    }
+
+    private AchievementSummary buildSummaryByUser(User user) {
+
+        List<Answer> answers = new IterableList<>(answerService.answeredBy(user));
+        List<Achievement> achievements = new IterableList<>(achievementService.achievementsOf(answers));
+
+        AchievementSummary summary = new AchievementSummary();
+
+        summary.setQuestionsAnswered((long) answers.size());
+
+        summary.setCorrectAnswers(answers.stream().map(Answer::getCorrect).count());
+
+        summary.setTotalPoints(achievements.stream().mapToLong(Achievement::getValue).reduce(0l, (t, v) ->  t+v));
+
+        return summary;
     }
 }

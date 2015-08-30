@@ -1,7 +1,28 @@
 package br.ufjf.nenc.thautology.model;
 
-/**
- * Created by welingtonveiga on 20/08/15.
- */
-public class Reference {
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
+public class Reference<T extends Entity> {
+
+    private final Class<T>  type;
+    private final String id;
+
+
+    private Reference(Class<T> type, String id) {
+        this.type = type;
+        this.id = id;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T extends Entity> Reference<T> from(T entity) {
+        Class<T> clazz = (Class<T>) entity.getClass();
+        return new Reference<T>(clazz, entity.getId());
+    }
 }

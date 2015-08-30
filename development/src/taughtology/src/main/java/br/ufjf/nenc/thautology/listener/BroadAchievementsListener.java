@@ -1,10 +1,8 @@
 package br.ufjf.nenc.thautology.listener;
 
 import br.ufjf.nenc.thautology.event.EntityCreatedEvent;
-import br.ufjf.nenc.thautology.model.Answer;
-import br.ufjf.nenc.thautology.service.AchievementService;
+import br.ufjf.nenc.thautology.model.Achievement;
 import lombok.extern.log4j.Log4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
@@ -12,17 +10,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class BroadAchievementsListener {
 
-    private final AchievementService achievementService;
-
-    @Autowired
-    public BroadAchievementsListener(AchievementService achievementService) {
-        this.achievementService = achievementService;
-    }
-
     @EventListener
-    public void listenAnswerCreated(EntityCreatedEvent<Answer> answerCreationEvent) {
-        log.info("Event received: "+answerCreationEvent);
-        achievementService.calculateAchievements(answerCreationEvent.getEntity());
+    public void listenAnswerCreated(EntityCreatedEvent<Achievement> achievementCreatedEvent) {
+        log.info("Enviar para Moodle: " +achievementCreatedEvent);
     }
 
 }
