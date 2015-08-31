@@ -2,6 +2,7 @@ package br.ufjf.nenc.broadecos.model;
 
 import lombok.Data;
 import lombok.ToString;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -19,9 +20,11 @@ public class ParticipantProfile implements Serializable {
     private String id;
 
     @XmlElement(name="firstname")
+    @JsonProperty("firstname")
     private String firstName;
 
     @XmlElement(name="lastname")
+    @JsonProperty("lastname")
     private String lastName;
 
     private String picture;

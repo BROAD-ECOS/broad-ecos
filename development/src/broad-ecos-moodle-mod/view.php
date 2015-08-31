@@ -30,6 +30,8 @@
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
 
+global $USER;
+
 $id = optional_param('id', 0, PARAM_INT); // Course_module ID, or
 $n  = optional_param('n', 0, PARAM_INT);  // ... broadecosmod instance ID - it should be named as the first character of the module.
 
@@ -67,9 +69,51 @@ $PAGE->set_heading(format_string($course->fullname));
  * $PAGE->set_focuscontrol('some-html-id');
  * $PAGE->add_body_class('broadecosmod-'.$somevar);
  */
-$sessionToken=null;
-if (!isset($_COOKIE['broadecos.token'])) {
-    $sessionToken = bin2hex(openssl_random_pseudo_bytes(16));
+$token = null;
+$cookieId = 'broadecos.token.'.$broadecosmod->external_service_id;
+$cookieName = str_replace('.','_',$cookieId);
+if (!isset($_COOKIE[$cookieName])) {
+
+    //
+    /*$matrix = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $code = '';
+    for ($i=0; $i<8;$i++) {
+        $code .= $matrix[rand(0, strlen($matrix))];
+    }
+
+    header("Location: ".$broadecosmod->external_service_uri."/confirm?code=".$code."&redirect=");
+    die();
+    */
+    $newToken = bin2hex(openssl_random_pseudo_bytes(16));
+    setcookie($cookieId, $newToken, time()+3600, '/');
+
+    $searchScopes = "SELECT name
+                     FROM {broadecosmod_scopes}
+                    WHERE broadecosmod_id = ?";
+
+    var_dump($DB->get_records_sql($searchScopes, array($broadecosmod->id)));
+
+    $token = new stdClass();
+    $token->token = $newToken;
+    $token->participant_id = $USER->id;
+    $token->course_id = $course->id;
+    $token->service_id = $broadecosmod->external_service_id;
+    $token->session_id = session_id();
+    $token->approved_scopes =  implode(';', $DB->get_records_sql($searchScopes, array($broadecosmod->id)));
+    $token->timecreated = time();
+    $token->timeupdated = time();
+
+    $token->id = $DB->insert_record('broadecos_token', $token);
+
+} else {
+    $sessionToken=$_COOKIE[$cookieName];
+    $token = $DB->get_record_sql('SELECT * FROM {broadecos_token} WHERE token  = ? AND timecreated >= ?', array($sessionToken, time()-3600));
+
+    if (!array_key_exists('id', $token)) {
+        setcookie($cookieName, null, 1);
+        header("Location: ".$PAGE->url);
+        die();
+    }
 
 }
 
@@ -85,7 +129,7 @@ echo $OUTPUT->header();
 
 echo '<hr />';
 echo '<iframe src="'.($broadecosmod->external_service_entrypoint)
-        .'?token='.$sessionToken
+        .'?token='.$token->token
         .'&platform='.urlencode('http://dev.broadecos/moodle/mod/broadecosmod/ws.php')
         .'"  width="100%" height="779px" frameborder="0"></iframe>';
 

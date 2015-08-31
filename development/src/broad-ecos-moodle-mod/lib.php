@@ -89,6 +89,7 @@ function broadecosmod_add_instance(stdClass $broadecosmod, mod_broadecosmod_mod_
         $scope->name = $scopeName;
         $scope->allowed = '1';
         $scope->timecreated = time();
+        $DB->insert_record('broadecosmod_scopes', $scope);
     }
 
     broadecosmod_grade_item_update($broadecosmod);
@@ -124,6 +125,7 @@ function broadecosmod_update_instance(stdClass $broadecosmod, mod_broadecosmod_m
         $scope->name = $scopeName;
         $scope->allowed = '1';
         $scope->timecreated = time();
+        $DB->insert_record('broadecosmod_scopes', $scope);
     }
 
     broadecosmod_grade_item_update($broadecosmod);
@@ -151,6 +153,7 @@ function broadecosmod_delete_instance($id) {
     // Delete any dependent records here.
 
     $DB->delete_records('broadecosmod', array('id' => $broadecosmod->id));
+    $DB->delete_records('broadecosmod_scopes', array('broadecosmod_id' => $broadecosmod->id));
 
     broadecosmod_grade_item_delete($broadecosmod);
 

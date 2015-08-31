@@ -7,17 +7,24 @@ global $DB;
 $api = json_decode(json_encode(simplexml_load_file(dirname(__FILE__).'/ws/broad-ecos-api.xml' , null , LIBXML_NOCDATA )),TRUE);
 
 function loadTokenInfo($token){
-    return array(
-        'participantId' => '2',
-        'courseId' => '3',
-        'serviceURI' => '',
-        'approved_scopes'=> array('participant.profile', 'courses.current', 'courses.current.participants'),
+    global $DB;
+    $token = $DB->get_record_sql('SELECT * FROM {broadecos_token} WHERE token  = ? AND timecreated >= ?', array($token, time()-3600));
+    if (!$token) {
+        http_response_code(403);
+        die();
+    }
+
+    $token->approved_scopes =  array('participant.profile', 'participant.email', 'courses.current', 'courses.current.participants');// explode(';', $token);
+
+
+    return (array) array_merge(array(
         'baseUrl'=> 'http://dev.broadecos/moodle',
         'baseImagePath'=> '/pluginfile.php',
         'platformName' => 'Universidade Federal de Juiz de Fora (UFJF)',
         'platformLogo' => 'http://dev.broadecos/moodle/theme/image.php/clean/core/1439983890/moodlelogo',
-        'moreInfo' => 'http://dev.broadecos/moodle'
-    );
+        'moreInfo' => 'http://dev.broadecos/moodle',
+        'approved_scopes'=>array()
+    ), (array) $token);
 }
 
 if (!array_key_exists('HTTP_BROAD_ECOS_TOKEN',$_SERVER))

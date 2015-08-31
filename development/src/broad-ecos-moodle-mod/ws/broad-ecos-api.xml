@@ -34,7 +34,7 @@
             left join
                 {files} f on f.id = u.picture AND f.filename like 'f1%'
             where
-                u.id={{context.participantId}}
+                u.id={{context.participant_id}}
         ]]></query>
         <isarray>false</isarray>
     </resourse>
@@ -80,7 +80,7 @@
             from
               {course}
             where
-              id = {{context.courseId}}
+              id = {{context.course_id}}
 
         ]]></query>
         <isarray>false</isarray>
@@ -116,7 +116,7 @@
             JOIN {context} c ON ra.contextid = c.id
             left join {files} f on f.id = u.picture AND f.filename like 'f1%'
           WHERE c.contextlevel = 50
-            AND c.instanceid = {{context.courseId}}
+            AND c.instanceid = {{context.course_id}}
             AND r.archetype = "student"
 
         ]]></query>

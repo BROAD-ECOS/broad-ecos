@@ -32,6 +32,8 @@ public class CurrentUserProvider {
                 .withContext(context)
                 .getParticipant();
 
+        profile.setPlatform(context.getPlatform());
+
         return new CurrentUser(userService.retriveOrCreateUser(profile), context);
     }
 

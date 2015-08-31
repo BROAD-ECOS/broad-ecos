@@ -17,6 +17,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 @Service
 @Log4j
 public class ClassmateService {
@@ -39,10 +41,11 @@ public class ClassmateService {
         List<Classmate> classmates = new ArrayList<>();
 
         List<ParticipantProfile> courseParticipants = getCurrentCourseParticipants(user);
+        List<String> courseParticipantsIds = courseParticipants.stream().map(ParticipantProfile::getId).collect(toList());
 
-        classmateRepository.deleteByUserParticipantProfileNotInAndCourse(courseParticipants, course);
+        classmateRepository.deleteByUserParticipantProfileIdNotInAndCourseId(courseParticipantsIds, course.getId());
 
-        classmates.addAll(new IterableList<>(classmateRepository.findAllByCourse(course)));
+        classmates.addAll(new IterableList<>(classmateRepository.findAllByCourseId(course.getId())));
 
         Map<String, Classmate> classmateByProfile = classmates.stream().collect(Collectors.toMap(
                 classmate -> classmate.getUser().getParticipantProfile().getId(),

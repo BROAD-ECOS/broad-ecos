@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface ClassmateRepository extends PagingAndSortingRepository<Classmate, String>{
 
-    Long deleteByUserParticipantProfileNotInAndCourse(List<ParticipantProfile> profilesToRetain, Course course) ;
+    Long deleteByUserParticipantProfileIdNotInAndCourseId(List<String> profilesToRetain, String course) ;
 
-    Iterable<Classmate> findAllByCourse(Course course);
+    Iterable<Classmate> findAllByCourseId(String course);
 }
