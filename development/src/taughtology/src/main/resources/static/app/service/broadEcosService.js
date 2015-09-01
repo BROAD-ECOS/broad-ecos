@@ -9,7 +9,7 @@
         return {
 
             'init': function (token, platform) {
-                var initialized = false;
+                var initialized = true;
                 if (token) {
                     var currentToken = localStorageService.get('token');
 

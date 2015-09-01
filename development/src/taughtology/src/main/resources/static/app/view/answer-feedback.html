@@ -49,7 +49,7 @@
 
             </div>
             <div class="col-md-3">
-                <a ng-if="!answer.correct" class="btn btn-default btn-raised" href="#/question"  role="button"><i class="fa fa-paper-plane fa-fg"></i> Enviar Desafio</a>
+                <a ng-if="!answer.correct" class="btn btn-info btn-raised" href="#/send-challenge/{{answer.question.id}}"  role="button"><i class="fa fa-paper-plane fa-fg"></i> Enviar Desafio</a>
             </div>
             <div class="col-md-2">
                 <a class="btn btn-primary" href="#/question" role="button">Continuar <i class="fa fa-angle-double-right fa-lg"></i></a>

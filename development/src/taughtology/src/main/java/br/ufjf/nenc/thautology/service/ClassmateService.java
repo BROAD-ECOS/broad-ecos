@@ -5,8 +5,10 @@ import br.ufjf.nenc.broadecos.model.Course;
 import br.ufjf.nenc.broadecos.model.ParticipantProfile;
 import br.ufjf.nenc.thautology.model.Classmate;
 import br.ufjf.nenc.thautology.model.CurrentUser;
+import br.ufjf.nenc.thautology.model.User;
 import br.ufjf.nenc.thautology.repository.ClassmateRepository;
 import br.ufjf.nenc.thautology.util.IterableList;
+import com.google.common.base.Preconditions;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.stream.Collectors.toList;
 
 @Service
@@ -29,21 +32,23 @@ public class ClassmateService {
 
     private final UserService userService;
 
+    private final CourseService courseService;
+
     @Autowired
-    public ClassmateService(BroadEcosApi broadEcosApi, ClassmateRepository classmateRepository, UserService userService) {
+    public ClassmateService(BroadEcosApi broadEcosApi, ClassmateRepository classmateRepository, UserService userService, CourseService courseService) {
         this.broadEcosApi = broadEcosApi;
         this.classmateRepository = classmateRepository;
         this.userService = userService;
+        this.courseService = courseService;
     }
 
     public List<Classmate> getClassmates(CurrentUser user, Course course) {
+        checkArgument(user != null);
+        checkArgument(course != null);
 
         List<Classmate> classmates = new ArrayList<>();
 
         List<ParticipantProfile> courseParticipants = getCurrentCourseParticipants(user);
-        List<String> courseParticipantsIds = courseParticipants.stream().map(ParticipantProfile::getId).collect(toList());
-
-        classmateRepository.deleteByUserParticipantProfileIdNotInAndCourseId(courseParticipantsIds, course.getId());
 
         classmates.addAll(new IterableList<>(classmateRepository.findAllByCourseId(course.getId())));
 
@@ -57,10 +62,17 @@ public class ClassmateService {
                 .map(userService::getUser)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
-                .map(classmateUser -> classmateRepository.save(new Classmate(course, classmateUser)))
+                .map(classmateUser -> save(course, classmateUser))
                 .forEach(classmates::add);
 
+        classmates.removeIf(classmate -> classmate.getUser().getId().equals(user.getUser().getId()));
+
         return classmates;
+    }
+
+    private Classmate save(Course course, User classmateUser) {
+        course = courseService.save(course);
+        return classmateRepository.save(new Classmate(course, classmateUser));
     }
 
     private List<ParticipantProfile> getCurrentCourseParticipants(CurrentUser user) {
