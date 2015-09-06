@@ -30,7 +30,6 @@ else
     $client->setAccessToken($info['access_token']);
 
     $response = $client->fetch('http://dev.broadecos:9999/uaa/oauth/check_token?token='.$info['access_token'].'&');
-    var_dump($response);
 }
 
 // --------------

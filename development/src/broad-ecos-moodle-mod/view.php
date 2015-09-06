@@ -91,8 +91,6 @@ if (!isset($_COOKIE[$cookieName])) {
                      FROM {broadecosmod_scopes}
                     WHERE broadecosmod_id = ?";
 
-    var_dump($DB->get_records_sql($searchScopes, array($broadecosmod->id)));
-
     $token = new stdClass();
     $token->token = $newToken;
     $token->participant_id = $USER->id;

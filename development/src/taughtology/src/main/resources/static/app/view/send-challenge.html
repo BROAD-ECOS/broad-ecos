@@ -22,7 +22,7 @@
 
                 <div ng-if="classmates && classmates.length>0" >
                     <div ng-repeat="(courseid, courseClassmates) in classmates" ng-if="courseid!='length'">
-                        <h4><i class="fa fa-graduation-cap fa-fg"></i> Curso {{courseClassmates.course.fullName}}</h4>
+                        <h4><i class="fa    fa-graduation-cap fa-fg"></i> Curso {{courseClassmates.course.fullName}}</h4>
                             <div class="row" ng-repeat="courseClassmate in courseClassmates.classmates" >
                                 <div class="col-md-1">
                                     <div class="thumbnail">
@@ -34,7 +34,7 @@
                                     <p class="list-group-item-text">Nível {{levelName(courseClassmate.user.level)}}</p>
                                 </div>
                                 <div class="col-md-3">
-                                    <a class="btn btn-default btn-raised pull-right" href="#/send-challenge/{{answer.question.id}}"  role="button"><i class="fa fa-paper-plane fa-fg"></i> Enviar </a>
+                                    <a class="btn btn-default btn-raised pull-right" ng-click="sendChallenge(courseClassmate.user)" role="button"><i class="fa fa-paper-plane fa-fg"></i> Enviar </a>
                                 </div>
                             </div>
                         <hr/>
@@ -50,3 +50,16 @@
                         class="fa fa-angle-double-right fa-lg"></i></a>
     </div>
 </div>
+
+<script type="text/ng-template" id="sendChallengeModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title"><i class="fa fa-paper-plane"></i> Enviar desafio</h3>
+    </div>
+    <div class="modal-body">
+        <p class="lead"> Ao enviar o desafio, caso {{user.participantProfile.firstName}} {{user.participantProfile.lastName}} aceite e acerte a resposta, voce ganhara <strong>1 ponto</strong></p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+        <button class="btn btn-primary" type="button" ng-click="ok()">Enviar</button>
+    </div>
+</script>
