@@ -1,15 +1,12 @@
 package br.ufjf.nenc.thautology.model;
 
 import br.ufjf.nenc.broadecos.model.ParticipantProfile;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 public class User extends Entity implements Serializable {
 

@@ -4,40 +4,50 @@
             <div class="panel-body">
                 <h3>Escolha quem voce deseja desafiar com "{{question.title}}"</h3>
                 <hr/>
-                <div class="alert alert-dismissable alert-info">
+                <div class="alert alert-dismissable alert-info" ng-if="!showSentMessage">
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     <p>Ao desafiar um colega, você recebe um  <strong>1 ponto</strong> caso ele acerte!</p>
                 </div>
+                <div class="alert alert-dismissable alert-success" ng-if="showSentMessage">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <p>Você já desafiou o colega <strong>{{challenge.challenged.firstName}} {{challenge.challenged.lastName}} neste desafio</strong>,
+                        <span ng-if="challenge.accepted"> que <strong>aceitou</strong> o desafio,  e
+                            <strong ng-if="challenge.accepted && challenge.met">acertou!</strong>
+                            <strong ng-if="challenge.accepted && !challenge.met">não acertou</strong> a solução </span>
+                        <span ng-if="!challenge.accepted"> que <strong>ainda não aceitou</strong> o desafio.</span>
+                    </p>
+                </div>
 
 
-                <div ng-if="!classmates">
+                <div ng-if="!classmates && !showSentMessage">
                     <p class="lead text-center" ><i class="fa fa-refresh fa-spin"></i></p>
                 </div>
 
+                <div ng-if="!showSentMessage">
+                    <div ng-if="classmates && clasmates.length==0">
+                        <p class="lead"><i class="mdi-content-block"></i> <strong>Oooops...</strong> você ainda não tem nenhum colega de classe no
+                            Thaghtology, é preciso que alguém esteja no jogo para ser desafiado.</p>
+                    </div>
 
-                <div ng-if="classmates && clasmates.length==0">
-                    <p class="lead"><i class="mdi-content-block"></i> <strong>Oooops...</strong> você ainda não tem nenhum colega de classe no
-                        Thaghtology, é preciso que alguém esteja no jogo para ser desafiado.</p>
-                </div>
-
-                <div ng-if="classmates && classmates.length>0" >
-                    <div ng-repeat="(courseid, courseClassmates) in classmates" ng-if="courseid!='length'">
-                        <h4><i class="fa    fa-graduation-cap fa-fg"></i> Curso {{courseClassmates.course.fullName}}</h4>
-                            <div class="row" ng-repeat="courseClassmate in courseClassmates.classmates" >
-                                <div class="col-md-1">
-                                    <div class="thumbnail">
-                                        <img class="img-responsive user-photo" ng-src="{{courseClassmate.user.picture}}">
+                    <div ng-if="classmates && classmates.length>0" >
+                        <div ng-repeat="(courseid, courseClassmates) in classmates" ng-if="courseid!='length'">
+                            <h4><i class="fa    fa-graduation-cap fa-fg"></i> Curso {{courseClassmates.course.fullName}}</h4>
+                                <div class="row" ng-repeat="courseClassmate in courseClassmates.classmates" >
+                                    <div class="col-md-1">
+                                        <div class="thumbnail">
+                                            <img class="img-responsive user-photo" ng-src="{{courseClassmate.user.picture}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h4 class="list-group-item-heading">{{courseClassmate.user.participantProfile.firstName}} {{courseClassmate.user.participantProfile.lastName}}</h4>
+                                        <p class="list-group-item-text">Nível {{levelName(courseClassmate.user.level)}}</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <a class="btn btn-default btn-raised pull-right" ng-click="sendChallenge(courseClassmate.user)" role="button"><i class="fa fa-paper-plane fa-fg"></i> Enviar </a>
                                     </div>
                                 </div>
-                                <div class="col-md-8">
-                                    <h4 class="list-group-item-heading">{{courseClassmate.user.participantProfile.firstName}} {{courseClassmate.user.participantProfile.lastName}}</h4>
-                                    <p class="list-group-item-text">Nível {{levelName(courseClassmate.user.level)}}</p>
-                                </div>
-                                <div class="col-md-3">
-                                    <a class="btn btn-default btn-raised pull-right" ng-click="sendChallenge(courseClassmate.user)" role="button"><i class="fa fa-paper-plane fa-fg"></i> Enviar </a>
-                                </div>
-                            </div>
-                        <hr/>
+                            <hr/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -56,7 +66,7 @@
         <h3 class="modal-title"><i class="fa fa-paper-plane"></i> Enviar desafio</h3>
     </div>
     <div class="modal-body">
-        <p class="lead"> Ao enviar o desafio, caso {{user.participantProfile.firstName}} {{user.participantProfile.lastName}} aceite e acerte a resposta, voce ganhara <strong>1 ponto</strong></p>
+        <p class="lead"> Ao enviar o desafio, caso {{user.participantProfile.firstName}} {{user.participantProfile.lastName}} aceite e acerte a resposta, voce ganhara <strong>1 ponto</strong>.|</p>
     </div>
     <div class="modal-footer">
         <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>

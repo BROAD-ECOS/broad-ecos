@@ -15,6 +15,8 @@ public class Challenge extends Entity {
     @DBRef
     private Question question;
 
-    private Boolean met = false;
+    private Boolean met = Boolean.FALSE;
+
+    private Boolean accepted = Boolean.FALSE;
 
 }

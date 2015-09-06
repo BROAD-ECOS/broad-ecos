@@ -1,11 +1,11 @@
 package br.ufjf.nenc.thautology.rest;
 
 
-import br.ufjf.nenc.thautology.model.Challenge;
-import br.ufjf.nenc.thautology.model.Comment;
-import br.ufjf.nenc.thautology.model.Reference;
+import br.ufjf.nenc.broadecos.model.Course;
+import br.ufjf.nenc.thautology.model.*;
 import br.ufjf.nenc.thautology.service.ChallengeService;
 import br.ufjf.nenc.thautology.service.CommentService;
+import br.ufjf.nenc.thautology.util.IterableList;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -45,5 +46,12 @@ public class ChallengeResource {
         return Reference.from(savedChallenge);
 
     }
+
+    @RequestMapping(method = GET)
+    public List<Challenge> getClassmates(@RequestParam("challenger") Optional<String> challengerId,
+                                         @RequestParam("question") Optional<String> questionId){
+        return new IterableList<>(challengeService.getChallenge(challengerId, questionId));
+    }
+
 
 }

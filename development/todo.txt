@@ -1,4 +1,6 @@
 
+[ ] Taughtology: Corrigir #Acertos
+[ ] Taughtology: Corrigir exibição das imagens
 [ ] [env] Corrigir portas mapeadas
 [ ] [mod_broad] Adiconar ícones e formalizar metadados
 [ ] [mod_broad] Refatorar scripts do mod_form.js
