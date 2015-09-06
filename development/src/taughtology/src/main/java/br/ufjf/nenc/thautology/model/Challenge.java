@@ -19,4 +19,5 @@ public class Challenge extends Entity {
 
     private Boolean accepted = Boolean.FALSE;
 
+
 }

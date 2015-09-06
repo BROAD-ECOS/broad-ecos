@@ -1,4 +1,5 @@
 <h1> <i class="fa fa-bookmark"></i> Desafio</h1>
+
 <div class="panel panel-default">
     <div class="panel-body">
         <div class="row">
@@ -8,12 +9,15 @@
                 <p class="lead">{{question.content}}</p>
             </div>
         </div>
-        <hr />
-        <div class="row">
-            <div class="col-md-offset-4">
-                <a class="btn btn-lg btn-success " ng-click="answer(true)" role="button"><i class="mdi-action-thumb-up"></i> Verdadeiro</a>
-                <a class="btn btn-lg btn-danger " ng-click="answer(false)" role="button"> Falso <i class="mdi-action-thumb-down"></i></a>
-            </div>
-        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12 text-center" >
+        <p>
+            <a class="btn btn-lg btn-success " ng-click="answer(true)" role="button"><i class="mdi-action-thumb-up"></i> Verdadeiro</a>
+            <a class="btn btn-lg btn-danger " ng-click="answer(false)" role="button"> Falso <i class="mdi-action-thumb-down"></i></a>
+        </p>
     </div>
 </div>

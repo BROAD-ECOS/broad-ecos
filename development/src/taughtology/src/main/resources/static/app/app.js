@@ -3,8 +3,9 @@
 // Declare app level module which depends on views, and components
 (function(){
     angular.module('taughtology', [
-           'ngRoute',
+            'ngRoute',
             'ngResource',
+            'ngSanitize',
             'LocalStorageModule',
             'ui.bootstrap'
         ])
@@ -63,6 +64,19 @@
                             var deferred = $q.defer();
                             Answer.get({id:id},function(answer){
                                 deferred.resolve(answer)
+                            });
+                            return deferred.promise;
+                        }]
+                    }
+                })
+                .when('/notifications', {
+                    templateUrl: 'app/view/notification-list.html',
+                    controller: 'NotificationListCtrl',
+                    resolve: {
+                        "currentUser" : ['$q', "userService", function($q, userService){
+                            var deferred = $q.defer();
+                            userService.contextUser().then(function(user){
+                                deferred.resolve(user)
                             });
                             return deferred.promise;
                         }]

@@ -94,27 +94,33 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown"><a onclick="return false" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell-o fa-lg"></i> <span class="badge" style="background-color:#ffca28">3</span> Notificações
-                    <b class="caret"></b></a>
+                <li class="dropdown" ng-controller="NotificationMenuCtrl">
+                    <a onclick="return false" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-bell-o fa-lg"></i>
+                        <span class="badge" style="background-color:#ffca28" ng-if="notifications.data.length>0">{{notifications.data.length}}</span> Notificações
+                        <b class="caret"></b>
+                    </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <div class="navbar-content">
-                                <div class="row">
+                            <div class="navbar-content" ng-if="notifications.data.length>0">
+                                <div class="row" ng-repeat="data in notifications.data">
                                     <div class="col-md-12">
-                                        <p class="text-muted small">Mensagem1</p>
+                                        <p class="text-muted small"><a href="#/notifications/{{data.id}}"><i class="fa fa-circle fa-fg"></i> {{data.subject}}</a></p>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="navbar-content" ng-if="notifications.data.length==0">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <p class="text-muted small">Mensagem2</p>
+                                        <p class="text-muted small">Você não tem notificações não lidas.</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="navbar-footer">
                                 <div class="navbar-footer-content">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            Rodapé
+                                        <div class="col-md-12">
+                                            <a href="#/notifications"><i class="fa fa-list fa-fg"></i> Todas as notificações</a>
                                         </div>
                                     </div>
                                 </div>
@@ -200,6 +206,7 @@
 <script src="app/lib/angular-resource.js"></script>
 <script src="app/lib/angular-cookies.js"></script>
 <script src="app/lib/angular-local-storage.js"></script>
+<script src="app/lib/angular-sanitize.js"></script>
 <script src="app/lib/ui-bootstrap-tpls-0.13.3.js"></script>
 
 <!-- App -->
@@ -212,6 +219,8 @@
 <script src="app/cntrl/profilePanelCtrl.js"></script>
 <script src="app/cntrl/dashboardCtrl.js"></script>
 <script src="app/cntrl/sendChallengeCtrl.js"></script>
+<script src="app/cntrl/notificationMenuCtrl.js"></script>
+<script src="app/cntrl/notificationListCtrl.js"></script>
 
 <script src="app/resource/user.js"></script>
 <script src="app/resource/question.js"></script>
@@ -222,11 +231,13 @@
 <script src="app/resource/broad.js"></script>
 <script src="app/resource/classmate.js"></script>
 <script src="app/resource/challenge.js"></script>
+<script src="app/resource/notification.js"></script>
 
 <script src="app/service/broadEcosService.js"></script>
 <script src="app/service/userService.js"></script>
 <script src="app/service/gameService.js"></script>
 <script src="app/service/moment.js"></script>
+<script src="app/service/notificationPoolingService.js"></script>
 
 <script src="app/interceptor/broadEcosContextInterceptor.js"></script>
 

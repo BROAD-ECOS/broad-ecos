@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Locale;
 
 @Getter
 @Setter
@@ -33,5 +34,7 @@ public class Question extends Entity implements Serializable {
     private Level level;
 
 
-
+    public String getLevelName(Locale locale){
+        return level.getLocalNameOrDefault(locale);
+    }
 }

@@ -1,11 +1,8 @@
 package br.ufjf.nenc.thautology.rest;
 
 
-import br.ufjf.nenc.thautology.model.Achievement;
-import br.ufjf.nenc.thautology.model.Answer;
 import br.ufjf.nenc.thautology.model.Comment;
 import br.ufjf.nenc.thautology.model.Reference;
-import br.ufjf.nenc.thautology.service.AchievementService;
 import br.ufjf.nenc.thautology.service.CommentService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +50,7 @@ public class CommentResource {
 
         Comment savedComment = commentService.save(comment);
 
-        return Reference.from(savedComment);
+        return Reference.to(savedComment);
 
     }
 

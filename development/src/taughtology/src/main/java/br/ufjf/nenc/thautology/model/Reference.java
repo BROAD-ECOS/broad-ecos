@@ -21,7 +21,7 @@ public class Reference<T extends Entity> {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T extends Entity> Reference<T> from(T entity) {
+    public static <T extends Entity> Reference<T> to(T entity) {
         Class<T> clazz = (Class<T>) entity.getClass();
         return new Reference<T>(clazz, entity.getId());
     }

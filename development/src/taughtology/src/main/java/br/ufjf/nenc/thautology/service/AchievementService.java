@@ -51,8 +51,14 @@ public class AchievementService {
         Long points = 0l;
         if (answer.getCorrect()) {
             Level level = answer.getQuestion().getLevel();
-            points = LevelPoints.getPoints(level);
+            points = getPoints(level);
         }
+        return points;
+    }
+
+    public Long getPoints(Level level) {
+        Long points;
+        points = LevelPoints.getPoints(level);
         return points;
     }
 

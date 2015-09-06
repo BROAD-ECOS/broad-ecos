@@ -33,7 +33,7 @@ public class AnswerResource {
 
         Answer savedAnswer = answerService.save(answer);
 
-        return Reference.from(savedAnswer);
+        return Reference.to(savedAnswer);
 
     }
 

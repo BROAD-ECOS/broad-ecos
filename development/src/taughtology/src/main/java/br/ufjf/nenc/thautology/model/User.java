@@ -3,7 +3,9 @@ package br.ufjf.nenc.thautology.model;
 import br.ufjf.nenc.broadecos.model.ParticipantProfile;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 
 @Data
@@ -26,4 +28,9 @@ public class User extends Entity implements Serializable {
         level = Level.EASY;
     }
 
+    @JsonIgnore
+    @XmlTransient
+    public String getFullName() {
+        return participantProfile.getFirstName() + " " + participantProfile.getLastName();
+    }
 }

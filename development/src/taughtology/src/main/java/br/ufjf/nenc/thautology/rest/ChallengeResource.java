@@ -1,15 +1,11 @@
 package br.ufjf.nenc.thautology.rest;
 
 
-import br.ufjf.nenc.broadecos.model.Course;
 import br.ufjf.nenc.thautology.model.*;
 import br.ufjf.nenc.thautology.service.ChallengeService;
-import br.ufjf.nenc.thautology.service.CommentService;
 import br.ufjf.nenc.thautology.util.IterableList;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,7 +39,7 @@ public class ChallengeResource {
 
         Challenge savedChallenge = challengeService.save(challenge);
 
-        return Reference.from(savedChallenge);
+        return Reference.to(savedChallenge);
 
     }
 

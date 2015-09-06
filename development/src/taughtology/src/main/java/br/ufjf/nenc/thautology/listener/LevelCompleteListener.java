@@ -1,9 +1,6 @@
 package br.ufjf.nenc.thautology.listener;
 
-import br.ufjf.nenc.thautology.event.EntityCreatedEvent;
 import br.ufjf.nenc.thautology.event.LevelCompleteEvent;
-import br.ufjf.nenc.thautology.model.Answer;
-import br.ufjf.nenc.thautology.service.AchievementService;
 import br.ufjf.nenc.thautology.service.UserService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;

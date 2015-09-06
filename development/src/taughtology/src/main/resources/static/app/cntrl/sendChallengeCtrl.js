@@ -33,7 +33,7 @@
                     }).$promise;
                 }).then(function(challenge){
                     $scope.showSentMessage = true;
-                    $scope.classmates = data[0];
+                    $scope.classmates = [];
                 });
 
             }, function () {

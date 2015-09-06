@@ -1,7 +1,7 @@
 'use strict';
 
 (function() {
-    var app = angular.module('taughtology')
+    var app = angular.module('taughtology');
     app.factory('userService', ['User', '$q', function (User, $q) {
 
         var _userService = {};
