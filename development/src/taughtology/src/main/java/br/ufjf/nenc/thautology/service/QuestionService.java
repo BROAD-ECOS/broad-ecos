@@ -1,5 +1,6 @@
 package br.ufjf.nenc.thautology.service;
 
+import br.ufjf.nenc.thautology.component.BroadContext;
 import br.ufjf.nenc.thautology.event.LevelCompleteEvent;
 import br.ufjf.nenc.thautology.model.Answer;
 import br.ufjf.nenc.thautology.model.Level;
@@ -30,11 +31,14 @@ public class QuestionService {
 
     private final ApplicationEventPublisher publisher;
 
+    private final BroadContext broadContext;
+
     @Autowired
-    public QuestionService(QuestionRepository questionRepository, AnswerService answerService, ApplicationEventPublisher publisher) {
+    public QuestionService(QuestionRepository questionRepository, AnswerService answerService, ApplicationEventPublisher publisher, BroadContext broadContext) {
         this.questionRepository = questionRepository;
         this.answerService = answerService;
         this.publisher = publisher;
+        this.broadContext = broadContext;
     }
 
     public Page<Question> findAll(PageRequest pageRequest) {
@@ -47,7 +51,7 @@ public class QuestionService {
         Optional<Question> randomQuestion = randomQuestionByUser(user);
 
         if (!randomQuestion.isPresent()) {
-            publisher.publishEvent(LevelCompleteEvent.from(user));
+            publisher.publishEvent(LevelCompleteEvent.from(user, broadContext.get()));
         }
 
         return randomQuestion;

@@ -66,21 +66,29 @@ foreach ($api['resourse'] as $resource) {
             }
         }
 
-        $query = $resource['query'];
-        foreach($params as $param=>$value) {
-            $query = str_replace("{{{$param}}}", $value, $query);
-        }
-
-        foreach($context as $param=>$value) {
-            if ($param == 'approved_scopes')
-                continue;
-            $query = str_replace("{{context.$param}}", $value, $query);
-        }
         $data = null;
-        if ($resource['isarray']==='true'){
-            $data = array_values($DB->get_records_sql($query));
+
+        if ($resource['method']=='GET') {
+            $query = $resource['query'];
+            foreach($params as $param=>$value) {
+                $query = str_replace("{{{$param}}}", $value, $query);
+            }
+
+            foreach($context as $param=>$value) {
+                if ($param == 'approved_scopes')
+                    continue;
+                $query = str_replace("{{context.$param}}", $value, $query);
+            }
+
+            if ($resource['isarray']==='true'){
+                $data = array_values($DB->get_records_sql($query));
+            } else {
+                $data = $DB->get_record_sql($query);
+            }
+        } else if ($resource['method']=='POST') {
+            $data =json_decode(file_get_contents('php://input'));
         } else {
-            $data = $DB->get_record_sql($query);
+            die(400);
         }
 
         header('Content-Type: application/json');

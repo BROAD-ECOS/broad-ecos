@@ -1,5 +1,6 @@
 package br.ufjf.nenc.thautology.service;
 
+import br.ufjf.nenc.thautology.component.BroadContext;
 import br.ufjf.nenc.thautology.event.AnswerCreatedEvent;
 import br.ufjf.nenc.thautology.event.EntityCreatedEvent;
 import br.ufjf.nenc.thautology.event.EntityUpdatedEvent;
@@ -27,10 +28,13 @@ public class AnswerService {
 
     private final AnswerRepository answerRepository;
 
+    private final BroadContext broadContext;
+
     @Autowired
-    public AnswerService(ApplicationEventPublisher publisher, AnswerRepository answerRepository) {
+    public AnswerService(ApplicationEventPublisher publisher, AnswerRepository answerRepository, BroadContext broadContext) {
         this.publisher = publisher;
         this.answerRepository = answerRepository;
+        this.broadContext = broadContext;
     }
 
     public Answer save(Answer answer) {
@@ -47,10 +51,9 @@ public class AnswerService {
         return  savedAnswer;
     }
 
-
     private Answer update(Answer answer) {
         Answer savedAnswer = answerRepository.save(answer);
-        publisher.publishEvent(EntityUpdatedEvent.from(savedAnswer));
+        publisher.publishEvent(EntityUpdatedEvent.from(savedAnswer, broadContext.get()));
 
         log.info("Answer updated: " + answer);
         return savedAnswer;
@@ -60,7 +63,7 @@ public class AnswerService {
         Answer savedAnswer;
         if (!userAnsweredQuestion(answer)) {
             savedAnswer = answerRepository.save(answer);
-            publisher.publishEvent(new AnswerCreatedEvent(answer));
+            publisher.publishEvent(new AnswerCreatedEvent(answer, broadContext.get()));
         } else {
             log.error("Question already answered by user, trying to save: " + answer);
             throw new QuestionAlreadyAnsweredException();

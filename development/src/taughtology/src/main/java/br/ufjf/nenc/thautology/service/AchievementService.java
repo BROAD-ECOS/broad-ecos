@@ -1,25 +1,19 @@
 package br.ufjf.nenc.thautology.service;
 
-import br.ufjf.nenc.thautology.event.AchievementCreatedEvent;
+import br.ufjf.nenc.thautology.component.BroadContext;
+import br.ufjf.nenc.thautology.event.AnswerAchievementCreatedEvent;
+import br.ufjf.nenc.thautology.event.ChallengeAchievementCreatedEvent;
 import br.ufjf.nenc.thautology.model.*;
 import br.ufjf.nenc.thautology.repository.AchievementRepository;
 import br.ufjf.nenc.thautology.repository.AnswerAchievementRepository;
 import br.ufjf.nenc.thautology.util.EntitySupplier;
-import com.google.common.base.Preconditions;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
-import static com.google.common.base.Preconditions.*;
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toSet;
 
 @Service
 public class AchievementService {
@@ -32,41 +26,43 @@ public class AchievementService {
 
     private final ApplicationEventPublisher publisher;
 
+    private final BroadContext broadContext;
+
     @Autowired
-    public AchievementService(AchievementRepository achievementRepository, AnswerAchievementRepository answerAchievementRepository, ApplicationEventPublisher publisher) {
+    public AchievementService(AchievementRepository achievementRepository, AnswerAchievementRepository answerAchievementRepository, ApplicationEventPublisher publisher, BroadContext broadContext) {
         this.achievementRepository = achievementRepository;
         this.answerAchievementRepository = answerAchievementRepository;
         this.publisher = publisher;
+        this.broadContext = broadContext;
     }
 
     public void calculateAchievements(Challenge challenge) {
         checkArgument(challenge!=null);
         checkArgument(challenge.getMet());
 
-        Achievement achievementChallenger = createPointAchievementChallenger(challenge);
-        publisher.publishEvent(new AchievementCreatedEvent(achievementChallenger));
+        ChallengeAchievement achievementChallenger = createPointAchievementChallenger(challenge);
+        publisher.publishEvent(new ChallengeAchievementCreatedEvent(achievementChallenger, broadContext.get()));
         achievementRepository.save(achievementChallenger);
 
-        Achievement achievementChallenged = createPointAchievementChallenged(challenge);
-        publisher.publishEvent(new AchievementCreatedEvent(achievementChallenged));
+        ChallengeAchievement achievementChallenged = createPointAchievementChallenged(challenge);
+        publisher.publishEvent(new ChallengeAchievementCreatedEvent(achievementChallenged,broadContext.get()));
         achievementRepository.save(achievementChallenged);
-
 
     }
 
-    private Achievement createPointAchievementChallenger(Challenge challenge) {
-        Achievement achievement = createPointAchievement(challenge);
+    private ChallengeAchievement createPointAchievementChallenger(Challenge challenge) {
+        ChallengeAchievement achievement = createPointAchievement(challenge);
         achievement.setUser(challenge.getChallenger());
         return achievement;
     }
 
-    private Achievement createPointAchievementChallenged(Challenge challenge) {
-        Achievement achievement = createPointAchievement(challenge);
+    private ChallengeAchievement createPointAchievementChallenged(Challenge challenge) {
+        ChallengeAchievement achievement = createPointAchievement(challenge);
         achievement.setUser(challenge.getChallenged());
         return achievement;
     }
 
-    private Achievement createPointAchievement(Challenge challenge) {
+    private ChallengeAchievement createPointAchievement(Challenge challenge) {
         ChallengeAchievement achievement = new ChallengeAchievement();
         achievement.setChallenge(challenge);
         achievement.setValue(calculatePoints(challenge));
@@ -88,14 +84,14 @@ public class AchievementService {
     public void calculateAchievements(Answer answer) {
         checkArgument(answer != null);
 
-        Achievement achievement = createPointAchievement(answer);
+        AnswerAchievement achievement = createPointAchievement(answer);
 
-        publisher.publishEvent(new AchievementCreatedEvent(achievement));
+        publisher.publishEvent(new AnswerAchievementCreatedEvent(achievement, broadContext.get()));
 
         achievementRepository.save(achievement);
     }
 
-    private Achievement createPointAchievement(Answer answer) {
+    private AnswerAchievement createPointAchievement(Answer answer) {
         AnswerAchievement achievement = new AnswerAchievement();
         achievement.setAnswer(answer);
         achievement.setValue(calculatePoints(answer));
@@ -131,26 +127,4 @@ public class AchievementService {
         return Optional.ofNullable(answerAchievementRepository.findOne(id));
     }
 
-    private enum LevelPoints {
-        EASY(Level.EASY, 5l),
-        MEDIUM(Level.MEDIUM, 10l),
-        HARD(Level.HARD, 25l),
-        INSANE(Level.INSANE, 100l);
-
-        @Getter private final Long points;
-        @Getter private final Level level;
-
-        LevelPoints(Level level, Long points) {
-            this.level = level;
-            this.points = points;
-        }
-
-        static Long getPoints(Level level) {
-            for(LevelPoints levelPoints : values()) {
-                if (level == levelPoints.level);
-                return levelPoints.points;
-            }
-            throw new IllegalStateException("Unknow points for level "+level);
-        }
-    }
 }

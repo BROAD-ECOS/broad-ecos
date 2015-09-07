@@ -1,8 +1,6 @@
 package br.ufjf.nenc.thautology.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import javax.validation.constraints.NotNull;
@@ -10,6 +8,9 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class Achievement<T> extends Entity {
 
     @DBRef

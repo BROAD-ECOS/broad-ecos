@@ -1,20 +1,19 @@
 package br.ufjf.nenc.thautology.service;
 
-import br.ufjf.nenc.thautology.event.AchievementCreatedEvent;
-import br.ufjf.nenc.thautology.model.*;
-import br.ufjf.nenc.thautology.repository.AchievementRepository;
+import br.ufjf.nenc.thautology.model.Achievement;
+import br.ufjf.nenc.thautology.model.AchievementSummary;
+import br.ufjf.nenc.thautology.model.Answer;
+import br.ufjf.nenc.thautology.model.User;
 import br.ufjf.nenc.thautology.util.IterableList;
-import lombok.Getter;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-import static com.google.common.base.Preconditions.checkArgument;
-
 @Service
+@Log4j
 public class AchievementSummaryService {
 
     private final AchievementService achievementService;
@@ -56,7 +55,7 @@ public class AchievementSummaryService {
 
         summary.setCorrectAnswers(answers.stream().filter(Answer::getCorrect).count());
 
-        summary.setTotalPoints(achievements.stream().mapToLong(Achievement::getValue).reduce(0l, (t, v) ->  t+v));
+        summary.setTotalPoints(achievements.stream().mapToLong(Achievement::getValue).reduce(0l, (t, v) -> t + v));
 
         return summary;
     }

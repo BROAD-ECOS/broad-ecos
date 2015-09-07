@@ -1,9 +1,14 @@
 package br.ufjf.nenc.thautology.model;
 
-import lombok.Data;
+import lombok.*;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
-@Data
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class Challenge extends Entity {
 
     @DBRef

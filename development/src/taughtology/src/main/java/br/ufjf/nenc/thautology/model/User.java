@@ -1,15 +1,18 @@
 package br.ufjf.nenc.thautology.model;
 
 import br.ufjf.nenc.broadecos.model.ParticipantProfile;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 
-@Data
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
+@AllArgsConstructor
 public class User extends Entity implements Serializable {
 
     private static final long serialVersionUID = 1L;

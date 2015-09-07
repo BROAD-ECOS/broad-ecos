@@ -1,11 +1,14 @@
 package br.ufjf.nenc.thautology.model;
 
 import br.ufjf.nenc.broadecos.model.Course;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
-@Data
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
 @AllArgsConstructor
 public class Classmate extends Entity {
 

@@ -74,16 +74,7 @@ $cookieId = 'broadecos.token.'.$broadecosmod->external_service_id;
 $cookieName = str_replace('.','_',$cookieId);
 if (!isset($_COOKIE[$cookieName])) {
 
-    //
-    /*$matrix = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $code = '';
-    for ($i=0; $i<8;$i++) {
-        $code .= $matrix[rand(0, strlen($matrix))];
-    }
 
-    header("Location: ".$broadecosmod->external_service_uri."/confirm?code=".$code."&redirect=");
-    die();
-    */
     $newToken = bin2hex(openssl_random_pseudo_bytes(16));
     setcookie($cookieId, $newToken, time()+3600, '/');
 
@@ -124,8 +115,17 @@ if (!isset($_COOKIE[$cookieName])) {
 
 // Output starts here.
 echo $OUTPUT->header();
-
+echo '<div class="singlebutton" style="float: right;">
+        <form action="'.$broadecosmod->external_service_entrypoint.'" method="get" target="_blank">
+            <div>
+                <input type="submit" value="Abrir em outra janela">
+                <input type="hidden" value="'.urlencode('http://dev.broadecos/moodle/mod/broadecosmod/ws.php').'" name="platform">
+                <input type="hidden" value="'.$token->token.'" name="token">
+            </div>
+        </form>
+     </div>';
 echo '<hr />';
+
 echo '<iframe src="'.($broadecosmod->external_service_entrypoint)
         .'?token='.$token->token
         .'&platform='.urlencode('http://dev.broadecos/moodle/mod/broadecosmod/ws.php')

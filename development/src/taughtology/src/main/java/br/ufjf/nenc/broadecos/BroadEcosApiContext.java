@@ -1,5 +1,6 @@
 package br.ufjf.nenc.broadecos;
 
+import br.ufjf.nenc.broadecos.experience.ExperienceStatement;
 import br.ufjf.nenc.broadecos.model.Course;
 import br.ufjf.nenc.broadecos.model.ParticipantProfile;
 import br.ufjf.nenc.broadecos.model.PlatformInfo;
@@ -53,6 +54,16 @@ public class BroadEcosApiContext {
 
     }
 
+    @SuppressWarnings(value = "unchecked")
+    private <T> T post(String path, T data) {
+        WebResource webResource = client().resource(context.getPlatform() + path);
+        return webResource
+                .type(APPLICATION_JSON_TYPE)
+                .accept(APPLICATION_JSON_TYPE)
+                .header("broad-ecos-token", context.getToken())
+                .post((Class<T>) data.getClass(), data);
+    }
+
     public ParticipantProfile getParticipant() {
         return get("/me/profile", ParticipantProfile.class);
     }
@@ -67,6 +78,10 @@ public class BroadEcosApiContext {
 
     public List<ParticipantProfile> getCurrentCourseParticipants() {
         ClientResponse clientResponse = getList("/courses/current/participants");
-        return clientResponse.getEntity(new GenericType<List<ParticipantProfile>>() { });
+        return clientResponse.getEntity(new GenericType<List<ParticipantProfile>>() {});
+    }
+
+    public ExperienceStatement sendExperience(ExperienceStatement statement) {
+        return post("/experiences", statement);
     }
 }

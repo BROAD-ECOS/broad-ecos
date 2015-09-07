@@ -1,5 +1,6 @@
 package br.ufjf.nenc.thautology.event;
 
+import br.ufjf.nenc.broadecos.Context;
 import br.ufjf.nenc.thautology.model.Answer;
 import br.ufjf.nenc.thautology.model.Entity;
 import lombok.EqualsAndHashCode;
@@ -11,10 +12,10 @@ import lombok.ToString;
 public class EntityCreatedEvent<T extends Entity> {
 
     @Getter private final T entity;
-
-
-    protected EntityCreatedEvent(T entity) {
+    @Getter private final Context context;
+    protected EntityCreatedEvent(T entity, Context context) {
         this.entity = entity;
+        this.context = context;
     }
 
 }

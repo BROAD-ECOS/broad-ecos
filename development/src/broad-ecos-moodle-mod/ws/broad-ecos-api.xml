@@ -87,7 +87,7 @@
     </resourse>
     <resourse>
         <method>GET</method>
-            <path>/courses/current/participants</path>
+        <path>/courses/current/participants</path>
         <required-scopes>
             <required-scope>courses.current.participants</required-scope>
             <required-scope/>
@@ -120,6 +120,22 @@
             AND r.archetype = "student"
 
         ]]></query>
+        <isarray>true</isarray>
+    </resourse>
+    <resourse>
+        <method>POST</method>
+        <path>/experiences</path>
+        <required-scopes>
+            <required-scope>experience.write</required-scope>
+            <required-scope/>
+        </required-scopes>
+        <parameters>
+            <param />
+            <param />
+        </parameters>
+        <query>
+
+        </query>
         <isarray>true</isarray>
     </resourse>
 </api>

@@ -1,15 +1,16 @@
 package br.ufjf.nenc.thautology.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import javax.validation.constraints.NotNull;
 
-@Setter
 @Getter
+@Setter
 @ToString
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class Comment extends Entity {
 
     @DBRef

@@ -11,10 +11,11 @@ import java.util.Locale;
 
 @Getter
 @Setter
-@Builder
+@ToString
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@Builder
 public class Question extends Entity implements Serializable {
 
     private static final long serialVersionUID = 1L;

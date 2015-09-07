@@ -1,5 +1,6 @@
 package br.ufjf.nenc.thautology.service;
 
+import br.ufjf.nenc.thautology.component.BroadContext;
 import br.ufjf.nenc.thautology.event.ChallengeAcceptedEvent;
 import br.ufjf.nenc.thautology.event.ChallengeCreatedEvent;
 import br.ufjf.nenc.thautology.event.ChallengeMetEvent;
@@ -30,12 +31,15 @@ public class ChallengeService {
 
     private final ApplicationEventPublisher publisher;
 
+    private final BroadContext broadContext;
+
     @Autowired
-    public ChallengeService(ChallengeRepository challengeRepository, UserService userService, QuestionService questionService, ApplicationEventPublisher publisher) {
+    public ChallengeService(ChallengeRepository challengeRepository, UserService userService, QuestionService questionService, ApplicationEventPublisher publisher, BroadContext broadContext) {
         this.challengeRepository = challengeRepository;
         this.userService = userService;
         this.questionService = questionService;
         this.publisher = publisher;
+        this.broadContext = broadContext;
     }
 
     public Challenge save(Challenge challenge) {
@@ -62,11 +66,11 @@ public class ChallengeService {
         Challenge savedChallenge = challengeRepository.save(challenge);
 
         if (!previousChallenge.getMet().equals(savedChallenge.getMet()) && savedChallenge.getMet()) {
-            publisher.publishEvent(new ChallengeMetEvent(savedChallenge));
+            publisher.publishEvent(new ChallengeMetEvent(savedChallenge, broadContext.get()));
         }
 
         if (!previousChallenge.getAccepted().equals(savedChallenge.getAccepted()) && savedChallenge.getAccepted()) {
-            publisher.publishEvent(new ChallengeAcceptedEvent(savedChallenge));
+            publisher.publishEvent(new ChallengeAcceptedEvent(savedChallenge, broadContext.get()));
         }
 
         return challengeRepository.save(savedChallenge);
@@ -80,7 +84,7 @@ public class ChallengeService {
 
         Challenge savedChallenge = challengeRepository.save(challenge);
 
-        publisher.publishEvent(new ChallengeCreatedEvent(savedChallenge));
+        publisher.publishEvent(new ChallengeCreatedEvent(savedChallenge, broadContext.get()));
 
         return savedChallenge;
     }
