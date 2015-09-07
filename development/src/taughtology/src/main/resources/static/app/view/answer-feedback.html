@@ -26,17 +26,7 @@
         </div>
         <hr />
         <div class="row">
-            <div class="col-md-1">
-                <span class="fa-stack fa-2x" style="color:red;"  ng-if="!answer.correct">
-                  <i class="fa fa-circle-o fa-stack-2x"></i>
-                  <i class="fa fa-frown-o fa-stack-1x"></i>
-                </span>
-                <span class="fa-stack fa-2x" style="color:green;"  ng-if="answer.correct">
-                  <i class="fa fa-circle-o fa-stack-2x"></i>
-                  <i class="fa fa-trophy fa-stack-1x"></i>
-                </span>
-            </div>
-            <div class="col-md-5">
+            <div class="col-md-6">
                 <h4 ng-if="!answer.correct">
                  Sinto muito, você respondeu
                     <span class="label {{answeredClass}}">{{answeredMessage}}</span>,

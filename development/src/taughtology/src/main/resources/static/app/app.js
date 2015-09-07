@@ -55,6 +55,20 @@
                         }]
                     }
                 })
+                .when('/challenge/:id', {
+                    templateUrl: 'app/view/challenge.html',
+                    controller: 'ChallengeCtrl',
+                    resolve: {
+                        "challenge" : ['$q', '$route', "Challenge", function($q, $route, Challenge){
+                            var  id = $route.current.params.id;
+                            var deferred = $q.defer();
+                            Challenge.get({id:id},function(challenge){
+                                deferred.resolve(challenge);
+                            });
+                            return deferred.promise;
+                        }]
+                    }
+                })
                 .when('/answer-feedback/:id', {
                     templateUrl: 'app/view/answer-feedback.html',
                     controller: 'AnswerFeedbackCtrl',

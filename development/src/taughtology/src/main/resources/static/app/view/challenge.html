@@ -1,0 +1,26 @@
+<h1> <i class="fa fa-bookmark"></i> Desafio</h1>
+<div class="alert alert-dismissable alert-info">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    Este é o desafio enviado por <strong>{{challenge.challenger.participantProfile.firstName}} {{challenge.challenger.participantProfile.lastName}}</strong>.
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>{{challenge.question.title}}</h2>
+                <hr>
+                <p class="lead">{{challenge.question.content}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12 text-center" >
+        <p>
+            <a class="btn btn-lg btn-success " ng-click="answer(true)" role="button"><i class="mdi-action-thumb-up"></i> Verdadeiro</a>
+            <a class="btn btn-lg btn-danger " ng-click="answer(false)" role="button"> Falso <i class="mdi-action-thumb-down"></i></a>
+        </p>
+    </div>
+</div>

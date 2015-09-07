@@ -3,6 +3,9 @@ package br.ufjf.nenc.thautology.service;
 import br.ufjf.nenc.thautology.event.AchievementCreatedEvent;
 import br.ufjf.nenc.thautology.model.*;
 import br.ufjf.nenc.thautology.repository.AchievementRepository;
+import br.ufjf.nenc.thautology.repository.AnswerAchievementRepository;
+import br.ufjf.nenc.thautology.util.EntitySupplier;
+import com.google.common.base.Preconditions;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -13,6 +16,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static com.google.common.base.Preconditions.*;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
@@ -20,14 +24,65 @@ import static java.util.stream.Collectors.toSet;
 @Service
 public class AchievementService {
 
+    private final Long CHALLENGE_POINTS_FACTOR = 5l;
+
     private final AchievementRepository achievementRepository;
+
+    private final AnswerAchievementRepository answerAchievementRepository;
 
     private final ApplicationEventPublisher publisher;
 
     @Autowired
-    public AchievementService(AchievementRepository achievementRepository, ApplicationEventPublisher publisher) {
+    public AchievementService(AchievementRepository achievementRepository, AnswerAchievementRepository answerAchievementRepository, ApplicationEventPublisher publisher) {
         this.achievementRepository = achievementRepository;
+        this.answerAchievementRepository = answerAchievementRepository;
         this.publisher = publisher;
+    }
+
+    public void calculateAchievements(Challenge challenge) {
+        checkArgument(challenge!=null);
+        checkArgument(challenge.getMet());
+
+        Achievement achievementChallenger = createPointAchievementChallenger(challenge);
+        publisher.publishEvent(new AchievementCreatedEvent(achievementChallenger));
+        achievementRepository.save(achievementChallenger);
+
+        Achievement achievementChallenged = createPointAchievementChallenged(challenge);
+        publisher.publishEvent(new AchievementCreatedEvent(achievementChallenged));
+        achievementRepository.save(achievementChallenged);
+
+
+    }
+
+    private Achievement createPointAchievementChallenger(Challenge challenge) {
+        Achievement achievement = createPointAchievement(challenge);
+        achievement.setUser(challenge.getChallenger());
+        return achievement;
+    }
+
+    private Achievement createPointAchievementChallenged(Challenge challenge) {
+        Achievement achievement = createPointAchievement(challenge);
+        achievement.setUser(challenge.getChallenged());
+        return achievement;
+    }
+
+    private Achievement createPointAchievement(Challenge challenge) {
+        ChallengeAchievement achievement = new ChallengeAchievement();
+        achievement.setChallenge(challenge);
+        achievement.setValue(calculatePoints(challenge));
+        return achievement;
+    }
+
+
+    public Long calculatePoints(Challenge challenge) {
+        checkArgument(challenge != null);
+
+        Long basicPoints = 0l;
+        if (challenge.getMet()){
+            basicPoints = getPoints(challenge.getQuestion().getLevel());
+        }
+        return Math.floorDiv(basicPoints, CHALLENGE_POINTS_FACTOR);
+
     }
 
     public void calculateAchievements(Answer answer) {
@@ -41,9 +96,10 @@ public class AchievementService {
     }
 
     private Achievement createPointAchievement(Answer answer) {
-        Achievement achievement = new Achievement();
-        achievement.setRelatedAnswer(answer);
+        AnswerAchievement achievement = new AnswerAchievement();
+        achievement.setAnswer(answer);
         achievement.setValue(calculatePoints(answer));
+        achievement.setUser(answer.getUser());
         return achievement;
     }
 
@@ -62,20 +118,17 @@ public class AchievementService {
         return points;
     }
 
+    public Iterable<Achievement> achievementsOf(User user) {
+        return achievementRepository.findAllByUser(user);
+    }
+
     public Optional<Achievement> findByAnswerId(Optional<String> answerId) {
-        return achievementRepository.findOneByRelatedAnswerId(answerId.get());
+        checkArgument(answerId != null);
+        return new EntitySupplier<>(answerId, this::getAnswerAchievementById).supply();
     }
 
-    public Iterable<Achievement> achievementsBy(User user) {
-        checkArgument(user != null && user.getId()!=null);
-        return achievementRepository.findOneByRelatedAnswerUser(user);
-    }
-
-    public Iterable<Achievement> achievementsOf(List<Answer> answers) {
-        checkArgument(answers != null);
-        Set<String> answerIds = answers.stream().map(Answer::getId).collect(toSet());
-
-        return achievementRepository.findAllByRelatedAnswerIdIn(answerIds);
+    private Optional<Achievement> getAnswerAchievementById(String id) {
+        return Optional.ofNullable(answerAchievementRepository.findOne(id));
     }
 
     private enum LevelPoints {

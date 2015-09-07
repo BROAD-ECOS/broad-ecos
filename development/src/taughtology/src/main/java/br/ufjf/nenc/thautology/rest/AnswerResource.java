@@ -27,13 +27,13 @@ public class AnswerResource {
     }
 
     @RequestMapping(method = POST)
-    public Reference<Answer> post(@RequestBody @Valid Answer answer){
+    public Answer post(@RequestBody @Valid Answer answer){
 
         log.info("Answer received: " + answer);
 
         Answer savedAnswer = answerService.save(answer);
 
-        return Reference.to(savedAnswer);
+        return savedAnswer;
 
     }
 

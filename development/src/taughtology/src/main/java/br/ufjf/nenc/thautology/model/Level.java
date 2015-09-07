@@ -10,19 +10,19 @@ import java.util.Locale;
 import java.util.Map;
 
 public enum Level implements Serializable {
-    EASY("Easy", ImmutableMap.<Locale, String> builder().put(new Locale("pt","BR"), "Fácil").build()),
-    MEDIUM("Medium", ImmutableMap.<Locale, String> builder().put(new Locale("pt","BR"), "Médio").build()),
-    HARD("Hard", ImmutableMap.<Locale, String> builder().put(new Locale("pt","BR"), "Difícil").build()),
-    INSANE("Insane", ImmutableMap.<Locale, String> builder().put(new Locale("pt","BR"), "Insano").build()),
-    COMPLETE("Complete", ImmutableMap.<Locale, String> builder().put(new Locale("pt","BR"), "Completo").build());
+    EASY("Easy", ImmutableMap.<String, String> builder().put("pt_BR", "Fácil").build()),
+    MEDIUM("Medium", ImmutableMap.<String, String> builder().put("pt_BR", "Médio").build()),
+    HARD("Hard", ImmutableMap.<String, String> builder().put("pt_BR", "Difícil").build()),
+    INSANE("Insane", ImmutableMap.<String, String> builder().put("pt_BR", "Insano").build()),
+    COMPLETE("Complete", ImmutableMap.<String, String> builder().put("pt_BR", "Completo").build());
 
     private static final long serialVersionUID = 1L;
 
     @Getter
     private final String name;
-    private final Map<Locale, String> localizedNames;
+    private final Map<String, String> localizedNames;
 
-    Level(String name, Map<Locale, String> localizedNames) {
+    Level(String name, Map<String, String> localizedNames) {
         this.name = name;
         this.localizedNames=localizedNames;
     }
@@ -42,7 +42,7 @@ public enum Level implements Serializable {
     }
 
     public String getLocalNameOrDefault(Locale locale){
-        String localName = localizedNames.get(locale);
+        String localName = localizedNames.get(locale.toString());
         if (localName == null) {
             localName = name;
         }

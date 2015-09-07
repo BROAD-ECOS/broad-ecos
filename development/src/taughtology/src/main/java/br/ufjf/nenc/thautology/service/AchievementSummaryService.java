@@ -48,13 +48,13 @@ public class AchievementSummaryService {
     private AchievementSummary buildSummaryByUser(User user) {
 
         List<Answer> answers = new IterableList<>(answerService.answeredBy(user));
-        List<Achievement> achievements = new IterableList<>(achievementService.achievementsOf(answers));
+        List<Achievement> achievements = new IterableList<>(achievementService.achievementsOf(user));
 
         AchievementSummary summary = new AchievementSummary();
 
         summary.setQuestionsAnswered((long) answers.size());
 
-        summary.setCorrectAnswers(answers.stream().map(Answer::getCorrect).count());
+        summary.setCorrectAnswers(answers.stream().filter(Answer::getCorrect).count());
 
         summary.setTotalPoints(achievements.stream().mapToLong(Achievement::getValue).reduce(0l, (t, v) ->  t+v));
 

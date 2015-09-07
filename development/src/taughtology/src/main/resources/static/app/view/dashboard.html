@@ -3,11 +3,42 @@
 
         <div class="panel panel-default">
             <div class="panel-body">
+                <h3><i class="fa fa-paper-plane-o fa-flip-horizontal fa-fg"></i> Desafios Recebidos</h3>
+                <hr />
+                <div class="row">
+                    <div class="col-md-12" ng-if="receivedChallenges.length==0">
+                        <p class="lead">Você ainda não recebeu nenhum desafio.</p>
+                    </div>
+                    <div class="col-md-12" ng-if="receivedChallenges.length>0">
+                        <div class="list-group">
+                            <p class="list-group-item-heading" ng-repeat="challenge in receivedChallenges track by $index" href="#/answer-feedback/{{levelAnswer.id}}" class="list-group-item" >
+                                # {{$index+1}}
+                                Você recebeu o desafio '<strong>{{challenge.question.title}}</strong>' enviado por  <strong>{{challenge.challenger.participantProfile.firstName}} {{challenge.challenger.participantProfile.lastName}}</strong>
+                                <a href="#/challenge/{{challenge.id}}" class="btn btn-flat btn-primary btn-xs"><i class="fa fa-check fa-fg"></i> Aceitar</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
                 <h3><i class="mdi-action-done-all"></i> Desafios Aceitos</h3>
                 <hr />
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12" ng-if="acceptedChallenges.length==0">
                         <p class="lead">Você ainda não aceitou nenhum desafio.</p>
+                    </div>
+                    <div class="col-md-12" ng-if="acceptedChallenges.length>0">
+                        <div class="list-group">
+                            <a ng-repeat="challenge in acceptedChallenges track by $index" href="#/answer-feedback/{{levelAnswer.id}}" class="list-group-item" >
+                                <h4 class="list-group-item-heading">
+                                    # {{$index+1}}
+                                    Você Aceitou o desafio '<strong>{{challenge.question.title}}</strong>' enviado por <strong>{{challenge.challenger.participantProfile.firstName}} {{challenge.challenger.participantProfile.lastName}}</strong>.
+                                </h4>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -18,16 +49,29 @@
                 <h3><i class="mdi-content-send"></i> Desafios Enviados</h3>
                 <hr />
                 <div class="row">
-                    <div class="col-md-12">
-                        <p class="lead">Você ainda não recebeu nenhum desafio.</p>
+                    <div class="col-md-12"  ng-if="sentChallenges.length==0">
+                        <p class="lead">Você ainda não enviou nenhum desafio.</p>
+                    </div>
+                    <div class="col-md-12" ng-if="sentChallenges.length>0">
+                        <div class="list-group">
+                            <a ng-repeat="challenge in sentChallenges track by $index" href="#/answer-feedback/{{levelAnswer.id}}" class="list-group-item" >
+                                <h4 class="list-group-item-heading">
+                                    # {{$index+1}}
+                                    Você enviou o desafio '<strong>{{challenge.question.title}}</strong>' para <strong>{{challenge.challenged.participantProfile.firstName}} {{challenge.challenged.participantProfile.lastName}}</strong>,
+                                    <span ng-if="!challenge.accepted"> e ainda não foi aceito.</span>
+                                    <span ng-if="challenge.accepted"> e foi aceito.</span>
+                                </h4>
+                            </a>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
         <div class="panel panel-default">
             <div class="panel-body">
-                <h3><i class="mdi-action-list"></i> Todos os desafios</h3>
+                <h3><i class="mdi-action-list"></i> Meus os desafios</h3>
                 <hr />
                 <div class="row" ng-if="!answers.EASY || answers.EASY.length == 0">
                     <div class="col-md-12">
@@ -43,7 +87,7 @@
                             <a  ng-repeat="levelAnswer in levelAnswers track by $index" href="#/answer-feedback/{{levelAnswer.id}}" class="list-group-item" >
                                 <h4 class="list-group-item-heading">
                                     # {{$index+1}}
-                                    {{levelAnswer.question.title}}
+                                    <strong>{{levelAnswer.question.title}}</strong>
                                     <span class="label label-success" ng-if="levelAnswer.correct">ACERTOU</span>
                                     <span class="label label-danger"  ng-if="!levelAnswer.correct">ERROU</span>
                                 </h4>

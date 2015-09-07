@@ -6,10 +6,7 @@ import br.ufjf.nenc.thautology.service.ChallengeService;
 import br.ufjf.nenc.thautology.util.IterableList;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -45,9 +42,18 @@ public class ChallengeResource {
 
     @RequestMapping(method = GET)
     public List<Challenge> getClassmates(@RequestParam("challenger") Optional<String> challengerId,
-                                         @RequestParam("question") Optional<String> questionId){
-        return new IterableList<>(challengeService.getChallenge(challengerId, questionId));
+                                         @RequestParam("question") Optional<String> questionId,
+                                         @RequestParam("challenged") Optional<String> challengedId,
+                                         @RequestParam("accepted") Optional<Boolean> accepted){
+
+        return new IterableList<>(challengeService.getChallenges(challengerId, challengedId, questionId, accepted));
     }
+
+    @RequestMapping(path = "/{id}", method = GET)
+    public Challenge getClassmates(@PathVariable("id") String challengeId){
+        return challengeService.getChallenge(challengeId).get();
+    }
+
 
 
 }

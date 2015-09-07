@@ -10,11 +10,16 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @ToString
-public class Achievement extends Entity {
+public abstract class Achievement<T> extends Entity {
 
     @DBRef
-    private Answer relatedAnswer;
+    @NotNull
+    private User user;
 
     @NotNull
     private Long value;
+
+
+    public abstract T getEntity();
+
 }

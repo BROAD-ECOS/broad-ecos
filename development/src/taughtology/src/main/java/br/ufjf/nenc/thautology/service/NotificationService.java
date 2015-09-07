@@ -35,19 +35,27 @@ public class NotificationService {
         return notificationRepository.save(notification);
     }
 
-    public Iterable<Notification> getNotificationsTo(Optional<String> to) {
+    public Iterable<Notification> getNotificationsTo(Optional<String> to, Optional<Boolean> seen) {
         Iterable<Notification> notifications = Collections.emptyList();
 
         if (to.isPresent()) {
             Optional<User> recipient = new EntitySupplier<>(to, userService::getUser).supply();
             if (recipient.isPresent()) {
-                notifications = listAll(recipient.get());
+                if (seen.isPresent()) {
+                    notifications = listAllBySeen(recipient.get(), seen.get());
+                } else {
+                    notifications = listAll(recipient.get());
+                }
             }
         } else {
             notifications = all();
         }
 
         return notifications;
+    }
+
+    private Iterable<Notification> listAllBySeen(User user, Boolean seen) {
+        return notificationRepository.findAllByToAndSeen(user, seen);
     }
 
     private Iterable<Notification> all() {

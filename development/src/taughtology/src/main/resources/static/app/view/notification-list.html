@@ -1,14 +1,11 @@
-<h1><i class="fa fa-list fa-fg"></i> Notificações</h1>
+<h1><i class="fa fa-bell-o"></i> Notificações</h1>
 <div class="panel panel-default">
     <div class="panel-body">
         <div class="row">
-            <div class="col-md-12">
-                <h2>{{question.title}}</h2>
-                <hr>
+            <div class="col-md-12" ng-if="notifications.length == 0">
+                <p class="lead">Você ainda não possui nenhuma notificação.</p>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12" ng-if="notifications.length > 0">
                 <accordion>
                     <accordion-group  ng-repeat="notification in notifications" ng-click="read(notification)" is-open="notification.seen">
                         <accordion-heading>

@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface NotificationRepository extends PagingAndSortingRepository<Notification, String> {
 
     Iterable<Notification> findAllByTo(User to);
+
+    Iterable<Notification> findAllByToAndSeen(User user, Boolean seen);
 }

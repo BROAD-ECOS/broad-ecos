@@ -32,8 +32,8 @@ public class NotificationResource {
 
 
     @RequestMapping(method = GET)
-    public List<Notification> getMe(@RequestParam("to") Optional<String> to){
-        return new IterableList<>(notificationService.getNotificationsTo(to));
+    public List<Notification> get(@RequestParam("to") Optional<String> to, @RequestParam("seen") Optional<Boolean> seen){
+        return new IterableList<>(notificationService.getNotificationsTo(to, seen));
     }
 
     @RequestMapping(method = POST)
