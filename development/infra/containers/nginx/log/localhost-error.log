@@ -1,0 +1,14 @@
+2015/09/12 18:02:47 [error] 5#0: *1 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/d1/e1/d1e1a31fca93910f4f1466a0ceb2e167551c1af2
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f2?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.0.23:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/course/view.php?id=3"
+2015/09/12 18:02:48 [error] 5#0: *7 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/d1/e1/d1e1a31fca93910f4f1466a0ceb2e167551c1af2
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f2?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.0.23:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/course/view.php?id=3"

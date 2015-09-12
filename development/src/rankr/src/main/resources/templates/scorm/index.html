@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/prettify.css" rel="stylesheet">
+<link href="css/jquery.modal.css">
+<meta charset='utf-8'>
+</head>
+
+<body>
+ <div class='container'>		
+		<div class="span12">
+			<section id="wizard">
+                <div class="row page-header">
+                    <div class="span7">
+                        <h1 id="title"></h1>
+                    </div>
+                    <div class="span2">
+                        <h4 id="name"></h4>
+                    </div>
+                    <div class="span2">
+                        <div id="progress" style="float:right">
+                        </div>
+                    </div>
+                </div>
+				<div id="rootwizard" class="tabbable tabs-left row">
+					<ul id="navigation">
+					</ul>
+					<div id="content" class="tab-content">
+					</div>
+                    <div class="pager wizard">
+                        <div style="float:right">
+                            <button type='button' class='btn  button-next'>
+                              Próximo &raquo;
+                            </button>
+                            <button type='button' class='btn  button-finish'>
+                              <span class="glyphicon glyphicon-ok"></span>Concluir
+                            </button>
+                        </div>
+                        <div style="float:left">
+                            <button type='button' class='btn  button-previous'>
+                              &laquo; Anterior
+                            </button>
+                        </div>
+                    </div>
+				</div>
+			</section>
+             <hr />
+ 		</div>
+    
+    
+	</div>
+
+    <div id="gatewayframe">
+    </div>
+
+    <!-- Modal HTML embedded directly into document -->
+    <div id="modal_container" class="modal" style="display:none">
+        
+    </div>
+    <script id="points_template" type="x-tmpl-mustache">
+        <div  style="width:560px; padding: 10px;">
+            <div  style="float:left; padding: 10px;">
+                <img src="img/badge-icon.png" width="180px">
+            </div>
+            <div style="padding-top: 50px; padding-left: 10px;">
+                <h2>Parabéns!</h2>
+                <h4>Ao concluir esta etapa você conquistou <strong style="font-size: 1.4em">{{points}}</strong> pontos!</h4>
+            </div>
+        </div>
+    </script>
+    <script id="medals_template" type="x-tmpl-mustache">
+        <div  style="width:560px; padding: 10px;">
+            <div  style="float:left; padding: 10px;">
+                <img src="img/{{medal}}.png" width="180px">
+            </div>
+            <div style="padding-top: 50px; padding-left: 10px;">
+                <h2>Parabéns!</h2>
+                <h4>Ao concluir esta etapa você conquistou a medalha <strong style="font-size: 1.4em">{{medalName}}</strong>!</h4>
+            </div>
+        </div>
+    </script>
+    
+    <script id="finish_template" type="x-tmpl-mustache">
+        <h1>Parabéns!</h1>
+        <h2>Tutorial Concluído!!!</h2>
+    </script>
+    
+    <script id="step_name_template" type="x-tmpl-mustache">
+        <li><a href="#tab{{idx}}" data-toggle="tab">{{name}}</a></li>
+    </script>
+    
+    <script id="step_content_template" type="x-tmpl-mustache">
+        <div class="tab-pane" id="tab{{idx}}">
+            {{{content}}}
+        </div>
+    </script>
+    
+    <script id="plain_text_template" type="x-tmpl-mustache">
+        <pre>{{content}}</pre>
+    </script>
+
+    <script id="rich_text_template" type="x-tmpl-mustache">
+        {{{content}}}
+    </script>
+
+    <script id="image_template" type="x-tmpl-mustache">
+        <img src={{{content}}} />
+    </script>
+    <script id="video_template" type="x-tmpl-mustache">
+        <iframe id="ytplayer"
+        type="text/html"
+        width="640"
+        height="390"
+        src="//www.youtube.com/embed/{{content}}"
+        frameborder="0"
+        allowfullscreen></iframe>
+    </script>
+    
+	<script type="text/javascript" src="SCORM_API_wrapper.js"></script>
+ 	<script type="text/javascript" src="js/jquery-latest.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery.bootstrap.wizard.min.js"></script>
+	<script type="text/javascript" src="js/prettify.js"></script>
+    <script type="text/javascript" src="js/jquery.modal.min.js"></script>
+    <script type="text/javascript" src="js/lopl.js"></script>
+    <script type="text/javascript" src="js/circular-progress.min.js"></script>
+    <script type="text/javascript" src="js/mustache.js"></script>
+	<script>
+		$(function() {
+		    $.getJSON( 'lo-data.json', function(data) {
+
+                $.each(data.steps, function(k, params){
+                    lo.addStep(params.contentType, params.contentParams, params.conquestType, params.conquestParams);
+                });
+
+                $('title').text(data.title);
+                $('#title').text(data.title);
+
+                // lo.init(data.repository, data.loId);
+                lo.init(data.repository, data.loId);
+
+                $('#name').text(lo.learner_name);
+		    });
+		});	
+	</script>
+</body>
+
+</html>

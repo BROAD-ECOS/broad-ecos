@@ -1,5 +1,5 @@
 nginx:
-  build: docker/nginx
+  build: infra/containers/nginx
   links:
     - moodle
   ports:
@@ -8,11 +8,11 @@ nginx:
   volumes_from:
     - moodle
   volumes:
-    - ./config/nginx:/etc/nginx/conf.d/
-    - ./log/nginx:/var/log/nginx
+    - ./infra/containers/nginx/config:/etc/nginx/conf.d/
+    - ./infra/containers/nginx/log:/var/log/nginx
 
 moodle:
-  build: docker/moodle
+  build: infra/containers/moodle
   links:
     - mariadb
     - memcached
@@ -21,46 +21,47 @@ moodle:
     - "9000:9000"
   volumes:
     - ./src/broad-ecos-moodle-mod:/var/www/html/moodle/mod/broadecosmod
-    - ./config/moodle/config.php:/var/www/html/moodle/config.php
+    - ./infra/containers/moodle/config/config.php:/var/www/html/moodle/config.php
+    - ./infra/containers/moodle/vendor:/var/www/html/moodle/mod/broadecosmod
 
 mariadb:
-  build: docker/mariadb
+  build: infra/containers/mariadb
   ports:
     - "3307:3306"
   volumes:
-    - ./log/mariadb:/var/log/mysql
-    - ./data/mariadb:/var/lib/mysql
+    - ./infra/containers/mariadb/log:/var/log/mysql
+    - ./infra/containers/mariadb/data:/var/lib/mysql
   env_file:
-    - ./envvars/mariadb.env
-
-mongodb:
-  build: docker/mongodb
-  volumes:
-    - ./data/mongodb:/data
-  ports:
-    - "27017:27017"
+    - ./infra/envvars/mariadb.env
 
 memcached:
-  build: docker/memcached
+  build: infra/containers/memcached
   ports:
     - "11211:11211"
 
 redis:
-  build: docker/redis
+  build: infra/containers/redis
   ports:
     - "6379:6379"
 
-#postgresql:
-#  build: docker/broad/postgresql
-#  ports:
-#    - "5433:5432"
-#  volumes:
-#    - ./data/broad/postgresql:/var/lib/postgresql
-#  env_file:
-#    - ./envvars/postgresql.env
+postgresql:
+  build: infra/containers/postgresql
+  ports:
+    - "5433:5432"
+  volumes:
+    - ./infra/containers/postgresql/data:/var/lib/postgresql
+  env_file:
+    - ./infra/envvars/postgresql.env
+
+mongodb:
+  build: infra/containers/mongodb
+  volumes:
+    - ./infra/containers/mongodb/data:/data
+  ports:
+    - "27017:27017"
 
 #broadauth:
-#  build: docker/broad/auth
+#  build: infra/containers/broadecos_auth
 #  links:
 #    - postgresql
 #  ports:
@@ -68,4 +69,5 @@ redis:
 #  volumes:
 #    - ./src/broad-ecos-auth-service/build/libs/demo-0.0.1.jar:/opt/app.jar
 #  env_file:
-#    - ./envvars/broad/auth.env
+#    - ./infra/envvars/broad_auth.env
+

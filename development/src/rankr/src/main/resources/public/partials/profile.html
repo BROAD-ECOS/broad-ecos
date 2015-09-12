@@ -1,0 +1,82 @@
+<h1> <i class="icon-user-2"></i> {{profile.participant.name}}  <small class="on-right">Perfil</small></h1>
+<div class="grid fluid" >
+    <div class="row">
+        <div class="span12">
+            <h2>Resumo</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span2">
+            <div class="tile">
+                <div class="tile-content image">
+                    <img src="img/default2.jpg">
+                </div>
+            </div>
+        </div>
+        <div class="span4">
+            <h4>{{profile.participant.name}}</h4>
+            <p>{{profile.participant.organization.name || 'Instituição Desconhecida'}} ({{profile.participant.organization.bizId || '-'}})</p>
+            <p>Usuário chriado há {{createdAt}}</p>
+            <p>Última atualização há {{updatedAt}}</p>
+        </div>
+        <div class="span3">
+            <div class=" double">
+                <div class="rating large active"
+                     style="height: auto; padding:20px 10px; " >
+                    <ul>
+                        <li class="{{stars >= 1 ? 'rated':''}}"></li>
+                        <li class="{{stars >= 2 ? 'rated':''}}"></li>
+                        <li class="{{stars >= 3 ? 'rated':''}}"></li>
+                        <li class="{{stars >= 4 ? 'rated':''}}"></li>
+                        <li class="{{stars == 5 ? 'rated':''}}"></li>
+                    </ul>
+                    <span class="score-hint">Avaliação: {{stars}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span12">
+            <h2>Resumo de Conquistas</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span3">
+            <h2><i class="  icon-award-stroke"></i> <small><strong>Score Total:</strong></small> {{profile.score}}</h2>
+        </div>
+        <div class="span3">
+            <h2><i class=" icon-star-3"></i> <small><strong>Pontos:</strong></small> {{points.total}}</h2>
+        </div>
+        <div class="span3">
+            <h2><i class="  icon-medal-2"></i> <small><strong>Medalhas:</strong></small> {{medals.total}}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span12">
+            <h2>Histórico de Conquistas</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span12">
+            <div class="tile bg-gray" ng-repeat="conquest in conquests">
+                <div class="tile-content icon">
+                    <i ng-if="conquest.type == 'POINTS'" class="icon-star-3"></i>
+                    <i ng-if="conquest.type == 'MEDALS'" class="icon-medal-2"></i>
+                </div>
+                <div class="tile-status">
+                    <span class="name">{{conquest.interaction}}</span>
+                    <span class="name">
+                        <a href="#"
+                           data-hint="Detalhes|Data: {{conquest.updatedAtFromNow}}<br /> Curso: {{conquest.loId}}"
+                           data-hint-position="top">Detalhes
+                        </a>
+                    </span>
+                </div>
+                <div class="brand">
+                    <div class="badge bg-green" style="width: 50px;"> {{conquest.value}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

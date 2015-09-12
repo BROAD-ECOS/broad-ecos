@@ -28,8 +28,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'mod_broadecosmod';
-$plugin->version = 2015080100;
-$plugin->release = 'v0.0';
+$plugin->version = 2015051100;
+$plugin->release = 'v0.1';
 $plugin->requires = 2014051200;
 $plugin->maturity = MATURITY_ALPHA;
 $plugin->cron = 0;

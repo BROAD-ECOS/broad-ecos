@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html ng-app="lopl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="product" content="Learning Object Product Line">
+    <meta name="description" content="Envoirement for E-learning Product Line">
+    <meta name="author" content="Welington Veiga">
+
+    <link href="css/metro-bootstrap.css" rel="stylesheet">
+    <link href="css/ngDialog.css" rel="stylesheet">
+    <link href="css/ngDialog-theme-flat.css" rel="stylesheet">
+    <link href="css/iconFont.css" rel="stylesheet">
+    <link href="css/spinner.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+
+    <title>Portal</title>
+
+    <style>
+        .container {
+            width: 1040px;
+        }
+
+        .wall {
+            padding-top: 10%;
+            width: 1040px;
+            z-index:9999;
+        }
+
+        .login {
+            background-color: #fdfdfd !important;
+            border: 1px solid #ccc;
+            margin: 0 0 10px;
+            min-height: 100px;
+            padding: 20px 40px 20px 60px;
+            position: relative;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+    </style>
+</head>
+<body class="metro">
+
+    <div ng-controller="LoginCtrl">
+        <div class="container wall" ng-if="!isLoggedIn()">
+            <div class="grid fluid" style="height:190px; padding-top: 50px;" ng-if="!ready">
+                <div class="row">
+                    <div class="span1 offset4">
+                        <div class="spinner"></div>
+                    </div>
+                    <div>
+                        <h3> Iniciando...</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row hidden" ng-cloak ng-show="ready" >
+                <div class="offset6 span6">
+                    <h2 id="_default">
+                    <i class=" icon-locked on-left"></i>
+                    Entre
+                    </h2>
+                    <div class="login">
+                        <div ng-if="message">
+                            <div class="balloon bd-darkRed" style="margin:  0 0 5px;">
+                                <div class="padding10"><i class="icon-warning fg-red"></i> {{message}}</div>
+                            </div>
+                        </div>
+                        <br />
+                        <form>
+                                <label>E-mail</label>
+                                <div class="input-control text" data-role="input-control">
+                                    <input type="text" placeholder="jhon.doe@example.com" ng-model="userData.email">
+                                    <button class="btn-clear" tabindex="-1" type="button"></button>
+                                </div>
+                                <label>Senha</label>
+                                <div class="input-control password" data-role="input-control">
+                                    <input type="password" autofocus="" placeholder="type password" ng-model="userData.secret">
+                                    <button class="btn-reveal" tabindex="-1" type="button"></button>
+                                </div>
+                                <div class="input-control checkbox" data-role="input-control">
+                                    <label>
+                                        <input type="checkbox" checked="">
+                                        <span class="check"></span>
+                                        Lembre-me
+                                    </label>
+                                </div>
+                                <button class="place-right" type="submit" ng-click="login()"><i class=" icon-key on-left"></i> Entrar</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container  hidden" ng-cloak ng-show="isLoggedIn()">
+        <nav class="navigation-bar" style="margin-top:20px">
+            <div class="navigation-bar-content">
+                <a class="element" href="/"><span class="icon-puzzle"></span> Learning Object Product Line <sup>BETA</sup></a>
+                <span class="element-divider"></span>
+
+                <a href="#" class="pull-menu"></a>
+                <ul class="element-menu">
+
+
+                </ul>
+
+                <div class="no-tablet-portrait">
+                    <span class="element-divider"></span>
+
+
+                    <div class="element place-right">
+                        <a href="#" class="dropdown-toggle">
+                            <span class="icon-cog"></span>
+                        </a>
+                        <ul data-role="dropdown" class="dropdown-menu place-right">
+                            <li><a href="#"><span class=" icon-user"> Perfil</a></li>
+                            <li><a href="#"><span class=" icon-equalizer"> Preferências</a></li>
+                            <li><a href="#"><span class=" icon-wrench"> Configurações</a></li>
+                            <li><a href="#"><span class=" icon-exit"> Sair</a></li>
+                        </ul>
+                    </div>
+                    <span class="element-divider place-right"></span>
+                    <button class="element image-button image-left place-right">
+                        {{participant.name}}
+                        <img src="img/default.jpg">
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <header class="margin20 nrm nlm">
+            <div class="clearfix">
+                <div class="place-right">
+                    <form>
+                        <div class="input-control text size6 margin20 nrm">
+                            <input type="text" name="q" placeholder="Busca semântica...">
+                            <button class="btn-search"></button>
+                        </div>
+                    </form>
+                </div>
+                <a class="place-left" href="#" title="">
+                    <h1>Portal</h1>
+                </a>
+            </div>
+
+            <div class="main-menu-wrapper">
+                <ul class="horizontal-menu nlm">
+                    <li><a href="#/portal"><span class=" icon-home"></span> Início</a></li>
+                    <li><a href="#/autoring"><span class=" icon-pencil"></span> Ferramenta de Autoria</a></li>
+                    <li><a href="#"><span class=" icon-database"></span> Repositório</a></li>
+                    <li><a href="#/ranking"><span class=" icon-medal-2"></span> Ranking</a></li>
+                </ul>
+            </div>
+        </header>
+        <div>
+            <hr />
+            <ng-view />
+            <hr />
+        </div>
+        <footer>
+            <div class="bottom-menu-wrapper">
+                <ul class="horizontal-menu compact">
+                    <li>&copy; 2014 NEnC - Universidade Ferderal de Juiz de Fora</li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bower components includes -->
+    <script src="lib/lodash.js"></script>
+    <script src="lib/angular.js"></script>
+    <script src="lib/angular-route.js"></script>
+    <script src="lib/angular-resource.js"></script>
+    <script src="lib/angular-cookies.js"></script>
+    <script src="lib/ngDialog.min.js"></script>
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/jquery.widget.min.js"></script>
+    <script src="lib/load-metro.js"></script>
+    <script src="lib/hmac-sha512.js"></script>
+    <script src="lib/md5.js"></script>
+    <script src="lib/sha512.js"></script>
+    <script src="lib/moment.min.js"></script>
+    <script src="lib/textAngular.min.js"></script>
+    <script src="lib/textAngular-sanitize.min.js"></script>
+    <script src="lib/angular-file-upload-all.js"></script>
+    <script src="lib/angular-multi-select.js"></script>
+
+    <!-- Application definition -->
+    <script src="js/app.js"></script>
+
+    <!-- Application Configurations -->
+    <script src="js/Config/Constants.js"></script>
+    <script src="js/Config/Bootstrap.js"></script>
+    <script src="js/Config/Routes.js"></script>
+    <script src="js/Config/HTTP.js"></script>
+    <script src="js/Config/RequestInterceptor.js"></script>
+    <script src="js/Config/ResponseInterceptor.js"></script>
+    <script src="js/Config/Security.js"></script>
+
+    <!-- Application Services -->
+    <script src="js/Services/Auth.js"></script>
+    <script src="js/Services/LoService.js"></script>
+    <script src="js/Services/Hashing.js"></script>
+    <script src="js/Services/Sign.js"></script>
+    <script src="js/Services/UserService.js"></script>
+    <script src="js/Services/Moment.js"></script>
+
+    <!-- Application Models -->
+    <script src="js/Models/Crud.js"></script>
+    <script src="js/Models/Participant.js"></script>
+    <script src="js/Models/Profile.js"></script>
+    <script src="js/Models/Conquest.js"></script>
+    <script src="js/Models/LO.js"></script>
+    <script src="js/Models/Build.js"></script>
+
+    <!-- Application Filters -->
+    <script src="js/Filters/word.js"></script>
+
+    <!-- Application Directives -->
+    <script src="js/Directives/year.js"></script>
+
+    <!-- Application Controllers -->
+    <script src="js/Controllers/LoginCtrl.js"></script>
+    <script src="js/Controllers/LoEditCtrl.js"></script>
+    <script src="js/Controllers/LoNewCtrl.js"></script>
+    <script src="js/Controllers/LoListCtrl.js"></script>
+    <script src="js/Controllers/PortalCtrl.js"></script>
+    <script src="js/Controllers/RankingCtrl.js"></script>
+    <script src="js/Controllers/ProfileCtrl.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('.hidden').removeClass('hidden');
+        });
+    </script>
+
+</body>
+</html>

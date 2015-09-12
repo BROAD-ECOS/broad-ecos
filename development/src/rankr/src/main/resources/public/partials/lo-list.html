@@ -1,0 +1,61 @@
+
+<div class="grid fluid" ng-hide="status">
+            
+    <div class="row">
+        <div class="span8">
+            <h3>Listagem de Objetos de Aprendizagem</h3>
+        </div>
+        <div class="span4">
+            <button class="default place-right" ng-click="newLo()">
+                Novo Objeto de Aprendizagem <i class="icon-plus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span12">
+            <table class="table hovered striped">
+                <thead style="text-align: left">
+                    <tr>
+                        <th>Nome do Projeto</th>
+                        <th>Autor</th>
+                        <th>Última alteração</th>
+                        <th><span class="place-right" style="padding-right:40px; font-weight:bold">Ações</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="lo in los">
+                        <td>{{lo.project}}</td>
+                        <td>{{lo.author}}</td>
+                        <td>{{lo.updatedAtFromNow}}</td>
+                        <td>
+                            <div class="toolbar transparent place-right">
+                                <!--button><i class="icon-download"></i></button-->
+                                <button ng-click="edit(lo.id)"><i class="icon-pencil"></i></button>
+                                <!--button><i class="icon-remove"></i></button-->
+                            </div>
+                        </td>
+                    </tr>
+                    <tr ng-if="los.length == 0">
+                        <td colspan="5" style="text-align:center">
+                            <strong>Nenhum Objeto de Aprendizagem disponível. Crie o seu!</strong>
+                        </td>
+                    </tr>
+                </tbody>
+
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </div>
+    </div>
+</div>
+
+<div class="grid fluid" style="height:190px; padding-top: 50px" ng-show="status!==false">
+    <div class="row">
+        <div class="span1 offset4">
+            <div class="spinner"></div>
+        </div>
+        <div>
+            <h3>{{status}}...</h3>
+        </div>
+    </div>
+</div>

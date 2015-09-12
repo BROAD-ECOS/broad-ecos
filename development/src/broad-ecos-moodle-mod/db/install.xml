@@ -1,66 +1,80 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <XMLDB PATH="mod/broadecosmod/db" VERSION="20101203" COMMENT="XMLDB file for Moodle mod/broadecosmod"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
->
-  <TABLES>
-    <TABLE NAME="broadecosmod" COMMENT="Default comment for broadecosmod, please edit me">
-      <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
-        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Course broadecosmod activity belongs to"/>
-        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="name field for moodle instances"/>
-        <FIELD NAME="intro" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="General introduction of the broadecosmod activity"/>
-          <FIELD NAME="external_service_id" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT=""/>
-          <FIELD NAME="external_service_uri" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT=""/>
-        <FIELD NAME="external_service_entrypoint" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT=""/>
-        <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="Format of the intro field (MOODLE, HTML, MARKDOWN...)"/>
-        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"/>
-        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="grade" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="100" SEQUENCE="false" COMMENT="The maximum grade. Can be negative to indicate the use of a scale."/>
-      </FIELDS>
-      <KEYS>
-        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
-      </KEYS>
-      <INDEXES>
-        <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
-      </INDEXES>
-    </TABLE>
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+        >
+    <TABLES>
+        <TABLE NAME="broadecosmod" COMMENT="Default comment for broadecosmod, please edit me">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
+                <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"
+                       COMMENT="Course broadecosmod activity belongs to"/>
+                <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"
+                       COMMENT="name field for moodle instances"/>
+                <FIELD NAME="intro" TYPE="text" NOTNULL="true" SEQUENCE="false"
+                       COMMENT="General introduction of the broadecosmod activity"/>
+                <FIELD NAME="external_service_id" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="external_service_uri" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="external_service_entrypoint" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0"
+                       SEQUENCE="false" COMMENT="Format of the intro field (MOODLE, HTML, MARKDOWN...)"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0"
+                       SEQUENCE="false"/>
+                <FIELD NAME="grade" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="100" SEQUENCE="false"
+                       COMMENT="The maximum grade. Can be negative to indicate the use of a scale."/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
+            </INDEXES>
+        </TABLE>
 
-      <TABLE NAME="broadecosmod_scopes" COMMENT="Default comment for broadecosmod, please edit me">
-          <FIELDS>
-              <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
-              <FIELD NAME="broadecosmod_id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Course broadecosmod activity belongs to"/>
-              <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="name field for moodle instances"/>
-              <FIELD NAME="status" TYPE="int" LENGTH="1" NOTNULL="true" SEQUENCE="false" COMMENT="name field for moodle instances"/>
-              <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"/>
-              <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"/>
-          </FIELDS>
-          <KEYS>
-              <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
-          </KEYS>
-          <INDEXES>
-              <INDEX NAME="broadecos_activity" UNIQUE="false" FIELDS="broadecosmod_id"/>
-          </INDEXES>
-      </TABLE>
+        <TABLE NAME="broadecosmod_scopes" COMMENT="Default comment for broadecosmod, please edit me">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
+                <FIELD NAME="broadecosmod_id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"
+                       COMMENT="Course broadecosmod activity belongs to"/>
+                <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"
+                       COMMENT="name field for moodle instances"/>
+                <FIELD NAME="status" TYPE="int" LENGTH="1" NOTNULL="true" SEQUENCE="false"
+                       COMMENT="name field for moodle instances"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0"
+                       SEQUENCE="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="broadecos_activity" UNIQUE="false" FIELDS="broadecosmod_id"/>
+            </INDEXES>
+        </TABLE>
 
-      <TABLE NAME="broadecos_token" COMMENT="Default comment for broadecosmod, please edit me">
-          <FIELDS>
-              <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
-              <FIELD NAME="token" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="User Token"/>
-              <FIELD NAME="participant_id" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="User Token"/>
-              <FIELD NAME="course_id" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="User Token"/>
-              <FIELD NAME="service_id" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="User Token"/>
-              <FIELD NAME="session_id" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="User Token"/>
-              <FIELD NAME="approved_scopes" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="User Token"/>
-              <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"/>
-              <FIELD NAME="timeupdated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"/>
-          </FIELDS>
-          <KEYS>
-              <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
-          </KEYS>
-          <INDEXES>
-              <INDEX NAME="broadecos_token" UNIQUE="true" FIELDS="token"/>
-          </INDEXES>
-      </TABLE>
-  </TABLES>
+        <TABLE NAME="broadecos_token" COMMENT="Default comment for broadecosmod, please edit me">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
+                <FIELD NAME="token" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="User Token"/>
+                <FIELD NAME="participant_id" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"
+                       COMMENT="User Token"/>
+                <FIELD NAME="course_id" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="User Token"/>
+                <FIELD NAME="service_id" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="User Token"/>
+                <FIELD NAME="session_id" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="User Token"/>
+                <FIELD NAME="approved_scopes" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"
+                       COMMENT="User Token"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"/>
+                <FIELD NAME="timeupdated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0"
+                       SEQUENCE="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="broadecos_token" UNIQUE="true" FIELDS="token"/>
+            </INDEXES>
+        </TABLE>
+
+    </TABLES>
 </XMLDB>

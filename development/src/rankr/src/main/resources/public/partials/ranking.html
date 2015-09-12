@@ -1,0 +1,80 @@
+<h1> <i class="icon-trophy"></i> Ranking <small class="on-right">Os maiores pontuadores!!!</small></h1>
+<div class="grid fluid" >
+    <div class="row">
+        <div class="span4">
+            <h3>Líderes globais</h3>
+            <div class="listview">
+                <a class="list" ng-repeat="user in global" href="#/profile/{{user.id}}">
+                    <div class="list-content">
+                        <img class="icon" src="img/default2.jpg">
+                        <div class="data">
+                            <span class="list-title">{{user.name}}</span>
+                            <div data-stars="5" data-role="rating" data-score="{{user.stars}}" class="rating small no-margin fg-yellow">
+                                <ul style="margin-bottom: 0px;">
+                                    <li class="{{user.stars >= 1 ? 'rated':''}}"></li>
+                                    <li class="{{user.stars >= 2 ? 'rated':''}}"></li>
+                                    <li class="{{user.stars >= 3 ? 'rated':''}}"></li>
+                                    <li class="{{user.stars >= 4 ? 'rated':''}}"></li>
+                                    <li class="{{user.stars == 5 ? 'rated':''}}"></li>
+                                </ul>
+                            </div>
+                            <span class="list-remark"><strong>Score {{user.score}}</strong> (Pontos: {{user.points.total}}, Medalhas: {{user.medals.total}})</span>
+                            <span class="list-remark">{{user.organization.name}} ({{organization.id}})</span>
+                            <span class="list-remark"><strong>Última atualização:</strong> {{user.updatedAt}}</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="span4">
+            <h3>Líderes da {{participant.organization.bizId}}</h3>
+            <div class="listview">
+                <a class="list" ng-repeat="user in region" href="#/profile/{{user.id}}">
+                    <div class="list-content">
+                        <img class="icon" src="img/default2.jpg">
+                        <div class="data">
+                            <span class="list-title">{{user.name}}</span>
+                            <div data-stars="5" data-role="rating" data-score="{{user.stars}}" class="rating small no-margin fg-yellow">
+                                <ul style="margin-bottom: 0px;">
+                                    <li class="{{user.stars > 1 ? 'rated':''}}"></li>
+                                    <li class="{{user.stars > 2 ? 'rated':''}}"></li>
+                                    <li class="{{user.stars > 3 ? 'rated':''}}"></li>
+                                    <li class="{{user.stars > 4 ? 'rated':''}}"></li>
+                                    <li class="{{user.stars == 5 ? 'rated':''}}"></li>
+                                </ul>
+                            </div>
+                            <span class="list-remark"><strong>Score {{user.score}}</strong> (Pontos: {{user.points.total}}, Medalhas: {{user.medals.total}})</span>
+                            <span class="list-remark">{{user.organization.name}} ({{organization.id}})</span>
+                            <span class="list-remark"><strong>Última atualização:</strong> {{user.updatedAt}}</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="span4">
+            <h3>Uusários com conquistas recentes</h3>
+            <div class="listview">
+                <a class="list" ng-repeat="user in recent" href="#/profile/{{user.id}}">
+                    <div class="list-content" >
+                        <img class="icon" src="img/default2.jpg">
+                        <div class="data">
+                            <span class="list-title">{{user.name}}</span>
+                            <div data-stars="5" data-role="rating" data-score="{{user.stars}}" class="rating small no-margin fg-yellow">
+                                <ul style="margin-bottom: 0px;">
+                                    <li class="{{user.stars > 1 ? 'rated':''}}"></li>
+                                    <li class="{{user.stars > 2 ? 'rated':''}}"></li>
+                                    <li class="{{user.stars > 3 ? 'rated':''}}"></li>
+                                    <li class="{{user.stars > 4 ? 'rated':''}}"></li>
+                                    <li class="{{user.stars == 5 ? 'rated':''}}"></li>
+                                </ul>
+                            </div>
+                            <span class="list-remark"><strong>Score {{user.score}}</strong> (Pontos: {{user.points.total}}, Medalhas: {{user.medals.total}})</span>
+                            <span class="list-remark">{{user.organization.name}} ({{organization.bizId}})</span>
+                            <span class="list-remark"><strong>Última atualização:</strong> {{user.updatedAt}}</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,582 @@
+<link rel="stylesheet" href="lib/themes/default/style.min.css" />
+<style>
+    .feature {
+        padding-left: 20px;
+    }
+
+    .required >label {
+        font-weight: bold;
+    }
+
+
+    .alternative > label {
+    }
+
+    .optional > label{
+        font-style: italic;
+    }
+
+    .params-dialog {
+        width: 800px,
+        padding:20px
+    }
+
+</style>
+<div class="grid fluid" ng-hide="status">
+    <div class="row">
+        <div class="span12">
+            <form>
+                <fieldset>
+                    <legend>Projeto</legend>
+                    <label>Nome</label>
+                    <div class="input-control text" data-role="input-control">
+                        <input ng-model="lo.project" placeholder="Ex: Projeto Química Lição-4, esse é a identificação do projeto e não é utilizado no Objeto de Aprendizagem" type="text">
+                        <button type="button" class="btn-clear" tabindex="-1"></button>
+                    </div>
+                </fieldset>
+                <br />
+                <fieldset>
+                    <legend style="margin-bottom: 10px;">Seleção de Modelo de Características</legend>
+                    <div class="row" style="margin-top: 0px;">
+                        <div class="span3">
+                            <h4>Objeto de Aprendizagem</h4>
+                            <div class="root">
+                                <div id="metadata" class="feature required">
+                                    <label>
+                                        <input type="checkbox" ng-model="features.metadata.selected" ng-change="changeSelection(['metadata'], features.metadata.selected)"/>
+                                        <i class="icon-cube"></i> Metadados
+                                    </label>
+                                    <div id="lom" class="feature alternative">
+                                        <label >
+                                            <input type="checkbox" ng-model="features.metadata.features.lom.selected" ng-change="changeSelection(['metadata', 'lom'], features.metadata.features.lom.selected)"/>
+                                            <i class=" icon-github-6"></i> LOM
+                                        </label>
+                                    </div>
+                                </div>
+                                <div id="type" class="feature required">
+                                    <label>
+                                        <input type="checkbox" ng-model="features.type.selected" ng-change="changeSelection(['type'], features.type.selected)"/>
+                                        <span class="check"></span>
+                                        <i class="icon-cube"></i> Tipo
+                                    </label>
+                                    <div id="tutorial" class="feature alternative">
+                                        <label>
+                                            <input type="checkbox" ng-model="features.type.features.tutorial.selected" ng-change="changeSelection(['type', 'tutorial'], features.type.features.tutorial.selected)"/>
+                                            <span class="check"></span>
+                                            <i class=" icon-github-6"></i> Tutorial
+                                        </label>
+                                        <div class="feature">
+                                            <label>
+                                                <input type="checkbox" ng-model="features.type.features.tutorial.features.index.selected" ng-change="changeSelection(['type', 'tutorial', 'index'], features.type.features.tutorial.features.index.selected)"/>
+                                                <span class="check"></span>
+                                                <i class=" icon-tree-view"></i> Índice
+                                            </label>
+                                            <label>
+                                                <input type="checkbox" ng-model="features.type.features.tutorial.features.sequential.selected" ng-change="changeSelection(['type', 'tutorial', 'sequential'], features.type.features.tutorial.features.sequential.selected)"/>
+                                                <span class="check"></span>
+                                                <i class=" icon-tree-view"></i> Sequencial
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="conquest" class="feature optional">
+                                    <label>
+                                        <input type="checkbox" ng-model="features.conquest.selected" ng-change="changeSelection(['conquest'], features.conquest.selected)" />
+                                        <span class="check"></span>
+                                        <i class="icon-cube-2"></i> Gamificação
+                                    </label>
+                                    <div id="points" class="feature alternative">
+                                        <label>
+                                            <input type="checkbox" ng-model="features.conquest.features.points.selected" ng-change="changeSelection(['conquest','conquest'], features.conquest.features.points.selected)"/>
+                                            <span class="check"></span>
+                                            <i class=" icon-github-6"></i> Pontos
+                                        </label>
+                                    </div>
+                                    <div id="medals" class="feature alternative">
+                                        <label>
+                                            <input type="checkbox" ng-model="features.conquest.features.medals.selected" ng-change="changeSelection(['conquest','medals'], features.conquest.features.medals.selected)"/>
+                                            <span class="check"></span>
+                                            <i class=" icon-github-6"></i> Medalhas
+                                        </label>
+                                    </div>
+                                </div>
+                                <div id="package_format" class="feature required">
+                                    <label>
+                                        <input type="checkbox" ng-model="features.package_format.selected" ng-change="changeSelection(['package_format'], features.package_format.selected)" />
+                                        <span class="check"></span>
+                                        <i class="icon-cube"></i> Empacotamento
+                                    </label>
+                                    <div id="scorm" class="feature required">
+                                        <label>
+                                            <input type="checkbox" ng-model="features.package_format.features.scorm.selected" ng-change="changeSelection(['package_format','scorm'], features.package_format.features.scorm.selected)"/>
+                                            <span class="check"></span>
+                                            <i class=" icon-cube"></i> SCORM
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <table>
+                                <thead class="background-color:gray">
+                                    <th colspan="2">Legenda</th>
+                                </thead>
+                                <tr>
+                                    <td><i class="icon-cube"></i></td>
+                                    <td>Obrigatório</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="icon-cube-2"></i></td>
+                                    <td>Opcional</td>
+                                </tr>
+                                <tr>
+                                    <td><i class=" icon-github-6"></i></td>
+                                    <td>Uma das opções</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="icon-tree-view"></i></td>
+                                    <td>Múltiplas opções</td>
+                                </tr>
+                            </table>
+                            <hr />
+                            <h5>Modelos de Características</h5>
+                            <button class="link" ng-click="showFeatureModelDiagram()"><i class="icon-pictures"></i> Visualizar diagrama</button>
+
+                        </div>
+                        <div class="span9">
+                            <h4>Defina os parâmetros para as características selecionadas:</h4>
+                            <div ng-repeat="message in messages">
+                                <div class="balloon bd-darkRed" style="margin:  0 0 5px;">
+                                    <div class="padding10"><i class="icon-warning fg-red"></i> {{message}}</div>
+                                </div>
+                            </div>
+                            <div ng-if="messages.length == 0">
+                                <div class="balloon bd-darkGreen" style="margin:  0 0 5px;">
+                                    <div class="padding10"><i class="icon-warning fg-green"></i> Nenhuma pendência, salve para gerar seu Objeto de Aprendizagem!</div>
+                                </div>
+                            </div>
+                            <div class="tile bg-darkBlue" ng-if="features.metadata.features.lom.selected" ng-click="defineLOMParams()">
+                                <div class="tile-content icon">
+                                    <i class="icon-embed"></i>
+                                </div>
+                                <div class="tile-status">
+                                    <span class="name">LOM</span>
+                                </div>
+                                <div class="brand" ng-if="features.metadata.features.lom.pending > 0">
+                                    <div class="badge bg-red"> {{features.metadata.features.lom.pending}}</div>
+                                </div>
+                            </div>
+                            <div class="tile bg-darkBlue"  ng-if="features.conquest.selected" ng-click="defineConquestParams()">
+                                <div class="tile-content icon">
+                                    <i class="icon-trophy"></i>
+                                </div>
+                                <div class="tile-status">
+                                    <span class="name">Gamificação</span>
+                                </div>
+                                <div class="brand" ng-if="features.conquest.pending > 0">
+                                    <div class="badge bg-red"> {{features.conquest.pending}}</div>
+                                </div>
+                            </div>
+                            <div class="tile bg-darkBlue"  ng-if="features.conquest.features.points.selected" ng-click="definePointsParams()">
+                                <div class="tile-content icon">
+                                    <i class=" icon-star-3"></i>
+                                </div>
+                                <div class="tile-status">
+                                    <span class="name">Pontos</span>
+                                </div>
+                                <div class="brand" ng-if="features.conquest.features.points.pending > 0">
+                                    <div class="badge bg-red"> {{features.conquest.features.points.pending}}</div>
+                                </div>
+                            </div>
+                            <div class="tile bg-darkBlue"  ng-if="features.conquest.features.medals.selected" ng-click="noParams()">
+                                <div class="tile-content icon">
+                                    <i class="icon-medal-2"></i>
+                                </div>
+                                <div class="tile-status">
+                                    <span class="name">Medalhas</span>
+                                </div>
+                                <div class="brand" ng-if="features.conquest.features.medals.pending > 0">
+                                    <div class="badge bg-red"> {{features.conquest.features.medals.pending}}</div>
+                                </div>
+                            </div>
+                            <div class="tile bg-darkBlue" ng-if="features.type.features.tutorial.selected" ng-click="defineTutorialParams()">
+                                <div class="tile-content icon">
+                                    <i class="icon-list"></i>
+                                </div>
+                                <div class="tile-status">
+                                    <span class="name">Tutorial</span>
+                                </div>
+                                <div class="brand" ng-if="features.type.features.tutorial.pending > 0">
+                                    <div class="badge bg-red"> {{features.type.features.tutorial.pending}}</div>
+                                </div>
+                            </div>
+                            <div class="tile bg-darkBlue" ng-if="features.package_format.features.scorm.selected" ng-click="defineScormParams()">
+                                <div class="tile-content icon">
+                                    <i class="icon-box-add"></i>
+                                </div>
+                                <div class="tile-status">
+                                    <span class="name">SCORM</span>
+                                </div>
+                                <div class="brand" ng-if="features.package_format.features.scorm.pending > 0">
+                                    <div class="badge bg-red"> {{features.package_format.features.scorm.pending}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="span12">
+            <button class="command-button" ng-click="back()">
+                <i class="icon-backspace-2 on-left"></i>
+                Descartar
+                <small>As alterações serão perdidas</small>
+            </button>
+            <button class="place-right command-button primary" ng-click="save()">
+                <i class="icon-floppy on-left"></i>
+                Salvar
+                <small>Salve para continuar depois</small>
+            </button>
+            <button class="place-right command-button  default" style="margin-right: 5px;" ng-click="download()">
+                <i class="icon-download on-left"></i>
+                Download
+                <small>Salva e permite o download</small>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<div class="grid fluid" style="height:190px; padding-top: 50px" ng-show="status!==false">
+    <div class="row">
+        <div class="span1 offset4">
+            <div class="spinner"></div>
+        </div>
+        <div>
+            <h3>{{status}}...</h3>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/ng-template" id="featureDiagram">
+    <img src="img/features.jpg">
+</script>
+
+<script type="text/ng-template" id="noParams">
+    <div class="params-dialog">
+        <h1>Nenhuma configuração é necessária ;)</h1>
+        <button  class=" place-right default" ng-click="closeThisDialog(true)">
+            <i class="icon-checkmark"></i>
+            OK
+        </button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="lomParams">
+    <div class="params-dialog">
+        <form>
+            <fieldset>
+                <legend><i class="icon-embed"></i> LOM</legend>
+                <label>Title *</label>
+                <div class="input-control text" data-role="input-control">
+                    <input placeholder="Título do objeto de aprendizagem" type="text" ng-model="features.metadata.features.lom.params.title">
+                    <button type="button" class="btn-clear" tabindex="-1"></button>
+                </div>
+                <label>Language</label>
+                <div class="input-control text" data-role="input-control">
+                    <input placeholder="Idioma" type="text" ng-model="features.metadata.features.lom.params.language">
+                    <button type="button" class="btn-clear" tabindex="-1"></button>
+                </div>
+                <label>ID Organização</label>
+                <div class="input-control text" data-role="input-control">
+                    <input placeholder="Ex: UFJF" type="text" ng-model="features.metadata.features.lom.params.organizationId">
+                    <button type="button" class="btn-clear" tabindex="-1"></button>
+                </div>
+                <label>Nome Organização</label>
+                <div class="input-control text" data-role="input-control">
+                    <input placeholder="Ex: Universidade Federal de Juiz de Fora" type="text" ng-model="features.metadata.features.lom.params.organizationName">
+                    <button type="button" class="btn-clear" tabindex="-1"></button>
+                </div>
+                <label>Description</label>
+                <div class="input-control textarea" data-role="input-control" ng-model="features.metadata.features.lom.params.description">
+                    <textarea></textarea>
+                </div>
+                <label>Keyword</label>
+                <div class="input-control text" data-role="input-control">
+                    <input placeholder="Ex: Educação, pedagogia, engenharia do conhecimento" type="text"  ng-model="features.metadata.features.lom.params.keywords">
+                    <button type="button" class="btn-clear" tabindex="-1"></button>
+                </div>
+            </fieldset>
+        </form>
+        <button  class=" place-right default" ng-click="closeThisDialog(true)">
+            <i class="icon-checkmark"></i>
+            OK
+        </button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="conquestParams">
+    <div class="params-dialog">
+        <form>
+            <fieldset>
+                <legend><i class=" icon-trophy"></i> Gamificação</legend>
+                <label>Repositório de dados de conquistas</label>
+                <div class="input-control text" data-role="input-control">
+                    <input placeholder="https://example.com/repository" type="text" ng-model="features.conquest.params.repository">
+                    <button type="button" class="btn-clear" tabindex="-1"></button>
+                </div>
+            </fieldset>
+        </form>
+        <button  class=" place-right default" ng-click="closeThisDialog(true)">
+            <i class="icon-checkmark"></i>
+            OK
+        </button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="pointsParams">
+    <div class="params-dialog">
+        <form>
+            <fieldset>
+                <legend><i class="icon-star-3"></i> Pontos</legend>
+                <label>Nome dos Pontos</label>
+                <div class="input-control text" data-role="input-control">
+                    <input placeholder="Ex: Pontos, dolestas, moedas..." type="text" ng-model="features.conquest.features.points.params.name">
+                    <button type="button" class="btn-clear" tabindex="-1"></button>
+                </div>
+            </fieldset>
+        </form>
+        <button  class=" place-right default" ng-click="closeThisDialog(true)">
+            <i class="icon-checkmark"></i>
+            OK
+        </button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="scormParams">
+    <div class="params-dialog">
+        <form>
+            <fieldset>
+                <legend><i class="icon-star-3"></i> SCORM</legend>
+                <label>Especificação</label>
+                <div class="input-control select">
+                    <select ng-model="features.package_format.features.scorm.params.format">
+                        <option value="">Selecione...</option>
+                        <option value="SCORM2004">SCORM 2004</option>
+                    </select>
+                </div>
+            </fieldset>
+        </form>
+        <button  class=" place-right default" ng-click="closeThisDialog(true)">
+            <i class="icon-checkmark"></i>
+            OK
+        </button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="tutorialParams">
+    <div class="params-dialog grid fluid">
+        <form>
+            <fieldset>
+                <legend><i class="icon-list"></i> Tutorial</legend>
+                <label>Passos</label>
+                <div class="button-set">
+                    <button ng-click="addStep('plain-text')"><i class="icon-plus-2"></i> Texto Plano</button>
+                    <button ng-click="addStep('rich-text')"><i class="icon-plus-2"></i> Rexto Rico</button>
+                    <button ng-click="addStep('image')"><i class="icon-plus-2"></i> Imagem</button>
+                    <button ng-click="addStep('video')"><i class="icon-plus-2"></i> Vídeo</button>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="span3">
+                        <h2>Passos</h2>
+                        <div  class="listview-outlook" data-role="listview">
+                            <a class="list" ng-class="{marked: step.params.show}" ng-click="showTutorialStep($index)" ng-repeat="step in features.type.features.tutorial.features.steps">
+                                <div class="list-content">
+                                    <span class="list-title">Passo {{$index+1}}</span>
+                                    <span class="list-subtitle">{{step.params.name}}</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="offset1 span8">
+                        <h2><i class="icon-paragraph-left"></i> Texto Plano</h2>
+                        <div ng-repeat="step in features.type.features.tutorial.features.steps">
+                            <div ng-if="step.params.contentType=='plain-text' && step.params.show">
+                                <label> Título do Passo *
+                                    <div class="input-control text size6">
+                                        <input ng-model="step.params.name" type="text" value="" placeholder="Preparando o ambiente..."/>
+                                        <button class="btn-clear"></button>
+                                    </div>
+                                </label>
+                                <label> Conteúdo *
+                                    <div class="input-control textarea" data-role="input-control" ng-model="features.metadata.features.lom.params.description">
+                                        <textarea ng-model="step.params.content"></textarea>
+                                    </div>
+                                </label>
+                            </div>
+                            <div ng-if="step.params.contentType=='rich-text' && step.params.show">
+                                <label> Título do Passo *
+                                    <div class="input-control text size6">
+                                        <input ng-model="step.params.name" type="text" value="" placeholder="Preparando o ambiente..."/>
+                                        <button class="btn-clear"></button>
+                                    </div>
+                                </label>
+                                <label> Conteúdo *
+                                    <div class="input-control textarea" data-role="input-control" ng-model="features.metadata.features.lom.params.description">
+                                        <div text-angular
+                                             ng-model="step.params.content"
+                                             name="demo-editor"
+                                             ta-text-editor-class="border-around"
+                                             ta-html-editor-class="border-around">
+                                        </div>
+
+                                    </div>
+                                </label>
+                            </div>
+                            <div ng-if="step.params.contentType=='image' && step.params.show">
+                                <label> Título do Passo *
+                                    <div class="input-control text size6">
+                                        <input ng-model="step.params.name" type="text" value="" placeholder="Preparando o ambiente..."/>
+                                        <button class="btn-clear"></button>
+                                    </div>
+                                </label>
+                                <label> Imagem *
+                                    <div class="input-control textarea" data-role="input-control">
+                                        <input ng-model="step.params.content" type="text" value="" placeholder="http://example.org/image.jpg"/>
+                                    </div>
+                                </label>
+                            </div>
+                            <div ng-if="step.params.contentType=='video' && step.params.show">
+                                <label> Título do Passo *
+                                    <div class="input-control text size6">
+                                        <input ng-model="step.params.name" type="text" value="" placeholder="Preparando o ambiente..."/>
+                                        <button class="btn-clear"></button>
+                                    </div>
+                                </label>
+                                <label> Vídeo *
+                                    <div class="input-control textarea" data-role="input-control">
+                                        <input ng-model="step.params.content" type="text" value="" placeholder="https://www.youtube.com/watch?v=XXXXXX"/>
+                                    </div>
+                                </label>
+                            </div>
+
+                        </div>
+                        <hr />
+                        <h2><i class="icon-trophy"></i>Conquistas</h2>
+                        <div id="gamification">
+                            <div ng-if="!features.conquest.selected" class="balloon bd-darkRed" style="margin:  0 0 5px;">
+                                <div class="padding10"><i class="icon-warning fg-red"></i> Selecione a caracetreística gamificação para atribuir conquistas a este passo.</div>
+                            </div>
+                            <div ng-if="features.conquest.selected && !features.conquest.features.points.selected && !features.conquest.features.points.selected" class="balloon bd-darkRed" style="margin:  0 0 5px;">
+                                <div class="padding10"><i class="icon-warning fg-red"></i> Selecione um dos tipos de conquista para configurá-lo para este passo.</div>
+                            </div>
+                            <div ng-if="features.conquest.selected">
+                                <div id="pointsdash" ng-if="features.conquest.features.points.selected">
+                                    <label for="steppoints"> Quantos pontos o aluno recebe ao concluir este passo?</label>
+                                    <div class="input-control text size3" ng-repeat="step in features.type.features.tutorial.features.steps" ng-if="step.params.show">
+                                        <input id="steppoints"ng-model="step.params.points" type="text" value="" placeholder="ex: 1000"/>
+                                        <button class="btn-clear"></button>
+                                    </div>
+                                </div>
+                                <div id="medalsdash" ng-if="features.conquest.features.medals.selected">
+                                    <div ng-repeat="step in features.type.features.tutorial.features.steps" ng-if="step.params.show">
+                                    <label> Qual medalha o aluno recebe ao concluir este passo?</label>
+                                    <hr />
+                                    <label for="stepmedalname">Nome</label>
+                                    <div class="input-control text size3" ng-repeat="step in features.type.features.tutorial.features.steps" ng-if="step.params.show">
+                                        <input id="stepmedalname"ng-model="step.params.medalName" type="text" placeholder="Conquistador"/>
+                                        <button class="btn-clear"></button>
+                                    </div>
+                                    <label for="stepmedalvalue">Valor</label>
+                                    <div class="input-control text size3" ng-repeat="step in features.type.features.tutorial.features.steps" ng-if="step.params.show">
+                                        <input id="stepmedalvalue"ng-model="step.params.value" type="text" placeholder=" 1000"/>
+                                        <button class="btn-clear"></button>
+                                        </div>
+                                        <label for="stepmedalvalue">Ícone</label>
+                                        <div style="width: 100%">
+                                            <div class="row">
+                                                <div class="span2">
+                                                    <div class="{{step.params.medal=='gold'?'selected image-container':''}}" ng-click="selectMedalIco(step, 'gold')" style="width:76px; height:76px;">
+                                                        <img  ng-src="/img/medals/gold.png"/>
+                                                    </div>
+                                                </div>
+                                                <div class="span2">
+                                                    <div class="{{step.params.medal=='silver'?'selected image-container':''}}" ng-click="selectMedalIco(step, 'silver')" style="width:76px; height:76px;">
+                                                        <img  ng-src="/img/medals/silver.png"/>
+                                                    </div>
+                                                </div>
+                                                <div class="span2">
+                                                    <div class="{{step.params.medal=='bronze'?'selected image-container':''}}" ng-click="selectMedalIco(step, 'bronze')" style="width:76px; height:76px;">
+                                                        <img  ng-src="/img/medals/bronze.png"/>
+                                                    </div>
+                                                </div>
+                                                <div class="span2">
+                                                    <div class="{{step.params.medal=='goblet'?'selected image-container':''}}" ng-click="selectMedalIco(step, 'goblet')" style="width:76px; height:76px;">
+                                                      <img  ng-src="/img/medals/goblet.png"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                  <div class="span2">
+                                                      <div class="{{step.params.medal=='goblet'?'selected image-container':''}}" ng-click="selectMedalIco(step, 'arrow')" style="width:76px; height:76px;">
+                                                        <img  ng-src="/img/medals/arrow.png"/>
+                                                        </div>
+                                                </div>
+                                                <div class="span2">
+                                                    <div class="{{step.params.medal=='shield'?'selected image-container':''}}" ng-click="selectMedalIco(step, 'shield')" style="width:76px; height:76px;">
+                                                          <img  ng-src="/img/medals/shield.png"/>
+                                                    </div>
+                                                </div>
+                                                <div class="span2">
+                                                    <div class="{{step.params.medal=='crosshair'?'selected image-container':''}}" ng-click="selectMedalIco(step, 'crosshair')" style="width:76px; height:76px;">
+                                                        <img  ng-src="/img/medals/crosshair.png" />
+                                                    </div>
+                                                </div>
+                                                <div class="span2">
+                                                    <div class="{{step.params.medal=='feather'?'selected image-container':''}}" ng-click="selectMedalIco(step, 'feather')" style="width:76px; height:76px;">
+                                                        <img  ng-src="/img/medals/feather.png"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="span2">
+                                                    <div class="{{step.params.medal=='gaming'?'selected image-container':''}}" ng-click="selectMedalIco(step, 'gaming')" style="width:76px; height:76px;">
+                                                        <img  ng-src="/img/medals/gaming.png" />
+                                                    </div>
+                                                </div>
+                                                <div class="span2">
+                                                    <div class="{{step.params.medal=='key'?'selected image-container':''}}" ng-click="selectMedalIco(step, 'key')" style="width:76px; height:76px;">
+                                                        <img  ng-src="/img/medals/key.png" />
+                                                    </div>
+                                                </div>
+                                                <div class="span2">
+                                                    <div class="{{step.params.medal=='linegraph'?'selected image-container':''}}" ng-click="selectMedalIco(step, 'linegraph')" style="width:76px; height:76px;">
+                                                        <img  ng-src="/img/medals/linegraph.png" />
+                                                    </div>
+                                                </div>
+                                                <div class="span2">
+                                                    <div class="{{step.params.medal=='badge'?'selected image-container':''}}" ng-click="selectMedalIco(step, 'badge')" style="width:76px; height:76px;">
+                                                        <img  ng-src="/img/medals/badge.png" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <button  class=" place-right default" ng-click="closeThisDialog(true)">
+            <i class="icon-checkmark"></i>
+            OK
+        </button>
+    </div>
+</script>

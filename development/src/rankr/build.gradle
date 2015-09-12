@@ -1,0 +1,55 @@
+buildscript {
+    ext {
+        springBootVersion = '1.1.8.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "info.robotbrain.gradle.lombok:lombok-gradle:1.1"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+apply plugin: "info.robotbrain.lombok"
+
+jar {
+    baseName = 'rankr'
+    version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+}
+
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-ws")
+    compile("com.sun.jersey:jersey-client:1.19")
+    compile("com.google.guava:guava:18.0")
+    compile("com.sun.jersey:jersey-json:1.19")
+    compile("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.4.3")
+    compile("org.codehaus.woodstox:woodstox-core-asl:4.4.1")
+    compile("com.github.spullara.mustache.java:compiler:0.8.16")
+    compile("org.reflections:reflections:0.9.9")
+    compile("org.zeroturnaround:zt-zip:1.8")
+
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
