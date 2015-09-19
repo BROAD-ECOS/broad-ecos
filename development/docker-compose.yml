@@ -7,7 +7,9 @@ nginx:
     - "443:443"
   volumes_from:
     - moodle
+    - learninglocker
   volumes:
+    - ./infra/containers/nginx/config:/etc/nginx/conf.d/
     - ./infra/containers/nginx/config:/etc/nginx/conf.d/
     - ./infra/containers/nginx/log:/var/log/nginx
 
@@ -16,13 +18,13 @@ moodle:
   links:
     - mariadb
     - memcached
-#    - broadauth
+    - learninglocker
   ports:
     - "9000:9000"
   volumes:
     - ./src/broad-ecos-moodle-mod:/var/www/html/moodle/mod/broadecosmod
     - ./infra/containers/moodle/config/config.php:/var/www/html/moodle/config.php
-    - ./infra/containers/moodle/vendor:/var/www/html/moodle/mod/broadecosmod
+    - ./infra/containers/moodle/data/moodledata:/var/www/moodledata
 
 mariadb:
   build: infra/containers/mariadb
@@ -38,6 +40,16 @@ memcached:
   build: infra/containers/memcached
   ports:
     - "11211:11211"
+
+learninglocker:
+  build: infra/containers/learninglocker
+  ports:
+    - "8079:80"
+    - "27018:27017"
+  volumes:
+#    - ./infra/containers/learninglocker/config/database.php:/var/www/html/learninglocker/app/config/database.php 
+    - ./infra/containers/learninglocker/data/data:/data/db
+#   - ./infra/containers/learninglocker/data/storage:/var/www/html/learninglocker/app/storage
 
 redis:
   build: infra/containers/redis

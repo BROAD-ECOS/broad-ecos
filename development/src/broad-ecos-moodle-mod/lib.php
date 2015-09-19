@@ -88,6 +88,7 @@ function broadecosmod_add_instance(stdClass $broadecosmod, mod_broadecosmod_mod_
         $scope->broadecosmod_id = $broadecosmod->id ;
         $scope->name = $scopeName;
         $scope->allowed = '1';
+        $scope->status = '1';
         $scope->timecreated = time();
         $DB->insert_record('broadecosmod_scopes', $scope);
     }

@@ -19,9 +19,9 @@ public class QuestionActivity {
         Activity activity = new Activity();
         activity.setId(URI.create("http://dev.broadecos:8080/questions/" + question.getId()));
         activity.setDefinition(Definition.builder()
-            .name(ImmutableMap.<String, String>builder().put("pt_BR", question.getTitle()).build())
+            .name(ImmutableMap.<String, String>builder().put("pt-BR", question.getTitle()).build())
             .description(ImmutableMap.<String, String>builder()
-                            .put("pt_BR", question.getContent())
+                            .put("pt-BR", question.getContent())
                             .build()
             )
             .moreInfo(URI.create("http://dev.broadecos:8080/#/question/" + question.getId()))

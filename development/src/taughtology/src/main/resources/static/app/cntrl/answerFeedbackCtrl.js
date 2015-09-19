@@ -19,6 +19,7 @@
 
         var loadComments = function(page, pageSize){
             $scope.comments = Comment.get({answerId: answer.question.id, page: page ||0, pageSize: pageSize || 10});
+            console.log($scope.comments);
         };
 
         var fromNow = function(time){
@@ -35,6 +36,7 @@
                 }).$save(function(){
                     $scope.comment = '';
                     loadComments();
+
                 });
             });
 

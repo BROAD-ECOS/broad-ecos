@@ -27,4 +27,6 @@ public class ExperienceStatement {
 
     private Result result;
 
+    private Actor authority;
+
 }

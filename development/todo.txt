@@ -1,3 +1,4 @@
+* Carregar as informações no Rankr
 
 [ ] Taughtology: Corrigir exibição das imagens
 [ ] [env] Corrigir portas mapeadas
@@ -6,3 +7,13 @@
 [ ] [mod_broad] Ajustar Internacionalização
 [ ] [mod_broad] Descrever permissões.
 [ ] [mod_broad] Estilizar "loading" de serviços, escopos são requeridos.
+
+Melhorar a exibição da seleção de serviços
+Consertar escopos sendo perdidos
+remover http://dev.broadecos:8080/#/question/
+DInamizar metadados para experience api no taghtology
+Validar experience api para salvar com outra autoridade.
+Isolar xPAI usando context
+
+broadecosadmin
+@dmin

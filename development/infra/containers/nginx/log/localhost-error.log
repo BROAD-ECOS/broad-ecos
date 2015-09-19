@@ -12,3 +12,242 @@ Error code: storedfilecannotread
 * line 2333 of /lib/filelib.php: call to readfile_accel()
 * line 4041 of /lib/filelib.php: call to send_stored_file()
 * line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f2?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.0.23:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/course/view.php?id=3"
+2015/09/12 21:30:24 [error] 5#0: *1 directory index of "/var/www/html/moodle/" is forbidden, client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 21:30:28 [error] 5#0: *1 directory index of "/var/www/html/moodle/" is forbidden, client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 21:30:38 [error] 5#0: *1 directory index of "/var/www/html/learninglocker/" is forbidden, client: 172.17.42.1, server: localhost, request: "GET /learninglocker/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 21:31:46 [error] 5#0: *1 directory index of "/var/www/html/learninglocker/" is forbidden, client: 172.17.42.1, server: localhost, request: "GET /learninglocker/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 21:31:50 [error] 5#0: *1 directory index of "/var/www/html/moodle/" is forbidden, client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 21:45:32 [error] 6#0: *1 directory index of "/var/www/html/moodle/" is forbidden, client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 21:45:38 [error] 6#0: *1 FastCGI sent in stderr: "Unable to open primary script: /var/www/html/moodle/pluginfile.php (No such file or directory)" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/f1.png HTTP/1.1", upstream: "fastcgi://172.17.0.78:9000", host: "dev.broadecos"
+2015/09/12 21:45:46 [error] 6#0: *1 FastCGI sent in stderr: "Unable to open primary script: /var/www/html/moodle/mod/broadecosmod/info.php (No such file or directory)" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/mod/broadecosmod/info.php HTTP/1.1", upstream: "fastcgi://172.17.0.78:9000", host: "dev.broadecos"
+2015/09/12 21:46:41 [error] 6#0: *1 directory index of "/var/www/html/moodle/" is forbidden, client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 21:46:45 [error] 6#0: *1 directory index of "/var/www/html/moodle/" is forbidden, client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 21:46:56 [error] 6#0: *1 FastCGI sent in stderr: "PHP message: Default exception handler: Can not find data record in database. Debug: SELECT cm.*, m.name, md.name AS modname 
+              FROM {course_modules} cm
+                   JOIN {modules} md ON md.id = cm.module
+                   JOIN {broadecosmod} m ON m.id = cm.instance
+                   
+             WHERE cm.id = :cmid AND md.name = :modulename
+                   
+[array (
+  'cmid' => 20,
+  'modulename' => 'broadecosmod',
+)]
+Error code: invalidrecordunknown
+* line 1481 of /lib/dml/moodle_database.php: dml_missing_record_exception thrown
+* line 1328 of /lib/datalib.php: call to moodle_database->get_record_sql()
+* line 39 of /mod/broadecosmod/view.php: call to get_coursemodule_from_id()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/mod/broadecosmod/view.php?id=20 HTTP/1.1", upstream: "fastcgi://172.17.0.85:9000", host: "dev.broadecos"
+2015/09/12 21:47:54 [error] 6#0: *1 directory index of "/var/www/html/moodle/" is forbidden, client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 21:48:33 [error] 11#0: *1 directory index of "/var/www/html/moodle/" is forbidden, client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 21:50:15 [error] 6#0: *1 directory index of "/var/www/html/moodle/" is forbidden, client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 21:50:16 [error] 6#0: *1 directory index of "/var/www/html/moodle/" is forbidden, client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 21:51:34 [error] 7#0: *1 open() "/var/www/html/index.php" failed (2: No such file or directory), client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 21:52:52 [error] 5#0: *1 "/var/www/html/moodle/moodle/index.php" is not found (2: No such file or directory), client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 21:53:19 [error] 5#0: *1 "/var/www/html/moodle/moodle/index.php" is not found (2: No such file or directory), client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 21:53:21 [error] 5#0: *1 "/var/www/html/moodle/moodle/index.php" is not found (2: No such file or directory), client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 21:53:27 [error] 5#0: *1 "/var/www/html/moodle/moodle/index.php" is not found (2: No such file or directory), client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 21:54:30 [error] 5#0: *1 "/var/www/html/moodle/moodle/index.php" is not found (2: No such file or directory), client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 22:05:03 [error] 5#0: *1 directory index of "/var/www/html/moodle/" is forbidden, client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 22:05:38 [error] 5#0: *1 directory index of "/var/www/html/" is forbidden, client: 172.17.42.1, server: localhost, request: "GET / HTTP/1.1", host: "dev.broadecos"
+2015/09/12 22:06:10 [error] 5#0: *1 directory index of "/var/www/html/moodle/" is forbidden, client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 22:06:16 [error] 5#0: *1 directory index of "/var/www/html/moodle/" is forbidden, client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 22:08:09 [error] 5#0: *1 "/var/www/html/moodle/moodle/index.html" is not found (2: No such file or directory), client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 22:08:11 [error] 5#0: *1 "/var/www/html/moodle/moodle/index.html" is not found (2: No such file or directory), client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 22:09:05 [error] 6#0: *1 directory index of "/var/www/html/moodle/" is forbidden, client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 22:10:36 [error] 5#0: *1 open() "/etc/nginx/htmlindex.php" failed (2: No such file or directory), client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 22:11:30 [error] 5#0: *1 directory index of "/var/www/html/moodle/" is forbidden, client: 172.17.42.1, server: localhost, request: "GET /moodle/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 22:11:54 [error] 5#0: *8 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/d1/e1/d1e1a31fca93910f4f1466a0ceb2e167551c1af2
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f2?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.0.189:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/course/view.php?id=3"
+2015/09/12 22:11:54 [error] 5#0: *1 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/d1/e1/d1e1a31fca93910f4f1466a0ceb2e167551c1af2
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f2?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.0.189:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/course/view.php?id=3"
+2015/09/12 22:13:39 [error] 6#0: *1 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/d1/e1/d1e1a31fca93910f4f1466a0ceb2e167551c1af2
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f2?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.0.197:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/course/view.php?id=3"
+2015/09/12 22:13:39 [error] 6#0: *8 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/d1/e1/d1e1a31fca93910f4f1466a0ceb2e167551c1af2
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f2?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.0.197:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/course/view.php?id=3"
+2015/09/12 22:13:59 [error] 6#0: *4 directory index of "/var/www/html/learninglocker/" is forbidden, client: 172.17.42.1, server: localhost, request: "GET /learninglocker/ HTTP/1.1", host: "dev.broadecos"
+2015/09/12 22:14:10 [error] 6#0: *4 open() "/var/www/htmlindex.php" failed (2: No such file or directory), client: 172.17.42.1, server: localhost, request: "GET /learninglocker/public/index;php HTTP/1.1", host: "dev.broadecos"
+2015/09/13 10:55:15 [error] 7#0: *13 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/d1/e1/d1e1a31fca93910f4f1466a0ceb2e167551c1af2
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f2?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.1.40:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/admin/index.php?cache=1"
+2015/09/13 10:55:22 [error] 7#0: *13 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/d1/e1/d1e1a31fca93910f4f1466a0ceb2e167551c1af2
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f2?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.1.40:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/my/"
+2015/09/13 10:55:22 [error] 7#0: *2 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/df/30/df30d5a12b6b372712bb233a3984d66c95266681
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f1?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.1.40:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/my/"
+2015/09/13 10:55:22 [error] 7#0: *11 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/d1/e1/d1e1a31fca93910f4f1466a0ceb2e167551c1af2
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f2?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.1.40:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/my/"
+2015/09/13 10:55:22 [error] 7#0: *15 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/df/30/df30d5a12b6b372712bb233a3984d66c95266681
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f1?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.1.40:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/my/"
+2015/09/13 10:55:25 [error] 7#0: *19 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/d1/e1/d1e1a31fca93910f4f1466a0ceb2e167551c1af2
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f2?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.1.40:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/my/"
+2015/09/13 10:55:25 [error] 7#0: *16 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/df/30/df30d5a12b6b372712bb233a3984d66c95266681
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f1?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.1.40:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/my/"
+2015/09/13 10:55:25 [error] 7#0: *101 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/df/30/df30d5a12b6b372712bb233a3984d66c95266681
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f1?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.1.40:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/my/"
+2015/09/13 10:55:25 [error] 7#0: *102 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/d1/e1/d1e1a31fca93910f4f1466a0ceb2e167551c1af2
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f2?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.1.40:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/my/"
+2015/09/13 10:55:30 [error] 7#0: *107 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/d1/e1/d1e1a31fca93910f4f1466a0ceb2e167551c1af2
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f2?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.1.40:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/user/profile.php?id=2"
+2015/09/13 10:55:30 [error] 7#0: *109 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/df/30/df30d5a12b6b372712bb233a3984d66c95266681
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f1?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.1.40:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/user/profile.php?id=2"
+2015/09/13 11:53:25 [error] 5#0: *5 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/d1/e1/d1e1a31fca93910f4f1466a0ceb2e167551c1af2
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f2?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.1.48:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/my/"
+2015/09/13 11:53:25 [error] 5#0: *11 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/df/30/df30d5a12b6b372712bb233a3984d66c95266681
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f1?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.1.48:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/my/"
+2015/09/13 11:53:26 [error] 5#0: *15 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/df/30/df30d5a12b6b372712bb233a3984d66c95266681
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f1?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.1.48:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/my/"
+2015/09/13 11:53:26 [error] 5#0: *13 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/d1/e1/d1e1a31fca93910f4f1466a0ceb2e167551c1af2
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f2?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.1.48:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/my/"
+2015/09/13 11:54:16 [error] 5#0: *13 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/d1/e1/d1e1a31fca93910f4f1466a0ceb2e167551c1af2
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f2?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.1.48:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/user/profile.php?id=2"
+2015/09/13 11:54:16 [error] 5#0: *20 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/df/30/df30d5a12b6b372712bb233a3984d66c95266681
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f1?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.1.48:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/user/profile.php?id=2"
+2015/09/13 11:59:42 [error] 5#0: *55 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/d1/e1/d1e1a31fca93910f4f1466a0ceb2e167551c1af2
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f2?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.1.48:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/user/editadvanced.php?id=2&course=1&returnto=profile"
+2015/09/13 11:59:42 [error] 5#0: *57 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/df/30/df30d5a12b6b372712bb233a3984d66c95266681
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f1?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.1.48:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/user/editadvanced.php?id=2&course=1&returnto=profile"
+2015/09/13 11:59:43 [error] 5#0: *62 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/d1/e1/d1e1a31fca93910f4f1466a0ceb2e167551c1af2
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f2?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.1.48:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/user/editadvanced.php?id=2&course=1&returnto=profile"
+2015/09/13 11:59:43 [error] 5#0: *64 FastCGI sent in stderr: "PHP message: Default exception handler: Can not read file, either file does not exist or there are permission problems Debug: [dataroot]/filedir/df/30/df30d5a12b6b372712bb233a3984d66c95266681
+Error code: storedfilecannotread
+* line 445 of /lib/filestorage/stored_file.php: file_exception thrown
+* line 1967 of /lib/filelib.php: call to stored_file->readfile()
+* line 2333 of /lib/filelib.php: call to readfile_accel()
+* line 4041 of /lib/filelib.php: call to send_stored_file()
+* line 37 of /pluginfile.php: call to file_pluginfile()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/pluginfile.php/5/user/icon/clean/f1?rev=54 HTTP/1.1", upstream: "fastcgi://172.17.1.48:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/user/editadvanced.php?id=2&course=1&returnto=profile"
+2015/09/13 12:00:01 [error] 5#0: *53 FastCGI sent in stderr: "PHP message: PHP Warning:  imagecopyresampled() expects parameter 2 to be resource, boolean given in /var/www/html/moodle/lib/gdlib.php on line 53
+PHP message: PHP Warning:  imagedestroy() expects parameter 1 to be resource, boolean given in /var/www/html/moodle/lib/gdlib.php on line 403" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/draftfile.php/5/user/draft/465612277/silhouette_i-m-congnito.jpg?preview=thumb&oid=1442145600 HTTP/1.1", upstream: "fastcgi://172.17.1.48:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/user/editadvanced.php?id=2&course=1&returnto=profile"
+2015/09/13 12:07:28 [error] 5#0: *285 FastCGI sent in stderr: "PHP message: Database transaction aborted automatically in /var/www/html/moodle/course/modedit.php
+PHP message: Default exception handler: Error writing to database Debug: Field 'status' doesn't have a default value
+INSERT INTO mdl_broadecosmod_scopes (broadecosmod_id,name,timecreated) VALUES(?,?,?)
+[array (
+  0 => 1,
+  1 => 'courses.current',
+  2 => 1442146048,
+)]
+Error code: dmlwriteexception
+* line 446 of /lib/dml/moodle_database.php: dml_write_exception thrown
+* line 1164 of /lib/dml/mysqli_native_moodle_database.php: call to moodle_database->query_end()
+* line 1210 of /lib/dml/mysqli_native_moodle_database.php: call to mysqli_native_moodle_database->insert_record_raw()
+* line 92 of /mod/broadecosmod/lib.php: call to mysqli_native_moodle_database->insert_record()
+* line 121 of /course/modlib.php: call to broadecosmod_add_instance()
+* line 275 of /course/modedit.php: call to add_moduleinfo()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "POST /moodle/course/modedit.php HTTP/1.1", upstream: "fastcgi://172.17.1.48:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/course/modedit.php?add=broadecosmod&type=&course=3&section=0&return=0&sr=0"
+2015/09/15 19:22:17 [error] 5#0: *167 FastCGI sent in stderr: "Unable to open primary script: /var/www/html/index.php (No such file or directory)" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/mod/broadecosmod/view.php?id=14"

@@ -5,7 +5,8 @@ public enum Scope {
     PARTICIPANT_PROFILE("participant.profile"),
     PARTICIPANT_EMAIL("participant.email"),
     COURSES_CURRENT("courses.current"),
-    COURSES_CURRENT_PARTICIPANTES("courses.current.participants");
+    COURSES_CURRENT_PARTICIPANTES("courses.current.participants"),
+    EXPERIENCE_WRITE("courses.current.participants");
 
     private final String name;
 

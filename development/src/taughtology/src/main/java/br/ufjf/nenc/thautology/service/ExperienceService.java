@@ -3,6 +3,7 @@ package br.ufjf.nenc.thautology.service;
 import br.ufjf.nenc.broadecos.BroadEcosApi;
 import br.ufjf.nenc.broadecos.Context;
 import br.ufjf.nenc.broadecos.experience.ExperienceStatement;
+import br.ufjf.nenc.broadecos.model.Reference;
 import br.ufjf.nenc.thautology.experience.AnswerAchievementStatement;
 import br.ufjf.nenc.thautology.model.Achievement;
 import br.ufjf.nenc.thautology.model.AnswerAchievement;
@@ -21,12 +22,12 @@ public class ExperienceService {
         this.broadEcosApi = broadEcosApi;
     }
 
-    public ExperienceStatement sendAchivementExperienced(AnswerAchievement achievement, Context context) {
+    public Reference sendAchivementExperienced(AnswerAchievement achievement, Context context) {
         AnswerAchievementStatement achievementStatement = new AnswerAchievementStatement(achievement);
         return send(achievementStatement.toExperienceStatement(), context);
     }
 
-    public ExperienceStatement send(ExperienceStatement statement, Context context) {
+    public Reference send(ExperienceStatement statement, Context context) {
         log.info("Experience Statement: ["+statement+"], context: ["+context+"]");
         return broadEcosApi.withContext(context)
                 .sendExperience(statement);

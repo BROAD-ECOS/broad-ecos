@@ -21,6 +21,7 @@ public class MetadataResource {
                 .scope(Scope.PARTICIPANT_EMAIL)
                 .scope(Scope.COURSES_CURRENT)
                 .scope(Scope.COURSES_CURRENT_PARTICIPANTES)
+                .scope(Scope.EXPERIENCE_WRITE)
                 .build();
     }
 

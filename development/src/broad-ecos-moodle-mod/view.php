@@ -25,12 +25,12 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// Replace broadecosmod with the name of your module and remove this line.
-
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
+require_once(dirname(__FILE__).'/locallib.php');
 
 global $USER;
+
 
 $id = optional_param('id', 0, PARAM_INT); // Course_module ID, or
 $n  = optional_param('n', 0, PARAM_INT);  // ... broadecosmod instance ID - it should be named as the first character of the module.
@@ -88,7 +88,7 @@ if (!isset($_COOKIE[$cookieName])) {
     $token->course_id = $course->id;
     $token->service_id = $broadecosmod->external_service_id;
     $token->session_id = session_id();
-    $token->approved_scopes =  implode(';', $DB->get_records_sql($searchScopes, array($broadecosmod->id)));
+    $token->approved_scopes =  implode(';',  json_decode(json_encode($DB->get_records_sql($searchScopes, array($broadecosmod->id))), true));
     $token->timecreated = time();
     $token->timeupdated = time();
 
@@ -97,7 +97,6 @@ if (!isset($_COOKIE[$cookieName])) {
 } else {
     $sessionToken=$_COOKIE[$cookieName];
     $token = $DB->get_record_sql('SELECT * FROM {broadecos_token} WHERE token  = ? AND timecreated >= ?', array($sessionToken, time()-3600));
-
     if (!array_key_exists('id', $token)) {
         setcookie($cookieName, null, 1);
         header("Location: ".$PAGE->url);
@@ -105,14 +104,6 @@ if (!isset($_COOKIE[$cookieName])) {
     }
 
 }
-
-// 1 - Verificar se há token
-    // 2 - Gerar código
-    // 3 - Enviar código
-// 3 - Carregar com token
-
-
-
 // Output starts here.
 echo $OUTPUT->header();
 echo '<div class="singlebutton" style="float: right;">

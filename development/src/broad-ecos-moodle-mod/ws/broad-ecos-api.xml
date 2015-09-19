@@ -3,6 +3,7 @@
     <resourse>
         <method>GET</method>
         <path>/me/profile</path>
+        <type>platform_query</type>
         <required-scopes>
             <required-scope>participant.profile</required-scope>
             <required-scope/>
@@ -41,6 +42,7 @@
     <resourse>
         <method>GET</method>
         <path>/platform-info</path>
+        <type>platform_query</type>
         <required-scopes>
             <required-scope/>
             <required-scope/>
@@ -61,6 +63,7 @@
     <resourse>
         <method>GET</method>
         <path>/courses/current</path>
+        <type>platform_query</type>
         <required-scopes>
             <required-scope>courses.current</required-scope>
             <required-scope/>
@@ -88,6 +91,7 @@
     <resourse>
         <method>GET</method>
         <path>/courses/current/participants</path>
+        <type>platform_query</type>
         <required-scopes>
             <required-scope>courses.current.participants</required-scope>
             <required-scope/>
@@ -125,6 +129,7 @@
     <resourse>
         <method>POST</method>
         <path>/experiences</path>
+        <type>lrs_statement_post</type>
         <required-scopes>
             <required-scope>experience.write</required-scope>
             <required-scope/>
@@ -136,6 +141,59 @@
         <query>
 
         </query>
+        <isarray>true</isarray>
+    </resourse>
+    <resourse>
+        <method>GET</method>
+        <path>/experiences</path>
+        <type>lrs_statement_get</type>
+        <required-scopes>
+            <required-scope>experience.read</required-scope>
+            <required-scope/>
+        </required-scopes>
+        <parameters>
+            <param>
+                <name>verb</name>
+                <required>false</required>
+                <default>0</default>
+            </param>
+            <param />
+        </parameters>
+        <query>
+
+        </query>
+        <isarray>true</isarray>
+    </resourse>
+
+    <resourse>
+        <method>POST</method>
+        <path>/authorize</path>
+        <type>authorize</type>
+        <required-scopes>
+            <required-scope/>
+            <required-scope/>
+        </required-scopes>
+        <parameters>
+            <param />
+            <param />
+        </parameters>
+        <query />
+        <isarray>true</isarray>
+    </resourse>
+
+    <resourse>
+        <method>POST</method>
+        <path>/token</path>
+        <type>token</type>
+        <required-scopes>
+            <required-scope/>
+            <required-scope/>
+        </required-scopes>
+        <parameters>
+            <param />
+            <param />
+        </parameters>
+        <query />
         <isarray>true</isarray>
     </resourse>
 </api>

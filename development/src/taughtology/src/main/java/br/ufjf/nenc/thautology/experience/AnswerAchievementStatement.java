@@ -2,8 +2,6 @@ package br.ufjf.nenc.thautology.experience;
 
 import br.ufjf.nenc.broadecos.experience.ExperienceStatement;
 import br.ufjf.nenc.broadecos.experience.Verbs;
-import br.ufjf.nenc.thautology.model.Achievement;
-import br.ufjf.nenc.thautology.model.Answer;
 import br.ufjf.nenc.thautology.model.AnswerAchievement;
 
 public class AnswerAchievementStatement {
@@ -20,6 +18,7 @@ public class AnswerAchievementStatement {
                 .verb(Verbs.ANSWERED.bean())
                 .object(new QuestionActivity(achievement.getEntity().getQuestion()).toActivity())
                 .result(new AnswerAchievementResult(achievement).toResult())
+                .authority(new TaughtologyAuthority().getAuthoriry())
                 .build();
 
         return statement;

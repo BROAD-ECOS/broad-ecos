@@ -10,8 +10,8 @@ import java.util.Map;
 public enum Verbs {
     ANSWERED(URI.create("http://wordnet-rdf.princeton.edu/wn31/200637941-v"),
             ImmutableMap.<String,String>builder()
-                    .put("pt_BR", "Respondeu")
-                    .put("en_US", "Answered")
+                    .put("pt-BR", "Respondeu")
+                    .put("en-US", "Answered")
                     .build()
     );
 
