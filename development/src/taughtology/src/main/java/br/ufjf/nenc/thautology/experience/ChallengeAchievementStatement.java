@@ -3,17 +3,18 @@ package br.ufjf.nenc.thautology.experience;
 import br.ufjf.nenc.broadecos.experience.ExperienceStatement;
 import br.ufjf.nenc.broadecos.experience.Verbs;
 import br.ufjf.nenc.thautology.model.AnswerAchievement;
-import com.google.common.base.Preconditions;
+import br.ufjf.nenc.thautology.model.ChallengeAchievement;
 
-import static com.google.common.base.Preconditions.*;
+import static com.google.common.base.Preconditions.checkArgument;
 
-public class AnswerAchievementStatement {
+public class ChallengeAchievementStatement {
 
-    private final AnswerAchievement achievement;
+    private final ChallengeAchievement achievement;
 
-    public AnswerAchievementStatement(AnswerAchievement achievement) {
+    public ChallengeAchievementStatement(ChallengeAchievement achievement) {
         checkArgument(achievement != null);
-        checkArgument(achievement.getAnswer().getCorrect());
+        checkArgument(achievement.getChallenge().getMet());
+
         this.achievement = achievement;
     }
 
@@ -22,7 +23,7 @@ public class AnswerAchievementStatement {
                 .actor(new UserActor(achievement.getUser()).toActor())
                 .verb(Verbs.WON.bean())
                 .object(new QuestionActivity(achievement.getEntity().getQuestion()).toActivity())
-                .result(new AnswerAchievementResult(achievement).toResult())
+                .result(new ChallengeAchievementResult(achievement).toResult())
                 .authority(new TaughtologyAuthority().getAuthoriry())
                 .build();
     }

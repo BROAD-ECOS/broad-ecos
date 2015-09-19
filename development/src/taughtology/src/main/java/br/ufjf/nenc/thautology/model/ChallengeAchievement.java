@@ -17,4 +17,13 @@ public class ChallengeAchievement extends Achievement<Challenge> {
     public Challenge getEntity() {
         return challenge;
     }
+
+    public boolean isChallenger() {
+        return getUser().equals(challenge.getChallenger());
+    }
+
+    public boolean isChallenged() {
+        return !isChallenger();
+    }
+
 }

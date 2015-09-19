@@ -23,7 +23,7 @@ public class AnswerAchievementResult {
     }
 
     private String buildResponse() {
-        return format("%s rescebeu %d pontos por responder ao desafio %s com a opção %s",
+        return format("%s recebeu %d pontos por responder ao desafio %s com a opção %s",
             achievement.getUser(),
             achievement.getValue(),
             achievement.getAnswer().getQuestion().getTitle(),

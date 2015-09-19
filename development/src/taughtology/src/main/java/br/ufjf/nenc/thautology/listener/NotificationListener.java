@@ -57,8 +57,8 @@ public class NotificationListener {
         Challenge challenge = challengeAcceptedEvent.getChallenge();
 
         Notification challengeNotification = Notification.builder()
-                .subject(buildChallengAcceptedSubject(challenge))
-                .message(buildChallengAcceptedMessage(challenge))
+                .subject(buildChallengeAcceptedSubject(challenge))
+                .message(buildChallengeAcceptedMessage(challenge))
                 .to(challenge.getChallenger())
                 .seen(Boolean.FALSE)
                 .build();
@@ -68,15 +68,15 @@ public class NotificationListener {
         notificationService.save(challengeNotification);
     }
 
-    private String buildChallengAcceptedSubject(Challenge challenge) {
+    private String buildChallengeAcceptedSubject(Challenge challenge) {
         return format(CHALLENGE_MET_SBJ,
-                challenge.getChallenger().getFullName(),
+                challenge.getChallenged().getFullName(),
                 challenge.getQuestion().getTitle()
 
         );
     }
 
-    private String buildChallengAcceptedMessage(Challenge challenge) {
+    private String buildChallengeAcceptedMessage(Challenge challenge) {
 
         final String message = challenge.getMet() ?  CHALLENGE_MET_SUCCESS_MSG : CHALLENGE_MET_FAILURE_MSG;
 

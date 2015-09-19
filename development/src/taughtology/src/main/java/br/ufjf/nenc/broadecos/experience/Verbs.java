@@ -13,6 +13,12 @@ public enum Verbs {
                     .put("pt-BR", "Respondeu")
                     .put("en-US", "Answered")
                     .build()
+    ),
+    WON(URI.create("http://wordnet-rdf.princeton.edu/wn31/301455267-a"),
+            ImmutableMap.<String,String>builder()
+                    .put("pt-BR", "Ganhou")
+                    .put("en-US", "Won")
+                    .build()
     );
 
     private final URI id;

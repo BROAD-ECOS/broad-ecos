@@ -11,7 +11,7 @@
                     </div>
                     <div class="col-md-12" ng-if="receivedChallenges.length>0">
                         <div class="list-group">
-                            <p class="list-group-item-heading" ng-repeat="challenge in receivedChallenges track by $index" href="#/answer-feedback/{{levelAnswer.id}}" class="list-group-item" >
+                            <p class="list-group-item-heading" ng-repeat="challenge in receivedChallenges track by $index" href="#/answer-feedback/{{levelAnswer.id}}" class="list-group-item" ng-if="!challenge.met">
                                 # {{$index+1}}
                                 Você recebeu o desafio '<strong>{{challenge.question.title}}</strong>' enviado por  <strong>{{challenge.challenger.participantProfile.firstName}} {{challenge.challenger.participantProfile.lastName}}</strong>
                                 <a href="#/challenge/{{challenge.id}}" class="btn btn-flat btn-primary btn-xs"><i class="fa fa-check fa-fg"></i> Aceitar</a>

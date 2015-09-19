@@ -40,21 +40,31 @@ public class AchievementService {
         checkArgument(challenge!=null);
         checkArgument(challenge.getMet());
 
-        ChallengeAchievement achievementChallenger = createPointAchievementChallenger(challenge);
-        publisher.publishEvent(new ChallengeAchievementCreatedEvent(achievementChallenger, broadContext.get()));
-        achievementRepository.save(achievementChallenger);
+        calculateChallengerAchievements(challenge);
 
-        ChallengeAchievement achievementChallenged = createPointAchievementChallenged(challenge);
-        publisher.publishEvent(new ChallengeAchievementCreatedEvent(achievementChallenged,broadContext.get()));
-        achievementRepository.save(achievementChallenged);
-
+        calculateChallengedAchievements(challenge);
     }
+
+    private void calculateChallengerAchievements(Challenge challenge) {
+        ChallengeAchievement achievementChallenger = createPointAchievementChallenger(challenge);
+        achievementChallenger = achievementRepository.save(achievementChallenger);
+        publisher.publishEvent(new ChallengeAchievementCreatedEvent(achievementChallenger, broadContext.get()));
+    }
+
 
     private ChallengeAchievement createPointAchievementChallenger(Challenge challenge) {
         ChallengeAchievement achievement = createPointAchievement(challenge);
         achievement.setUser(challenge.getChallenger());
         return achievement;
     }
+
+
+    private void calculateChallengedAchievements(Challenge challenge) {
+        ChallengeAchievement achievementChallenged = createPointAchievementChallenged(challenge);
+        achievementChallenged = achievementRepository.save(achievementChallenged);
+        publisher.publishEvent(new ChallengeAchievementCreatedEvent(achievementChallenged, broadContext.get()));
+    }
+
 
     private ChallengeAchievement createPointAchievementChallenged(Challenge challenge) {
         ChallengeAchievement achievement = createPointAchievement(challenge);
