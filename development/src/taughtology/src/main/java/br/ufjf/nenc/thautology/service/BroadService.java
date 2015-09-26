@@ -1,13 +1,11 @@
 package br.ufjf.nenc.thautology.service;
 
-import br.ufjf.nenc.broadecos.BroadEcosApi;
-import br.ufjf.nenc.broadecos.Context;
-import br.ufjf.nenc.broadecos.model.Course;
-import br.ufjf.nenc.broadecos.model.PlatformInfo;
+import br.ufjf.nenc.broadecos.api.BroadEcosApi;
+import br.ufjf.nenc.broadecos.api.Context;
+import br.ufjf.nenc.broadecos.api.model.Course;
+import br.ufjf.nenc.broadecos.api.model.PlatformInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class BroadService {

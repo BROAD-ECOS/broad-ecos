@@ -1,6 +1,6 @@
 package br.ufjf.nenc.thautology.resolver;
 
-import br.ufjf.nenc.broadecos.Context;
+import br.ufjf.nenc.broadecos.api.Context;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 

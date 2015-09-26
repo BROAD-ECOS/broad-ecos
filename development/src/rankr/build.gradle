@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.1.8.RELEASE'
+        springBootVersion = '1.3.0.M5'
     }
     repositories {
         mavenCentral()
@@ -13,6 +13,7 @@ buildscript {
         classpath "info.robotbrain.gradle.lombok:lombok-gradle:1.1"
     }
 }
+
 
 apply plugin: 'java'
 apply plugin: 'idea'
@@ -28,12 +29,15 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    maven { url "file://"+ (new File(System.getProperty('user.home'), '.m2/repository').absolutePath) }
     maven { url "https://repo.spring.io/snapshot" }
     maven { url "https://repo.spring.io/milestone" }
 }
 
 
 dependencies {
+    compile("br.ufjf.nenc.broadecos:broadecos-api:1.0.1")
+
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-ws")

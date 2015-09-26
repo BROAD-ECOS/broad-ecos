@@ -1,9 +1,7 @@
 package br.ufjf.nenc.thautology.experience;
 
-import br.ufjf.nenc.broadecos.experience.Result;
-import br.ufjf.nenc.thautology.model.AnswerAchievement;
+import br.ufjf.nenc.broadecos.api.experience.Result;
 import br.ufjf.nenc.thautology.model.ChallengeAchievement;
-import com.google.common.base.Strings;
 
 import static java.lang.String.format;
 

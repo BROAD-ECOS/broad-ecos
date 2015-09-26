@@ -1,7 +1,7 @@
 package br.ufjf.nenc.thautology.experience;
 
-import br.ufjf.nenc.broadecos.experience.Activity;
-import br.ufjf.nenc.broadecos.experience.Definition;
+import br.ufjf.nenc.broadecos.api.experience.Activity;
+import br.ufjf.nenc.broadecos.api.experience.Definition;
 import br.ufjf.nenc.thautology.model.Question;
 import com.google.common.collect.ImmutableMap;
 

@@ -1,6 +1,6 @@
 package br.ufjf.nenc.thautology.model;
 
-import br.ufjf.nenc.broadecos.Context;
+import br.ufjf.nenc.broadecos.api.Context;
 import lombok.*;
 
 import java.io.Serializable;

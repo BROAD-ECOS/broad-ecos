@@ -1,8 +1,7 @@
 package br.ufjf.nenc.thautology.service;
 
-import br.ufjf.nenc.broadecos.model.Course;
+import br.ufjf.nenc.broadecos.api.model.Course;
 import br.ufjf.nenc.thautology.repository.CourseRepository;
-import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

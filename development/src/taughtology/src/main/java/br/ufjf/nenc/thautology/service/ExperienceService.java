@@ -1,9 +1,9 @@
 package br.ufjf.nenc.thautology.service;
 
-import br.ufjf.nenc.broadecos.BroadEcosApi;
-import br.ufjf.nenc.broadecos.Context;
-import br.ufjf.nenc.broadecos.experience.ExperienceStatement;
-import br.ufjf.nenc.broadecos.model.Reference;
+import br.ufjf.nenc.broadecos.api.BroadEcosApi;
+import br.ufjf.nenc.broadecos.api.Context;
+import br.ufjf.nenc.broadecos.api.experience.ExperienceStatement;
+import br.ufjf.nenc.broadecos.api.model.Reference;
 import br.ufjf.nenc.thautology.experience.AnswerAchievementStatement;
 import br.ufjf.nenc.thautology.experience.AnswerStatement;
 import br.ufjf.nenc.thautology.experience.ChallengeAchievementStatement;

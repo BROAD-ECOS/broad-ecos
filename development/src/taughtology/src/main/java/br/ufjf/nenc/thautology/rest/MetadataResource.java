@@ -1,7 +1,7 @@
 package br.ufjf.nenc.thautology.rest;
 
-import br.ufjf.nenc.broadecos.model.Metadata;
-import br.ufjf.nenc.broadecos.model.Scope;
+import br.ufjf.nenc.broadecos.api.model.Metadata;
+import br.ufjf.nenc.broadecos.api.model.Scope;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

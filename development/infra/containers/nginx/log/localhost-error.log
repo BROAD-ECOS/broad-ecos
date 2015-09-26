@@ -252,3 +252,17 @@ Error code: dmlwriteexception
 * line 275 of /course/modedit.php: call to add_moduleinfo()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "POST /moodle/course/modedit.php HTTP/1.1", upstream: "fastcgi://172.17.1.48:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/course/modedit.php?add=broadecosmod&type=&course=3&section=0&return=0&sr=0"
 2015/09/15 19:22:17 [error] 5#0: *167 FastCGI sent in stderr: "Unable to open primary script: /var/www/html/index.php (No such file or directory)" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/mod/broadecosmod/view.php?id=14"
 2015/09/19 14:57:31 [error] 6#0: *302 FastCGI sent in stderr: "Unable to open primary script: /var/www/html/index.php (No such file or directory)" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/mod/broadecosmod/view.php?id=14"
+2015/09/19 20:39:33 [error] 6#0: *723 FastCGI sent in stderr: "PHP message: Default exception handler: Error writing to database Debug: Field 'status' doesn't have a default value
+INSERT INTO mdl_broadecosmod_scopes (broadecosmod_id,name,timecreated) VALUES(?,?,?)
+[array (
+  0 => '4',
+  1 => 'courses.current',
+  2 => 1442695173,
+)]
+Error code: dmlwriteexception
+* line 446 of /lib/dml/moodle_database.php: dml_write_exception thrown
+* line 1164 of /lib/dml/mysqli_native_moodle_database.php: call to moodle_database->query_end()
+* line 1210 of /lib/dml/mysqli_native_moodle_database.php: call to mysqli_native_moodle_database->insert_record_raw()
+* line 129 of /mod/broadecosmod/lib.php: call to mysqli_native_moodle_database->insert_record()
+* line 527 of /course/modlib.php: call to broadecosmod_update_instance()
+* line 273 of /course/modedit.php: call to update_moduleinfo()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "POST /moodle/course/modedit.php HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/course/modedit.php?update=15&return=0&sr=0"

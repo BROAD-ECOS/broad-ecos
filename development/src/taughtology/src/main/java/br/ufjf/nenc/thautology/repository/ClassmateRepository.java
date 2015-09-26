@@ -1,7 +1,7 @@
 package br.ufjf.nenc.thautology.repository;
 
-import br.ufjf.nenc.broadecos.model.Course;
-import br.ufjf.nenc.broadecos.model.ParticipantProfile;
+import br.ufjf.nenc.broadecos.api.model.Course;
+import br.ufjf.nenc.broadecos.api.model.ParticipantProfile;
 import br.ufjf.nenc.thautology.model.Classmate;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;

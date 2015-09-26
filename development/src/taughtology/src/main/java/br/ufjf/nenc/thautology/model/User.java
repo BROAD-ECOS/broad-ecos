@@ -1,6 +1,6 @@
 package br.ufjf.nenc.thautology.model;
 
-import br.ufjf.nenc.broadecos.model.ParticipantProfile;
+import br.ufjf.nenc.broadecos.api.model.ParticipantProfile;
 import lombok.*;
 import org.codehaus.jackson.annotate.JsonIgnore;
 

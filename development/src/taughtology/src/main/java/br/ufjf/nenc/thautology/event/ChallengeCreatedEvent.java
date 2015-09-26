@@ -1,6 +1,6 @@
 package br.ufjf.nenc.thautology.event;
 
-import br.ufjf.nenc.broadecos.Context;
+import br.ufjf.nenc.broadecos.api.Context;
 import br.ufjf.nenc.thautology.model.Challenge;
 import lombok.ToString;
 

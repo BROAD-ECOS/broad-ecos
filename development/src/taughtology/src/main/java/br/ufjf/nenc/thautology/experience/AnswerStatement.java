@@ -1,9 +1,8 @@
 package br.ufjf.nenc.thautology.experience;
 
-import br.ufjf.nenc.broadecos.experience.ExperienceStatement;
-import br.ufjf.nenc.broadecos.experience.Verbs;
+import br.ufjf.nenc.broadecos.api.experience.ExperienceStatement;
+import br.ufjf.nenc.broadecos.api.experience.Verbs;
 import br.ufjf.nenc.thautology.model.Answer;
-import br.ufjf.nenc.thautology.model.AnswerAchievement;
 
 public class AnswerStatement {
 

@@ -1,7 +1,7 @@
 package br.ufjf.nenc.thautology.event;
 
 
-import br.ufjf.nenc.broadecos.Context;
+import br.ufjf.nenc.broadecos.api.Context;
 import br.ufjf.nenc.thautology.model.AnswerAchievement;
 
 public class AnswerAchievementCreatedEvent extends EntityCreatedEvent<AnswerAchievement>  {

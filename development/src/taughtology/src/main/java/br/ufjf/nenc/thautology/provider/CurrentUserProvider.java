@@ -1,13 +1,11 @@
 package br.ufjf.nenc.thautology.provider;
 
-import br.ufjf.nenc.broadecos.BroadEcosApi;
-import br.ufjf.nenc.broadecos.Context;
-import br.ufjf.nenc.broadecos.model.ParticipantProfile;
+import br.ufjf.nenc.broadecos.api.BroadEcosApi;
+import br.ufjf.nenc.broadecos.api.Context;
+import br.ufjf.nenc.broadecos.api.model.ParticipantProfile;
 import br.ufjf.nenc.thautology.model.CurrentUser;
 import br.ufjf.nenc.thautology.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component

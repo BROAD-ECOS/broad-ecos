@@ -1,6 +1,6 @@
 package br.ufjf.nenc.thautology.model;
 
-import br.ufjf.nenc.broadecos.model.Course;
+import br.ufjf.nenc.broadecos.api.model.Course;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 

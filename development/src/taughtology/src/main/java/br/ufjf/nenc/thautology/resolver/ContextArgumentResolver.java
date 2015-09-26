@@ -1,11 +1,9 @@
 package br.ufjf.nenc.thautology.resolver;
 
-import br.ufjf.nenc.broadecos.Context;
+import br.ufjf.nenc.broadecos.api.Context;
 import org.springframework.core.MethodParameter;
-import org.springframework.web.bind.support.WebArgumentResolver;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
-import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 public class ContextArgumentResolver extends AbstractContextArgumentResolver {

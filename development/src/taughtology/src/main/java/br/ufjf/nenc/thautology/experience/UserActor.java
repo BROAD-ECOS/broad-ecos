@@ -1,8 +1,8 @@
 package br.ufjf.nenc.thautology.experience;
 
-import br.ufjf.nenc.broadecos.experience.Account;
-import br.ufjf.nenc.broadecos.experience.Actor;
-import br.ufjf.nenc.broadecos.experience.Agent;
+import br.ufjf.nenc.broadecos.api.experience.Account;
+import br.ufjf.nenc.broadecos.api.experience.Actor;
+import br.ufjf.nenc.broadecos.api.experience.Agent;
 import br.ufjf.nenc.thautology.model.User;
 
 import java.net.URI;

@@ -1,7 +1,6 @@
 package br.ufjf.nenc.thautology.experience;
 
-import br.ufjf.nenc.broadecos.experience.Score;
-import br.ufjf.nenc.thautology.model.AnswerAchievement;
+import br.ufjf.nenc.broadecos.api.experience.Score;
 import br.ufjf.nenc.thautology.model.ChallengeAchievement;
 import br.ufjf.nenc.thautology.model.LevelPoints;
 

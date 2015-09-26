@@ -1,7 +1,7 @@
 package br.ufjf.nenc.thautology.resolver;
 
-import br.ufjf.nenc.broadecos.Context;
-import br.ufjf.nenc.broadecos.model.Course;
+import br.ufjf.nenc.broadecos.api.Context;
+import br.ufjf.nenc.broadecos.api.model.Course;
 import br.ufjf.nenc.thautology.provider.CurrentCourseProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;

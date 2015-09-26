@@ -1,9 +1,8 @@
 package br.ufjf.nenc.thautology.rest;
 
-import br.ufjf.nenc.broadecos.model.Course;
+import br.ufjf.nenc.broadecos.api.model.Course;
 import br.ufjf.nenc.thautology.model.Classmate;
 import br.ufjf.nenc.thautology.model.CurrentUser;
-import br.ufjf.nenc.thautology.model.User;
 import br.ufjf.nenc.thautology.service.ClassmateService;
 import br.ufjf.nenc.thautology.util.IterableList;
 import lombok.extern.log4j.Log4j;

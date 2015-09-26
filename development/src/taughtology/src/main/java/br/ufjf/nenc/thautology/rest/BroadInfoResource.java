@@ -1,17 +1,13 @@
 package br.ufjf.nenc.thautology.rest;
 
-import br.ufjf.nenc.broadecos.Context;
-import br.ufjf.nenc.broadecos.model.Course;
-import br.ufjf.nenc.broadecos.model.PlatformInfo;
-import br.ufjf.nenc.thautology.model.Answer;
+import br.ufjf.nenc.broadecos.api.Context;
+import br.ufjf.nenc.broadecos.api.model.Course;
+import br.ufjf.nenc.broadecos.api.model.PlatformInfo;
 import br.ufjf.nenc.thautology.service.BroadService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 

@@ -1,12 +1,10 @@
 package br.ufjf.nenc.thautology.component;
 
-import br.ufjf.nenc.broadecos.Context;
-import lombok.Getter;
+import br.ufjf.nenc.broadecos.api.Context;
 import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;

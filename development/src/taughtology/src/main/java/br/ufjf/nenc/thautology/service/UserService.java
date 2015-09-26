@@ -1,9 +1,6 @@
 package br.ufjf.nenc.thautology.service;
 
-import br.ufjf.nenc.broadecos.BroadEcosApi;
-import br.ufjf.nenc.broadecos.Context;
-import br.ufjf.nenc.broadecos.model.ParticipantProfile;
-import br.ufjf.nenc.thautology.model.Level;
+import br.ufjf.nenc.broadecos.api.model.ParticipantProfile;
 import br.ufjf.nenc.thautology.model.User;
 import br.ufjf.nenc.thautology.repository.UserRepository;
 import com.google.common.base.Preconditions;

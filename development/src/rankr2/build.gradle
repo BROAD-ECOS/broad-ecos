@@ -1,0 +1,57 @@
+buildscript {
+    ext {
+        springBootVersion = '1.3.0.M5'
+    }
+    repositories {
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "info.robotbrain.gradle.lombok:lombok-gradle:1.1"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+apply plugin: "info.robotbrain.lombok"
+
+
+group 'br.ufjf.nenc.broadecos'
+version '2.0-SNAPSHOT'
+
+jar {
+    baseName = 'rankr'
+    version = '2.0-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url "file://"+ (new File(System.getProperty('user.home'), '.m2/repository').absolutePath) }
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+}
+
+
+dependencies {
+    compile("br.ufjf.nenc.broadecos:broadecos-api:1.0.1")
+
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-ws")
+    compile("org.springframework.data:spring-data-redis")
+    compile("redis.clients:jedis:2.7.3")
+    compile("com.google.guava:guava:18.0");
+
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}

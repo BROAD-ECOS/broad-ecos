@@ -1,14 +1,13 @@
 package br.ufjf.nenc.thautology.service;
 
-import br.ufjf.nenc.broadecos.BroadEcosApi;
-import br.ufjf.nenc.broadecos.model.Course;
-import br.ufjf.nenc.broadecos.model.ParticipantProfile;
+import br.ufjf.nenc.broadecos.api.BroadEcosApi;
+import br.ufjf.nenc.broadecos.api.model.Course;
+import br.ufjf.nenc.broadecos.api.model.ParticipantProfile;
 import br.ufjf.nenc.thautology.model.Classmate;
 import br.ufjf.nenc.thautology.model.CurrentUser;
 import br.ufjf.nenc.thautology.model.User;
 import br.ufjf.nenc.thautology.repository.ClassmateRepository;
 import br.ufjf.nenc.thautology.util.IterableList;
-import com.google.common.base.Preconditions;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.util.stream.Collectors.toList;
 
 @Service
 @Log4j
