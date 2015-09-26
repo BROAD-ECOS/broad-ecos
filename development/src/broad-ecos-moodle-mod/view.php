@@ -82,13 +82,16 @@ if (!isset($_COOKIE[$cookieName])) {
                      FROM {broadecosmod_scopes}
                     WHERE broadecosmod_id = ?";
 
+    $scopes = $DB->get_records_sql($searchScopes, array($broadecosmod->id));
+    $scopesNames = array_map(function($s) { return $s->name ;}, $scopes);
+
     $token = new stdClass();
     $token->token = $newToken;
     $token->participant_id = $USER->id;
     $token->course_id = $course->id;
     $token->service_id = $broadecosmod->external_service_id;
     $token->session_id = session_id();
-    $token->approved_scopes =  implode(';',  json_decode(json_encode($DB->get_records_sql($searchScopes, array($broadecosmod->id))), true));
+    $token->approved_scopes =  implode(';', $scopesNames);
     $token->timecreated = time();
     $token->timeupdated = time();
 

@@ -12,7 +12,7 @@ public class MetadataResource {
     @RequestMapping(value = "/metadata")
     public Metadata getMetadata(){
         return Metadata.builder()
-                .id("Rankr")
+                .id("rankr")
                 .name("Rankr")
                 .description("Shows conquest informations.")
                 .entryPoint("http://dev.broadecos:8090/#/index")

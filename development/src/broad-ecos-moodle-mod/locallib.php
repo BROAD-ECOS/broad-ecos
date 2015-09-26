@@ -31,15 +31,19 @@ abstract class BroadEcosAPIException extends Exception {
 
     private $statusCode;
 
-    function __construct($statusCode) {
+    function __construct($statusCode, $message=false) {
+
+        if (!$message) {
+            $message = $this->format($statusCode);
+        }
 
         $this->$statusCode = $statusCode;
-        parent::__construct($this->format($statusCode));
+        parent::__construct($message);
 
     }
 
     function format($statusCode) {
-        return "BroadEcosAPIException ".__CLASS__ .' HTTP STATUS CODE'. $this->format($statusCode) . ".";
+        return "BroadEcosAPIException ".get_class($this).' HTTP STATUS CODE '. $statusCode . ".";
     }
 
     function getStatusCode(){
@@ -51,7 +55,7 @@ class PreconditionsException extends BroadEcosAPIException {
 
     function __construct() {
 
-        parent::__construct(412);
+        parent::__construct(412, 'PRECONDITION FAILED.');
 
     }
 }
@@ -59,41 +63,82 @@ class ForbiddenException extends BroadEcosAPIException {
 
     function __construct() {
 
-        parent::__construct(403);
+        parent::__construct(403, 'FORBIDDEN.');
 
     }
+}class UnprocessableEntityException extends BroadEcosAPIException {
+
+    function __construct() {
+
+        parent::__construct(422, 'UNPROCESSABLE ENTITY');
+
+    }
+}
+
+function randCode($size, $str = "", $chr = 'ACEFHJKMNPRTUVWXY0123456789') {
+    $length = strlen($chr);
+    while($size --) {
+        $str .= $chr{mt_rand(0, $length- 1)};
+    }
+    return $str;
 }
 
 function startsWith($haystack, $needle) {
     return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
 }
 
-function loadTokenInfo($token){
-    global $DB;
-    $token = $DB->get_record_sql('SELECT * FROM {broadecos_token} WHERE token  = ? AND timecreated >= ?', array($token, time()-3600));
-    if (!$token) {
-        http_response_code(403);
-        die();
+function isAuthPath($serverInfo) {
+    return strpos($serverInfo['PATH_INFO'], '/auth/') === 0;
+}
+
+
+function loadTokenInfo($server){
+
+    $context = null;
+
+    if (array_key_exists('HTTP_BROAD_ECOS_TOKEN', $server)) {
+        $context = getTokenContext($server);
+
+    } else  if (isAuthPath($server)) {
+        $context = array(
+            'isAuth' => true
+        );
     }
 
-    $token->approved_scopes =  array('participant.profile', 'participant.email', 'courses.current', 'courses.current.participants');// explode(';', $token);
+    return $context;
+}
 
+function getTokenContext($server)
+{
+    global $DB;
 
-    return (array) array_merge(array(
-        'baseUrl'=> 'http://dev.broadecos/moodle',
-        'baseImagePath'=> '/pluginfile.php',
-        'platformName' => 'Universidade Federal de Juiz de Fora (UFJF)',
-        'platformLogo' => 'http://dev.broadecos/moodle/theme/image.php/clean/core/1439983890/moodlelogo',
-        'moreInfo' => 'http://dev.broadecos/moodle',
-        'approved_scopes'=>array()
-    ), (array) $token);
+    $context = null;
+    $token = $server['HTTP_BROAD_ECOS_TOKEN'];
+    $token = $DB->get_record_sql('SELECT * FROM {broadecos_token} WHERE token  = ? AND timecreated >= ?', array($token, time() - 3600));
+
+    if ($token) {
+        $token->approved_scopes = array('participant.profile', 'participant.email', 'courses.current', 'courses.current.participants');// explode(';', $token);
+
+        $context = (array)array_merge(array(
+            'isAuth' => false,
+            'baseUrl' => 'http://dev.broadecos/moodle',
+            'baseImagePath' => '/pluginfile.php',
+            'platformName' => 'Universidade Federal de Juiz de Fora (UFJF)',
+            'platformLogo' => 'http://dev.broadecos/moodle/theme/image.php/clean/core/1439983890/moodlelogo',
+            'moreInfo' => 'http://dev.broadecos/moodle',
+            'approved_scopes' => array()
+        ), (array)$token);
+    }
+    return $context;
 }
 
 function validateScopes($resource, $context)
 {
-    foreach ($resource['required-scopes']['required-scope'] as $scope) {
-        if ($scope && array_search($scope, $context['approved_scopes']) == -1) {
-            throw new ForbiddenException();
+    if ($context['isAuth']) {
+        foreach ($resource['required-scopes']['required-scope'] as $scope) {
+            if ($scope && array_search($scope, $context['approved_scopes']) == -1) {
+                throw new ForbiddenException();
+            }
         }
     }
 }
@@ -135,15 +180,21 @@ function broadecos_ws_type_platform_query($resource, $context, $params){
         }
 
         foreach($context as $param=>$value) {
-            if ($param == 'approved_scopes')
+            if ($param == 'approved_scopes' || $value==null)
                 continue;
             $query = str_replace("{{context.$param}}", $value, $query);
         }
 
-        if ($resource['isarray']==='true'){
-            $queryResult = array_values($DB->get_records_sql($query));
+        preg_match_all('/{{(.*?)}}/', $query, $matches);
+
+        if (empty($matches[1])) {
+            if ($resource['isarray'] === 'true') {
+                $queryResult = array_values($DB->get_records_sql($query));
+            } else {
+                $queryResult = $DB->get_record_sql($query);
+            }
         } else {
-            $queryResult = $DB->get_record_sql($query);
+            throw new UnprocessableEntityException();
         }
     } else {
         throw new PreconditionsException();
@@ -189,20 +240,122 @@ function broadecos_ws_type_lrs_statement_get($resource, $context, $params){
 }
 
 function broadecos_ws_type_authorize($resource, $context, $params){
-    // 1 - Verificar se há alguma instância desse cliente para esse curso
-    // 2 - Gerar número de código.
-    // 3 - Se solicitado offline, verificar se tem esse escopo.
-    //     Se não tiver exibir interface de login do moddole com foward para envio do serviço
-    // 4 - Enviar para o número gerado para o callback.
+    global $DB;
+
+    if ($params['response_type']!=='code') {
+        throw new PreconditionsException();
+    }
+
+    $queryParams = array($params['course_id'], $params['client_id']);
+    $client = $DB->get_record_sql('SELECT * FROM {broadecosmod} WHERE course= ? AND external_service_id = ?', $queryParams);
+
+    if ($client) {
+
+        $scopes = $DB->get_records_sql('SELECT name FROM {broadecosmod_scopes} WHERE broadecosmod_id= ?', array($client->id));
+        $scopeNames = array_map(function($s) { return $s->name ;}, $scopes);
+
+        checkOfflineAccessAllowed($scopeNames);
+
+        checkRedirectURL($params, $client);
+
+        $code = createCodeToken($params, $scopeNames);
+
+
+        $options = array(
+            'http' => array(
+                'header'  => "Content-Type: application/json",
+                'method'  => 'GET'
+            ),
+        );
+        file_get_contents($params['redirect_uri'].'?code='.$code->code, false, stream_context_create($options));
+
+
+    } else {
+        throw new PreconditionsException();
+    }
 
     return array();
 }
 
-function broadecos_ws_type_token($resource, $context, $params){
-    // 1 - Verificar se há um código válido e ativo para o cliente.
-    // 2 - Gerar token
-    // 3 - Registrar token
-    // 4 - Retornar Token
+/**
+ * @param $params
+ * @param $DB
+ * @param $scopeNames
+ * @return string
+ */
+function createCodeToken($params, $scopeNames)
+{
+    global $DB;
 
-    return array();
+    $code = randCode(8);
+
+    $DB->delete_records('broadecos_token', array('course_id' => $params['course_id'], 'service_id' => $params['client_id'], 'token' => 0));
+
+    $token = new stdClass();
+    $token->token = 0;
+    $token->code = $code;
+    $token->participant_id = null;
+    $token->course_id = $params['course_id'];
+    $token->service_id = $params['client_id'];
+    $token->session_id = 0;
+    $token->approved_scopes = implode(';', $scopeNames);
+    $token->timecreated = time();
+    $token->timeupdated = time();
+
+    $token->id = $DB->insert_record('broadecos_token', $token);
+    return $token;
+}
+
+/**
+ * @param $params
+ * @param $client
+ * @throws PreconditionsException
+ */
+function checkRedirectURL($params, $client)
+{
+    if (!strpos($params['redirect_uri'], $client->external_service_uri) === 0) {
+        throw new PreconditionsException();
+    }
+}
+
+/**
+ * @param $DB
+ * @param $client
+ * @throws ForbiddenException
+ */
+function checkOfflineAccessAllowed($scopes)
+{
+
+    $offlineAccessAlowed = false;
+    foreach ($scopes as $scope) {
+        if ($scope == 'offlineaccess') {
+            $offlineAccessAlowed = true;
+            break;
+        }
+    }
+
+    if (!$offlineAccessAlowed) {
+        throw new ForbiddenException();
+    }
+}
+
+function broadecos_ws_type_token($resource, $context, $params){
+    global $DB;
+    $data = array();
+
+    $token = $DB->get_record('broadecos_token', array('code'=>$params['code']));
+    if ($token && $token->service_id==$params['client_id'] && $token->course_id==$params['course_id']) {
+
+        $newToken = bin2hex(openssl_random_pseudo_bytes(16));
+        $token->token = $newToken;
+        //$token->code = 0;
+        $DB->update_record('broadecos_token', $token);
+
+        $data['token'] =  $token->token;
+
+    } else {
+        throw new PreconditionsException();
+    }
+
+    return $data;
 }

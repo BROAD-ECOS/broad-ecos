@@ -57,11 +57,12 @@
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
                 <FIELD NAME="token" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="User Token"/>
-                <FIELD NAME="participant_id" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"
+                <FIELD NAME="code" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="User Code"/>
+                <FIELD NAME="participant_id" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"
                        COMMENT="User Token"/>
                 <FIELD NAME="course_id" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="User Token"/>
                 <FIELD NAME="service_id" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="User Token"/>
-                <FIELD NAME="session_id" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="User Token"/>
+                <FIELD NAME="session_id" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="User Token"/>
                 <FIELD NAME="approved_scopes" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"
                        COMMENT="User Token"/>
                 <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"/>

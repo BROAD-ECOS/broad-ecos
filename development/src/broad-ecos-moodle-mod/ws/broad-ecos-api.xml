@@ -167,31 +167,56 @@
 
     <resourse>
         <method>POST</method>
-        <path>/authorize</path>
+        <path>/auth/authorize</path>
         <type>authorize</type>
         <required-scopes>
             <required-scope/>
             <required-scope/>
         </required-scopes>
         <parameters>
-            <param />
-            <param />
+            <param>
+                <name>client_id</name>
+                <required>true</required>
+            </param>
+            <param>
+                <name>course_id</name>
+                <required>true</required>
+            </param>
+            <param>
+                <name>response_type</name>
+                <required>false</required>
+                <default>code</default>
+            </param>
+            <param>
+                <name>redirect_uri</name>
+                <required>true</required>
+            </param>
         </parameters>
         <query />
         <isarray>true</isarray>
     </resourse>
 
     <resourse>
-        <method>POST</method>
-        <path>/token</path>
+        <method>GET</method>
+        <path>/auth/token</path>
         <type>token</type>
         <required-scopes>
             <required-scope/>
             <required-scope/>
         </required-scopes>
         <parameters>
-            <param />
-            <param />
+            <param>
+                <name>code</name>
+                <required>true</required>
+            </param>
+            <param>
+                <name>client_id</name>
+                <required>true</required>
+            </param>
+            <param>
+                <name>course_id</name>
+                <required>true</required>
+            </param>
         </parameters>
         <query />
         <isarray>true</isarray>

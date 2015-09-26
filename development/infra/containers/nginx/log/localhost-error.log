@@ -266,3 +266,229 @@ Error code: dmlwriteexception
 * line 129 of /mod/broadecosmod/lib.php: call to mysqli_native_moodle_database->insert_record()
 * line 527 of /course/modlib.php: call to broadecosmod_update_instance()
 * line 273 of /course/modedit.php: call to update_moduleinfo()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "POST /moodle/course/modedit.php HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/course/modedit.php?update=15&return=0&sr=0"
+2015/09/26 19:45:43 [error] 6#0: *67 FastCGI sent in stderr: "PHP message: Default exception handler: Field "course_id" does not exist in table "broadecosmod_scopes" Debug: 
+Error code: ddlfieldnotexist
+* line 592 of /lib/dml/moodle_database.php: dml_exception thrown
+* line 1830 of /lib/dml/moodle_database.php: call to moodle_database->where_clause()
+* line 250 of /mod/broadecosmod/locallib.php: call to moodle_database->delete_records()
+* line ? of unknownfile: call to broadecos_ws_type_authorize()
+* line 32 of /mod/broadecosmod/ws.php: call to call_user_func_array()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "POST /moodle/mod/broadecosmod/ws.php/auth/authorize?client_id=Rankr&course_id=3&redirect_uri=http://dev.broadecos:8090/authorization/code&response_type=code HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2015/09/26 19:46:13 [error] 6#0: *67 FastCGI sent in stderr: "PHP message: Default exception handler: Table "broadecos_scopes" does not exist Debug: 
+Error code: ddltablenotexist
+* line 585 of /lib/dml/moodle_database.php: dml_exception thrown
+* line 1830 of /lib/dml/moodle_database.php: call to moodle_database->where_clause()
+* line 250 of /mod/broadecosmod/locallib.php: call to moodle_database->delete_records()
+* line ? of unknownfile: call to broadecos_ws_type_authorize()
+* line 32 of /mod/broadecosmod/ws.php: call to call_user_func_array()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "POST /moodle/mod/broadecosmod/ws.php/auth/authorize?client_id=Rankr&course_id=3&redirect_uri=http://dev.broadecos:8090/authorization/code&response_type=code HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2015/09/26 19:55:53 [error] 6#0: *73 FastCGI sent in stderr: "PHP message: Default exception handler: Error writing to database Debug: Column 'approved_scopes' cannot be null
+INSERT INTO mdl_broadecos_token (token,participant_id,course_id,service_id,session_id,approved_scopes,timecreated,timeupdated) VALUES(?,?,?,?,?,?,?,?)
+[array (
+  0 => 0,
+  1 => NULL,
+  2 => '3',
+  3 => 'Rankr',
+  4 => 0,
+  5 => NULL,
+  6 => 1443297353,
+  7 => 1443297353,
+)]
+Error code: dmlwriteexception
+* line 446 of /lib/dml/moodle_database.php: dml_write_exception thrown
+* line 1164 of /lib/dml/mysqli_native_moodle_database.php: call to moodle_database->query_end()
+* line 1210 of /lib/dml/mysqli_native_moodle_database.php: call to mysqli_native_moodle_database->insert_record_raw()
+* line 293 of /mod/broadecosmod/locallib.php: call to mysqli_native_moodle_database->insert_record()
+* line 249 of /mod/broadecosmod/locallib.php: call to createCodeToken()
+* line ? of unknownfile: call to broadecos_ws_type_authorize()
+* line 32 of /mod/broadecosmod/ws.php: call to call_user_func_array()" while reading upstream, client: 172.17.42.1, server: localhost, request: "POST /moodle/mod/broadecosmod/ws.php/auth/authorize?client_id=Rankr&course_id=3&redirect_uri=http://dev.broadecos:8090/authorization/code&response_type=code HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2015/09/26 20:36:07 [error] 6#0: *81 FastCGI sent in stderr: "PHP message: Default exception handler: Exception - PRECONDITION FAILED. Debug: 
+Error code: generalexceptionmessage
+* line 156 of /mod/broadecosmod/locallib.php: PreconditionsException thrown
+* line 27 of /mod/broadecosmod/ws.php: call to getParameters()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/mod/broadecosmod/ws.php/auth/token?code=H8961NV0&client_id=Rankr&course_id=3 HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2015/09/26 20:36:17 [error] 6#0: *81 FastCGI sent in stderr: "PHP message: Default exception handler: Exception - PRECONDITION FAILED. Debug: 
+Error code: generalexceptionmessage
+* line 156 of /mod/broadecosmod/locallib.php: PreconditionsException thrown
+* line 27 of /mod/broadecosmod/ws.php: call to getParameters()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/mod/broadecosmod/ws.php/auth/token?code=H8961NV0&client_id=Rankr&course_id=3 HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2015/09/26 20:41:37 [error] 6#0: *86 FastCGI sent in stderr: "PHP message: Default exception handler: Table "bradecos_token" does not exist Debug: 
+Error code: ddltablenotexist
+* line 585 of /lib/dml/moodle_database.php: dml_exception thrown
+* line 1428 of /lib/dml/moodle_database.php: call to moodle_database->where_clause()
+* line 333 of /mod/broadecosmod/locallib.php: call to moodle_database->get_record()
+* line ? of unknownfile: call to broadecos_ws_type_token()
+* line 32 of /mod/broadecosmod/ws.php: call to call_user_func_array()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/mod/broadecosmod/ws.php/auth/token?code=H8961NV0&client_id=Rankr&course_id=3 HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2015/09/26 20:41:55 [error] 6#0: *86 FastCGI sent in stderr: "PHP message: Default exception handler: Field "code" does not exist in table "broadecos_token" Debug: 
+Error code: ddlfieldnotexist
+* line 592 of /lib/dml/moodle_database.php: dml_exception thrown
+* line 1428 of /lib/dml/moodle_database.php: call to moodle_database->where_clause()
+* line 333 of /mod/broadecosmod/locallib.php: call to moodle_database->get_record()
+* line ? of unknownfile: call to broadecos_ws_type_token()
+* line 32 of /mod/broadecosmod/ws.php: call to call_user_func_array()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/mod/broadecosmod/ws.php/auth/token?code=H8961NV0&client_id=Rankr&course_id=3 HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2015/09/26 20:54:43 [error] 6#0: *90 FastCGI sent in stderr: "PHP message: Default exception handler: Course or activity not accessible. Debug: You are not logged in
+Error code: requireloginerror
+* line 2558 of /lib/moodlelib.php: require_login_exception thrown
+* line 32 of /lib/ajax/getsiteadminbranch.php: call to require_login()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "POST /moodle/lib/ajax/getsiteadminbranch.php HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/my/"
+2015/09/26 21:44:20 [error] 6#0: *482 FastCGI sent in stderr: "Unable to open primary script: /var/www/html/index.php (No such file or directory)" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/mod/broadecosmod/ws.ph/me/profile HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2015/09/26 21:45:23 [error] 6#0: *482 FastCGI sent in stderr: "Unable to open primary script: /var/www/html/index.php (No such file or directory)" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/mod/broadecosmod/ws.ph/me/profile HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2015/09/26 21:45:45 [error] 6#0: *482 FastCGI sent in stderr: "Unable to open primary script: /var/www/html/index.php (No such file or directory)" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/mod/broadecosmod/ws.ph/me/profile HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2015/09/26 21:45:56 [error] 6#0: *482 FastCGI sent in stderr: "Unable to open primary script: /var/www/html/index.php (No such file or directory)" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/mod/broadecosmod/ws.ph/me/profile HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2015/09/26 21:46:05 [error] 6#0: *482 FastCGI sent in stderr: "PHP message: Default exception handler: Error reading from database Debug: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 19
+
+            select
+                u.id,
+                u.firstname as `firstName`,
+                u.lastname  as `lastName`,
+                CONCAT(
+                    'http://dev.broadecos/moodle/pluginfile.php','/',
+                    f.contextId,'/',
+                    f.component,'/',
+                    f.filearea,
+                    f.filepath,
+                    f.filename) as 'picture',
+                u.lang as 'locale'
+
+            from
+                mdl_user u
+            left join
+                mdl_files f on f.id = u.picture AND f.filename like 'f1%'
+            where
+                u.id=
+        
+[array (
+)]
+Error code: dmlreadexception
+* line 443 of /lib/dml/moodle_database.php: dml_read_exception thrown
+* line 1080 of /lib/dml/mysqli_native_moodle_databas" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/mod/broadecosmod/ws.php/me/profile HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2015/09/26 21:57:18 [error] 6#0: *499 FastCGI sent in stderr: "PHP message: Default exception handler: Error reading from database Debug: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 19
+
+            select
+                u.id,
+                u.firstname as `firstName`,
+                u.lastname  as `lastName`,
+                CONCAT(
+                    'http://dev.broadecos/moodle/pluginfile.php','/',
+                    f.contextId,'/',
+                    f.component,'/',
+                    f.filearea,
+                    f.filepath,
+                    f.filename) as 'picture',
+                u.lang as 'locale'
+
+            from
+                mdl_user u
+            left join
+                mdl_files f on f.id = u.picture AND f.filename like 'f1%'
+            where
+                u.id=
+        
+[array (
+)]
+Error code: dmlreadexception
+* line 443 of /lib/dml/moodle_database.php: dml_read_exception thrown
+* line 1080 of /lib/dml/mysqli_native_moodle_databas" while reading upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/mod/broadecosmod/ws.php/me/profile HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2015/09/26 21:57:51 [error] 6#0: *499 FastCGI sent in stderr: "PHP message: Default exception handler: Error reading from database Debug: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 19
+
+            select
+                u.id,
+                u.firstname as `firstName`,
+                u.lastname  as `lastName`,
+                CONCAT(
+                    'http://dev.broadecos/moodle/pluginfile.php','/',
+                    f.contextId,'/',
+                    f.component,'/',
+                    f.filearea,
+                    f.filepath,
+                    f.filename) as 'picture',
+                u.lang as 'locale'
+
+            from
+                mdl_user u
+            left join
+                mdl_files f on f.id = u.picture AND f.filename like 'f1%'
+            where
+                u.id=
+        
+[array (
+)]
+Error code: dmlreadexception
+* line 443 of /lib/dml/moodle_database.php: dml_read_exception thrown
+* line 1080 of /lib/dml/mysqli_native_moodle_databas" while reading upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/mod/broadecosmod/ws.php/me/profile HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2015/09/26 21:58:14 [error] 6#0: *499 FastCGI sent in stderr: "PHP message: Default exception handler: Error reading from database Debug: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 19
+
+            select
+                u.id,
+                u.firstname as `firstName`,
+                u.lastname  as `lastName`,
+                CONCAT(
+                    'http://dev.broadecos/moodle/pluginfile.php','/',
+                    f.contextId,'/',
+                    f.component,'/',
+                    f.filearea,
+                    f.filepath,
+                    f.filename) as 'picture',
+                u.lang as 'locale'
+
+            from
+                mdl_user u
+            left join
+                mdl_files f on f.id = u.picture AND f.filename like 'f1%'
+            where
+                u.id=
+        
+[array (
+)]
+Error code: dmlreadexception
+* line 443 of /lib/dml/moodle_database.php: dml_read_exception thrown
+* line 1080 of /lib/dml/mysqli_native_moodle_databas" while reading upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/mod/broadecosmod/ws.php/me/profile HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2015/09/26 21:59:56 [error] 6#0: *516 FastCGI sent in stderr: "PHP message: Default exception handler: Error reading from database Debug: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '{context.participant_id}}' at line 19
+
+            select
+                u.id,
+                u.firstname as `firstName`,
+                u.lastname  as `lastName`,
+                CONCAT(
+                    'http://dev.broadecos/moodle/pluginfile.php','/',
+                    f.contextId,'/',
+                    f.component,'/',
+                    f.filearea,
+                    f.filepath,
+                    f.filename) as 'picture',
+                u.lang as 'locale'
+
+            from
+                mdl_user u
+            left join
+                mdl_files f on f.id = u.picture AND f.filename like 'f1%'
+            where
+                u.id={{context.participant_id}}
+        
+[array (
+)]
+Error code: dmlreadexception
+* line 443 of /lib/dml/moodle_database.php: dml_read_exception thrown
+*" while reading upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/mod/broadecosmod/ws.php/me/profile HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2015/09/26 22:00:12 [error] 6#0: *516 FastCGI sent in stderr: "PHP message: Default exception handler: Error reading from database Debug: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '{context.participant_id}}' at line 19
+
+            select
+                u.id,
+                u.firstname as `firstName`,
+                u.lastname  as `lastName`,
+                CONCAT(
+                    'http://dev.broadecos/moodle/pluginfile.php','/',
+                    f.contextId,'/',
+                    f.component,'/',
+                    f.filearea,
+                    f.filepath,
+                    f.filename) as 'picture',
+                u.lang as 'locale'
+
+            from
+                mdl_user u
+            left join
+                mdl_files f on f.id = u.picture AND f.filename like 'f1%'
+            where
+                u.id={{context.participant_id}}
+        
+[array (
+)]
+Error code: dmlreadexception
+* line 443 of /lib/dml/moodle_database.php: dml_read_exception thrown
+*" while reading upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/mod/broadecosmod/ws.php/me/profile HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"

@@ -29,7 +29,7 @@ public class ConquestLoader {
     @Scheduled(fixedRate = 10000)
     public void reportCurrentTime() {
 
-        Map.Entry<String, Set<Course>> entry = courses.entrySet().iterator().next();
+        //      Map.Entry<String, Set<Course>> entry = courses.entrySet().iterator().next();
 
 
 
