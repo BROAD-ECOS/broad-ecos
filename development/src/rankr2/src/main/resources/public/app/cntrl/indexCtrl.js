@@ -1,7 +1,7 @@
 'use strict';
 
 (function() {
-    var app = angular.module('rankr')
+    var app = angular.module('rankr');
     app.controller('IndexCtrl', ['$scope', '$location', 'broadcontext', function ($scope, broadcontext, $location) {
 
         $scope.topGlobal = [

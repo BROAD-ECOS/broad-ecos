@@ -1,13 +1,19 @@
 package br.ufjf.nenc.broadecos.api;
 
+import br.ufjf.nenc.broadecos.api.experience.ExperienceRequest;
+import br.ufjf.nenc.broadecos.api.experience.ExperienceResponse;
+import br.ufjf.nenc.broadecos.api.experience.ExperienceStatement;
 import br.ufjf.nenc.broadecos.api.model.Metadata;
 import br.ufjf.nenc.broadecos.api.model.Scope;
+
+import java.net.URI;
+import java.util.List;
 
 public class Main {
 
     public static void main (String[] args) {
 
-        /*final Metadata metadata = Metadata.builder()
+       final Metadata metadata = Metadata.builder()
                 .id("rankr")
                 .name("Rankr")
                 .description("Shows conquest informations.")
@@ -24,20 +30,21 @@ public class Main {
                 .metadata(metadata)
                 .build();
 
-        AuthRequest authRequest;
-        try {
-            authRequest  = new AuthRequest(metadata, "http://dev.broadecos/moodle/mod/broadecosmod/ws.php", "3", true);
-        } catch (Exception e) {
-
-        }
-
-        System.out.println(authRequest);
-        Context context = authRequest.createContext("code");
-
-        System.out.println(broadEcosApi.withContext(context).getCurrentCourse());
+        final Context context = new Context("2b0543999c653bb3e6fc90891500cfea","http://dev.broadecos/moodle/mod/broadecosmod/ws.php");
 
 
-    }*/
+        BroadEcosApi api = broadEcosApi.withContext(context);
+
+        ExperienceResponse statements = api.getExperience(ExperienceRequest.builder()
+                .verbId(URI.create("http://wordnet-rdf.princeton.edu/wn31/202294200-v"))
+                .build()
+        );
+
+
+        System.out.print(statements);
+        System.out.print(statements.getStatements().get(0).getStored());
+        System.out.print(statements.getStatements().get(0).getTimestamp());
+
     }
 }
 

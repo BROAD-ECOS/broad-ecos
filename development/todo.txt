@@ -16,6 +16,10 @@ Validar experience api para salvar com outra autoridade.
 Isolar xPAI usando context
 Erro ao editar broadecos no moodle
 Refatorar NotificationListener
+Tela de login ao fazer request sem o contexto!
 
 broadecosadmin
 @dmin
+
+
+http://dev.broadecos/moodle/mod/broadecosmod/ws.php/auth?client_id=Rankr&course_id=3&redirect_uri=http://dev.broadecos:8090/authorization/code&response_type=code&

@@ -7,7 +7,8 @@
 
 body {
   color:#646464;
-  background-color:#efefef;
+  background-color:#FEFCE8;
+/*  background:url('../img/bg2.png')  top left repeat;*/
 }
 
 h1,h2,h3,.highlight,.navbar a,#masthead h4 {
@@ -19,16 +20,20 @@ footer {
   margin-top:40px;
   padding-top:40px;
   padding-bottom:40px;
-  background-color:#cecece;
+  background-color:#67C5C2;
  
 }
 
 
 #masthead {
   min-height:199px;
-  background-color:#666;
   color:#aaaacc;
   text-shadow: 2px 1px 0px #333, 5px 4px 0px rgba(0, 0, 0, 0.15);
+  background-color:#C84127;
+}
+
+.containessasasr {
+  background:url('../img/header.png') top left no-repeat;
 }
 
 #masthead h1 {
@@ -40,8 +45,8 @@ footer {
 
 #masthead .well {
   margin-top:31px;
-  background-color:#666;
-  border-color:#666;
+  background-color:#C84127;
+  border-color:#C84127;
   color:#efefff;
   min-height:127px;
 }

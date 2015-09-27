@@ -9,7 +9,7 @@ repositories {
 }
 
 group 'br.ufjf.nenc.broadecos'
-version '1.0.2'
+version '1.0.3'
 
 apply plugin: 'java'
 apply plugin: 'idea'
@@ -34,7 +34,7 @@ dependencies {
 
 install {
     repositories.mavenInstaller {
-        pom.version = '1.0.2'
+        pom.version = '1.0.3'
         pom.artifactId = 'broadecos-api'
     }
 }

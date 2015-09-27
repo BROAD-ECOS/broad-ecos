@@ -1,5 +1,7 @@
 package br.ufjf.nenc.broadecos.api;
 
+import br.ufjf.nenc.broadecos.api.experience.ExperienceRequest;
+import br.ufjf.nenc.broadecos.api.experience.ExperienceResponse;
 import br.ufjf.nenc.broadecos.api.experience.ExperienceStatement;
 import br.ufjf.nenc.broadecos.api.model.Course;
 import br.ufjf.nenc.broadecos.api.model.ParticipantProfile;
@@ -19,4 +21,6 @@ public interface BroadEcosApi {
     List<ParticipantProfile> getCurrentCourseParticipants();
 
     Reference sendExperience(ExperienceStatement statement);
+
+    ExperienceResponse getExperience(ExperienceRequest experienceRequest);
 }

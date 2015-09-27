@@ -12,7 +12,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-public class ConquestLoader {
+public class ConquestLoadJob {
 
 
     private final PlatformCourseService platformCourseService;
@@ -21,7 +21,7 @@ public class ConquestLoader {
 
 
     @Autowired
-    public ConquestLoader(PlatformCourseService platformCourseService) {
+    public ConquestLoadJob(PlatformCourseService platformCourseService) {
         this.platformCourseService = platformCourseService;
     }
 

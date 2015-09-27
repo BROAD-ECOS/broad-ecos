@@ -1,5 +1,7 @@
 package br.ufjf.nenc.broadecos.api;
 
+import br.ufjf.nenc.broadecos.api.experience.ExperienceRequest;
+import br.ufjf.nenc.broadecos.api.experience.ExperienceResponse;
 import br.ufjf.nenc.broadecos.api.experience.ExperienceStatement;
 import br.ufjf.nenc.broadecos.api.model.Course;
 import br.ufjf.nenc.broadecos.api.model.ParticipantProfile;
@@ -36,11 +38,36 @@ public class BroadEcosApiImpl implements BroadEcosApi {
     @Override
     public List<ParticipantProfile> getCurrentCourseParticipants() {
         ClientResponse clientResponse = wsClient.getList("/courses/current/participants");
-        return clientResponse.getEntity(new GenericType<List<ParticipantProfile>>() {});
+        return clientResponse.getEntity(new GenericType<List<ParticipantProfile>>() {
+        });
     }
 
     @Override
     public Reference sendExperience(ExperienceStatement statement) {
         return wsClient.postCreation("/experiences", statement);
+    }
+
+    @Override
+    public ExperienceResponse getExperience(ExperienceRequest experienceRequest) {
+
+        String path = buildExperiencePath(experienceRequest);
+        return wsClient.get(path, ExperienceResponse.class);
+    }
+
+    private String buildExperiencePath(ExperienceRequest experienceRequest) {
+
+        String path = "";
+
+        if (experienceRequest.getVerbId() != null) {
+            final String verbParamFormat = "verb=%s";
+            path += String.format(verbParamFormat, experienceRequest.getVerbId().toString());
+        }
+
+        if (path.length() > 0) {
+            path = "?"+path;
+        }
+
+
+        return "/experiences"+path;
     }
 }
