@@ -26,9 +26,8 @@ public class ConquestLoader {
     }
 
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 10000, initialDelay = 60*1000)
     public void reportCurrentTime() {
-
         //      Map.Entry<String, Set<Course>> entry = courses.entrySet().iterator().next();
 
 

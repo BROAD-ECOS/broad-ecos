@@ -23,6 +23,8 @@ public class Metadata {
 
     private String entryPoint;
 
+    private String redirectURI;
+
     @Singular
     @JsonIgnore
     private Set<Scope> scopes;

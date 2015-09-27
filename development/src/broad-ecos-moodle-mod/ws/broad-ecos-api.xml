@@ -166,7 +166,7 @@
     </resourse>
 
     <resourse>
-        <method>POST</method>
+        <method>GET</method>
         <path>/auth/authorize</path>
         <type>authorize</type>
         <required-scopes>

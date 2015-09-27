@@ -1,7 +1,15 @@
 package br.ufjf.nenc.broadecos.api;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Token {
-    public boolean isValid() {
-        return false;
-    }
+
+    private String token;
 }

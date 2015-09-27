@@ -101,7 +101,14 @@ function loadTokenInfo($server){
 
     } else  if (isAuthPath($server)) {
         $context = array(
-            'isAuth' => true
+            'isAuth' => true,
+            'baseUrl' => 'http://dev.broadecos/moodle',
+            'baseImagePath' => '/pluginfile.php',
+            'platformName' => 'Universidade Federal de Juiz de Fora (UFJF)',
+            'platformLogo' => 'http://dev.broadecos/moodle/theme/image.php/clean/core/1439983890/moodlelogo',
+            'moreInfo' => 'http://dev.broadecos/moodle',
+            'apiURL' => 'http://dev.broadecos/moodle/mod/broadecosmod/ws.php',
+            'approved_scopes' => array()
         );
     }
 
@@ -126,6 +133,7 @@ function getTokenContext($server)
             'platformName' => 'Universidade Federal de Juiz de Fora (UFJF)',
             'platformLogo' => 'http://dev.broadecos/moodle/theme/image.php/clean/core/1439983890/moodlelogo',
             'moreInfo' => 'http://dev.broadecos/moodle',
+            'apiURL' => 'http://dev.broadecos/moodle/mod/broadecosmod/ws.php',
             'approved_scopes' => array()
         ), (array)$token);
     }
@@ -267,7 +275,7 @@ function broadecos_ws_type_authorize($resource, $context, $params){
                 'method'  => 'GET'
             ),
         );
-        file_get_contents($params['redirect_uri'].'?code='.$code->code, false, stream_context_create($options));
+        file_get_contents($params['redirect_uri'].'?code='.$code->code.'&course_id='.$params['course_id'].'&platform='.$context['apiURL'], false, stream_context_create($options));
 
 
     } else {
@@ -345,14 +353,16 @@ function broadecos_ws_type_token($resource, $context, $params){
 
     $token = $DB->get_record('broadecos_token', array('code'=>$params['code']));
     if ($token && $token->service_id==$params['client_id'] && $token->course_id==$params['course_id']) {
+        if ($token->timecreated > time() - 5*60*1000) {
+            $newToken = bin2hex(openssl_random_pseudo_bytes(16));
+            $token->token = $newToken;
+            //$token->code = 0;
+            $DB->update_record('broadecos_token', $token);
 
-        $newToken = bin2hex(openssl_random_pseudo_bytes(16));
-        $token->token = $newToken;
-        //$token->code = 0;
-        $DB->update_record('broadecos_token', $token);
-
-        $data['token'] =  $token->token;
-
+            $data['token'] =  $token->token;
+        } else {
+            throw new ForbiddenException();
+        }
     } else {
         throw new PreconditionsException();
     }

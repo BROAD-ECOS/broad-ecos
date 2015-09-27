@@ -1,34 +1,22 @@
 package br.ufjf.nenc.broadecos.api;
 
+import br.ufjf.nenc.broadecos.api.experience.ExperienceStatement;
 import br.ufjf.nenc.broadecos.api.model.Course;
+import br.ufjf.nenc.broadecos.api.model.ParticipantProfile;
 import br.ufjf.nenc.broadecos.api.model.PlatformInfo;
-import lombok.Builder;
+import br.ufjf.nenc.broadecos.api.model.Reference;
 
-import java.util.Collections;
-import java.util.Set;
-import java.util.WeakHashMap;
-import java.util.concurrent.CompletableFuture;
+import java.util.List;
 
-import static java.util.Collections.newSetFromMap;
+public interface BroadEcosApi {
 
-@Builder
-public class BroadEcosApi {
+    ParticipantProfile getParticipant();
 
-    private static final Set<OfflineContext> OFFLINE_CONTEXTS = newSetFromMap(new WeakHashMap<>());
+    PlatformInfo getPlatFormInfo();
 
+    Course getCurrentCourse();
 
-    public BroadEcosApiContext withContext(Context context) {
+    List<ParticipantProfile> getCurrentCourseParticipants();
 
-        return BroadEcosApiContext.builder()
-                .context(context)
-                .build();
-    }
-
-    public CompletableFuture<BroadEcosApiContext> offlineContext(PlatformInfo platform, Course course) {
-
-        return BroadEcosApiContext.builder()
-                .context(context)
-                .build();
-    }
-
+    Reference sendExperience(ExperienceStatement statement);
 }
