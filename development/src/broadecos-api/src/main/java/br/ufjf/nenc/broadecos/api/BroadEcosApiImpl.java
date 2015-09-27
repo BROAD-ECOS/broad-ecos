@@ -7,22 +7,47 @@ import br.ufjf.nenc.broadecos.api.model.Course;
 import br.ufjf.nenc.broadecos.api.model.ParticipantProfile;
 import br.ufjf.nenc.broadecos.api.model.PlatformInfo;
 import br.ufjf.nenc.broadecos.api.model.Reference;
+import com.google.common.base.Preconditions;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
+import com.sun.jersey.api.client.UniformInterfaceException;
 import lombok.Builder;
 
 import java.util.List;
+import java.util.Optional;
+
+import static br.ufjf.nenc.broadecos.api.util.PreconditionPredicates.isNotNull;
+import static com.google.common.base.Preconditions.checkArgument;
 
 public class BroadEcosApiImpl implements BroadEcosApi {
 
+    private static final int NOT_FOUND = 404;
     private final SecureWSClient wsClient;
 
     public BroadEcosApiImpl(Context context) {
         this.wsClient = new SecureWSClient(context);
     }
+
     @Override
-    public ParticipantProfile getParticipant() {
+    public ParticipantProfile getCurrentParticipant() {
         return wsClient.get("/me/profile", ParticipantProfile.class);
+    }
+
+    @Override
+    public Optional<ParticipantProfile> getParticipant(String id) {
+        checkArgument(isNotNull(id));
+
+        Optional participant = Optional.empty();
+
+        try {
+            participant = Optional.of(wsClient.get("/participants/"+id, ParticipantProfile.class));
+        } catch (UniformInterfaceException e) {
+            if (e.getResponse().getStatus() != NOT_FOUND) {
+                throw e;
+            }
+        }
+
+        return participant;
     }
 
     @Override

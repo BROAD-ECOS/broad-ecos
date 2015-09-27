@@ -1,12 +1,15 @@
 package br.ufjf.nenc.broadecos.rankr.model;
 
 import br.ufjf.nenc.broadecos.api.model.ParticipantProfile;
+import com.google.common.base.Preconditions;
 import lombok.*;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.Date;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 @Getter
 @Setter
@@ -41,5 +44,15 @@ public class User extends Entity implements Serializable {
     @XmlTransient
     public String getFullName() {
         return participantProfile.getFirstName() + " " + participantProfile.getLastName();
+    }
+
+    public void addPoints(Double points) {
+        checkArgument(points != null);
+        addPoints(points.longValue());
+    }
+
+    public void addPoints(Long points) {
+        checkArgument(points != null);
+        this.points =  points;
     }
 }

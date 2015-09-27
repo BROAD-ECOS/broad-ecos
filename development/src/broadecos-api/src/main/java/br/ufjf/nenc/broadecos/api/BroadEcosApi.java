@@ -9,10 +9,13 @@ import br.ufjf.nenc.broadecos.api.model.PlatformInfo;
 import br.ufjf.nenc.broadecos.api.model.Reference;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BroadEcosApi {
 
-    ParticipantProfile getParticipant();
+    ParticipantProfile getCurrentParticipant();
+
+    Optional<ParticipantProfile> getParticipant(String id);
 
     PlatformInfo getPlatFormInfo();
 
@@ -23,4 +26,5 @@ public interface BroadEcosApi {
     Reference sendExperience(ExperienceStatement statement);
 
     ExperienceResponse getExperience(ExperienceRequest experienceRequest);
+
 }

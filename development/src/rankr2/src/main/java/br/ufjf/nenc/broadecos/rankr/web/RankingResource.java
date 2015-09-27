@@ -1,8 +1,11 @@
 package br.ufjf.nenc.broadecos.rankr.web;
 
+import br.ufjf.nenc.broadecos.api.BroadEcosApiProvider;
 import br.ufjf.nenc.broadecos.api.Context;
+import br.ufjf.nenc.broadecos.rankr.component.ConquestLoader;
 import br.ufjf.nenc.broadecos.rankr.model.CurrentUser;
 import br.ufjf.nenc.broadecos.rankr.model.User;
+import br.ufjf.nenc.broadecos.rankr.provider.BroadEcosProvider;
 import br.ufjf.nenc.broadecos.rankr.service.RankingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,13 +23,19 @@ public class RankingResource {
 
     private final RankingService rankingService;
 
+    private final ConquestLoader conquestLoader;
+
+    private final BroadEcosApiProvider broadEcosApiProvider;
+
     @Autowired
-    public RankingResource(RankingService rankingService) {
+    public RankingResource(RankingService rankingService, ConquestLoader conquestLoader, BroadEcosApiProvider broadEcosApiProvider) {
         this.rankingService = rankingService;
+        this.conquestLoader = conquestLoader;
+        this.broadEcosApiProvider = broadEcosApiProvider;
     }
 
     @RequestMapping(value = "/top", method = GET)
-    public Page<User> top(@RequestParam("page") Integer page, @RequestParam("page") Integer pageSize){
+    public Page<User> top(@RequestParam("page") Integer page, @RequestParam("pageSize") Integer pageSize){
         final PageRequest pageRequest = new PageRequest(page, pageSize);
         return rankingService.getTop(pageRequest);
     }
@@ -34,9 +43,7 @@ public class RankingResource {
     @RequestMapping(value = "/update", method = GET)
     public String update(Context context){
 
-        // 1 - Obter todas as experiências da plataforma do colaborador
-        System.out.println(context);
-
+        conquestLoader.load(broadEcosApiProvider.withContext(context));
 
         return "OK!";
     }

@@ -9,6 +9,7 @@ $api = json_decode(json_encode(simplexml_load_file(dirname(__FILE__).'/ws/broad-
 
 $context = loadTokenInfo($_SERVER);
 
+
 if ($context !== null)  {
 
     // @todo Verificar URI do cliente!
@@ -20,7 +21,9 @@ if ($context !== null)  {
         if (!array_key_exists('method', $resource))
             continue;
 
-        if ($resource['method']==$requestMethod && $resource['path']==$pathInfo ) {
+        $matches = pathMatch($resource, $pathInfo);
+
+        if ($resource['method']==$requestMethod && $matches['match']) {
 
             validateScopes($resource, $context);
 
@@ -29,9 +32,14 @@ if ($context !== null)  {
             $data = null;
             try {
                 $type = $resource['type'];
-                $data = call_user_func_array('broadecos_ws_type_'.$type, array($resource, $context, $params));
+                $data = call_user_func_array('broadecos_ws_type_'.$type, array($resource, $context, $params, $matches['params']));
+
+                if (!is_array($data) && !is_object($data)) {
+                    throw new NotFoundException();
+                }
+
             } catch (BroadEcosAPIException $e) {
-                http_response_code($e->getStatusCode());
+                 http_response_code($e->getStatusCode());
                 die($e->getMessage());
             }
 

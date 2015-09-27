@@ -1,49 +1,58 @@
-<div class="row">
-
-    <div class="col-md-12">
-
-        <div class="panel">
-            <div class="panel-body">
-                <!--/stories-->
-                <div class="row">
-                    <div class="col-md-4 col-sm-4">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12">
-                                <h2> Líderes Globais</h2>
-                                <hr />
-                            </div>
-                        </div>
-                        <div class="row" ng-repeat="profile in topGlobal track by $index">
-                            <div class="col-md-4 col-sm-6 text-center">
-                                <a class="story-title" href="#">
-                                    <img alt="" ng-src="{{profile.picture}}" style="width:100px;height:100px" class="img-circle">
-                                </a>
-                                <span class="badge badge-big"><i class="fa fa-trophy fa fg"></i> 29839 pts</span>
-                            </div>
-                            <div class="col-md-8 col-sm-6">
-                                <h3>#{{$index+1}} {{profile.name}} </h3>
-                                <div class="row">
-                                    <div class="col-xs-9">
-                                        <div class="rating">
-                                            <rating ng-model="profile.rating" max="5" readonly="isReadonly"></rating>
-                                        </div>
-                                        <h4>
-                                            <small style="font-family:courier,'new courier',serif;" class="text-muted">
-                                                {{profile.lastUpdated}}
-                                                <a href="#" class="text-muted">Visualizar Perfil</a>
-                                            </small>
-                                        </h4>
-                                    </div>
-                                    <div class="col-xs-3"></div>
-                                </div>
-                                <br><br>
-                            </div>
-                        </div>
+<h3 class="fg-green text-light margin5">Top 6 Líderes <span class="mif-chevron-right mif-2x" style="vertical-align: top !important;"></span></h3>
+<div class="tile-group no-margin no-padding" style="width: 100%;">
+    <div class="tile tile-wide" style="width: 290px; height: 120px" ng-repeat="top in tops.content track by $index">
+        <div class="tile-content">
+            <div class="row">
+                <div class="padding5" >
+                    <div class="padding5 bg-white">
+                        <img ng-src="{{top.participantProfile.picture}}"
+                              class="padding5" width="64px" style="border-width: 5px; border-color: white;">
                     </div>
                 </div>
-                <hr>
-                <a href="/" class="btn btn-primary pull-right btnNext">Ranking completo <i class="glyphicon glyphicon-chevron-right"></i></a>
+                <div class="colspan9">
+                    <h4 style="  text-overflow: '...'; white-space: nowrap; overflow: hidden;">
+                        #{{$index+1}} - {{top.participantProfile.firstName}} {{top.participantProfile.lastName}}
+                    </h4>
+                    <div class="rating static" data-role="rating" data-show-score="false" data-stars="5" data-value="4"  data-static="true">
+                        <span class="star on"></span>
+                        <span class="star on"></span>
+                        <span class="star on"></span>
+                        <span class="star on"></span>
+                        <span class="star"></span>
+                    </div><br/>
+                    <span class="tag success"><strong># Pontos</strong> {{top.points}}</span>
+                    <span class="tag info"><strong># Conquistas</strong> x</span>
+
+                </div>
             </div>
         </div>
     </div>
 </div>
+<button class="button primary" style="float:right">Ver todos <span class="mif-chevron-right"></span></button>
+<div style="clear:both;" />
+<br />
+<br />
+<h3 class="fg-orange text-light margin5">Últimas 6 conquistas <span class="mif-chevron-right mif-2x" style="vertical-align: top !important;"></span></h3>
+<div class="tile-group no-margin no-padding" style="width: 100%;">
+    <div class="tile tile-wide" style="width: 290px; height: 120px" ng-repeat="conquest in conquests.content">
+        <div class="tile-content">
+            <div class="row">
+                <div class="padding5" >
+                    <div class="padding5 bg-white">
+                        <img ng-src="{{conquest.user.participantProfile.picture}}"
+                             class="padding5" width="64px" style="border-width: 5px; border-color: white;">
+                    </div>
+                </div>
+                <div class="colspan9">
+                    <h5>
+                        {{conquest.title}}
+                    </h5>
+                    <span class="tag success"><strong>Pontos obtidos:</strong> {{conquest.points}}</span>
+                    <span class="tag info"><strong>Pontos obtidos:</strong> {{conquest.points}}</span>
+                    {{fromNow(conquest.created)}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button class="button primary" style="float:right">Ver todos <span class="mif-chevron-right"></span></button>

@@ -2,31 +2,13 @@
 
 (function() {
     var app = angular.module('rankr');
-    app.controller('IndexCtrl', ['$scope', '$location', 'broadcontext', function ($scope, broadcontext, $location) {
+    app.controller('IndexCtrl', ['$scope', 'Ranking', 'Conquest', '$moment', function ($scope, Ranking, Conquest, $moment) {
 
-        $scope.topGlobal = [
-            {
-                name: "Jhon Doe",
-                picture: "http://api.randomuser.me/portraits/thumb/men/58.jpg",
-                points: 5443,
-                rating: 4,
-                lastUpdated: new Date()
-            },
-            {
-                name: "Jhon Doe",
-                picture: "http://api.randomuser.me/portraits/thumb/men/58.jpg",
-                points: 5443,
-                rating: 4,
-                lastUpdated: new Date()
-            },
-            {
-                name: "Jhon Doe",
-                picture: "http://api.randomuser.me/portraits/thumb/men/58.jpg",
-                points: 5443,
-                rating: 4,
-                lastUpdated: new Date()
-            }
-        ];
+    $scope.tops = Ranking.get({id: 'top', 'page':0, 'pageSize':5});
+
+    $scope.conquests = Conquest.get({'page':0, 'pageSize':5});
+
+    $scope.fromNow = moment.fromNow;
 
     }]);
 })();

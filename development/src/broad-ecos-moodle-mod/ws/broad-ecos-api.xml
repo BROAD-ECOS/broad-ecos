@@ -41,6 +41,45 @@
     </resourse>
     <resourse>
         <method>GET</method>
+        <path>/participants/{id}</path>
+        <type>platform_query</type>
+        <required-scopes>
+            <required-scope>platform.participants</required-scope>
+            <required-scope/>
+        </required-scopes>
+        <parameters>
+            <param>
+                <name>id</name>
+                <required>false</required>
+                <default>1=1</default>
+            </param>
+            <param />
+        </parameters>
+        <query><![CDATA[
+            select
+                u.id,
+                u.firstname as `firstName`,
+                u.lastname  as `lastName`,
+                CONCAT(
+                    '{{context.baseUrl}}{{context.baseImagePath}}','/',
+                    f.contextId,'/',
+                    f.component,'/',
+                    f.filearea,
+                    f.filepath,
+                    f.filename) as 'picture',
+                u.lang as 'locale'
+
+            from
+                {user} u
+            left join
+                {files} f on f.id = u.picture AND f.filename like 'f1%'
+            where
+                u.id={{pathparam.id}}
+        ]]></query>
+        <isarray>false</isarray>
+    </resourse>
+    <resourse>
+        <method>GET</method>
         <path>/platform-info</path>
         <type>platform_query</type>
         <required-scopes>

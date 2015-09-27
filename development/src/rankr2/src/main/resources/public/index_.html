@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="rankr">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>Rankr</title>
+		<meta name="generator" content="Bootply" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+		<!--[if lt IE 9]>
+			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link href="css/styles.css" rel="stylesheet">
+	</head>
+	<body>
+<div id="masthead">
+  <div ng-controller="mainCtrl">
+  </div>
+
+  <div class="container" ng-controller="profileHeaderCtrl">
+    <div class="row headerrow">
+      <div class="col-md-2">
+          <img src="img/header2.png" />
+      </div>
+      <div class="col-md-5">
+          <h1> Rankr
+          <p class="lead">Quadro de Líderes</p>
+        </h1>
+      </div>
+      <div class="col-md-5">
+        <div class="well well-lg"> 
+          <div class="row">
+            <div class="col-sm-2">
+                <br />
+                <span style="font-size: 4em">#1</span>
+                <span class="badge badge-big"><i class="fa fa-trophy fa fg"></i> 29839 pts</span>
+            </div>
+            <div class="col-sm-2">
+                <br />
+                <img ng-src="{{user.participantProfile.picture}}" class="img-circle" height="64px" data-holder-rendered="true" />
+            </div>
+            <div class="col-sm-8">
+                <h3>{{user.fullName}} </h3>
+                <div class="row">
+                    <div class="col-xs-9">
+                        <div class="rating">
+                            <rating ng-model="user.rating" max="5" readonly="isReadonly"></rating>
+                        </div>
+
+                        <h4>
+                            <small style="font-family:courier,'new courier',serif; ">
+                                <a href="#" style="color: white;">Meu Perfil</a>
+                            </small>
+                        </h4>
+                    </div>
+                    <div class="col-xs-3"></div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="top-spacer"> </div>
+      </div>
+    </div> 
+  </div>
+  
+</div>
+
+
+<div class="container">
+    <ng-view />
+</div>
+                                                
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <ul class="list-inline">
+          <li><i class="icon-facebook icon-2x"></i></li>
+          <li><i class="icon-twitter icon-2x"></i></li>
+          <li><i class="icon-google-plus icon-2x"></i></li>
+          <li><i class="icon-pinterest icon-2x"></i></li>
+        </ul>
+        
+      </div>
+      <div class="col-sm-6">
+          <p class="pull-right">Built with <i class="icon-heart-empty"></i> at <a href="http://www.bootply.com">Bootply</a></p>      
+      </div>
+    </div>
+  </div>
+</footer>
+	<!-- script references -->
+
+    <!-- Libs-->
+    <script src="app/lib/jquery.min.js"></script>
+    <script src="app/lib/bootstrap.min.js"></script>
+    <script src="app/lib/ie10-viewport-bug-workaround.js"></script>
+    <script src="app/lib/ripples.min.js"></script>
+    <script src="app/lib/material.min.js"></script>
+    <script src="app/lib/moment-with-locales.min.js"></script>
+    <script src="app/lib/underscore-min.js"></script>
+
+
+    <!-- Angular -->
+    <script src="app/lib/angular.js"></script>
+    <script src="app/lib/angular-route.js"></script>
+    <script src="app/lib/angular-resource.js"></script>
+    <script src="app/lib/angular-cookies.js"></script>
+    <script src="app/lib/angular-local-storage.js"></script>
+    <script src="app/lib/angular-sanitize.js"></script>
+    <script src="app/lib/ui-bootstrap-tpls-0.13.3.js"></script>
+
+    <!-- App -->
+    <script src="app/app.js"></script>
+    <script src="app/cntrl/indexCtrl.js"></script>
+    <script src="app/cntrl/profileCtrl.js"></script>
+    <script src="app/resource/user.js"></script>
+    <script src="app/resource/notification.js"></script>
+
+    <script src="app/service/broad.js"></script>
+    <script src="app/service/broadEcosService.js"></script>
+    <script src="app/service/moment.js"></script>
+
+    <script src="app/service/mainCtrl.js"></script>
+    <script src="app/cntrl/profileheaderCtrl.js"></script>
+
+    <script src="app/interceptor/broadEcosContextInterceptor.js"></script>
+
+
+	</body>
+</html>

@@ -51,6 +51,26 @@ abstract class BroadEcosAPIException extends Exception {
     }
 }
 
+class ForbiddenException extends BroadEcosAPIException {
+
+    function __construct() {
+
+        parent::__construct(403, 'FORBIDDEN.');
+
+    }
+}
+
+
+class NotFoundException extends BroadEcosAPIException {
+
+    function __construct() {
+
+        parent::__construct(404, 'NOT FOUND.');
+
+    }
+}
+
+
 class PreconditionsException extends BroadEcosAPIException {
 
     function __construct() {
@@ -59,14 +79,9 @@ class PreconditionsException extends BroadEcosAPIException {
 
     }
 }
-class ForbiddenException extends BroadEcosAPIException {
 
-    function __construct() {
 
-        parent::__construct(403, 'FORBIDDEN.');
-
-    }
-}class UnprocessableEntityException extends BroadEcosAPIException {
+class UnprocessableEntityException extends BroadEcosAPIException {
 
     function __construct() {
 
@@ -151,6 +166,37 @@ function validateScopes($resource, $context)
     }
 }
 
+function pathMatch($resource, $pathInfo)
+{
+    $match = array( 'match' => true, 'params'=>array());
+
+    if ($pathInfo[strlen($pathInfo)-1] == '/') {
+        $pathInfo = substr(0, strlen($pathInfo)-2);
+    }
+
+    $resourcePathParts = explode('/', $resource['path']);
+    $pathInfoParts = explode('/', $pathInfo);
+
+    if (count($resourcePathParts) == count($pathInfoParts)) {
+        for ($i=0; $i<count($resourcePathParts); $i++) {
+            if (strpos($resourcePathParts[$i], '{') !== false) {
+                $key = str_replace('{','', str_replace('}', '', $resourcePathParts[$i]));
+                $match['params'][$key] = $pathInfoParts[$i];
+            } else {
+                if ($resourcePathParts[$i] != $pathInfoParts[$i]) {
+                    $match['match'] = false;
+                    break;
+                }
+            }
+        }
+    } else {
+        $match['match'] = false;
+    }
+
+    return $match;
+}
+
+
 function getParameters($resource, $request)
 {
     $params = array();
@@ -176,7 +222,7 @@ function getParameters($resource, $request)
 
 
 
-function broadecos_ws_type_platform_query($resource, $context, $params){
+function broadecos_ws_type_platform_query($resource, $context, $params, $pathParams){
     global $DB;
 
     $queryResult = null;
@@ -193,17 +239,20 @@ function broadecos_ws_type_platform_query($resource, $context, $params){
             $query = str_replace("{{context.$param}}", $value, $query);
         }
 
-        preg_match_all('/{{(.*?)}}/', $query, $matches);
-
-        if (empty($matches[1])) {
-            if ($resource['isarray'] === 'true') {
-                $queryResult = array_values($DB->get_records_sql($query));
-            } else {
-                $queryResult = $DB->get_record_sql($query);
-            }
-        } else {
-            throw new UnprocessableEntityException();
+        foreach ($pathParams as $param => $value) {
+            $query = str_replace("{{pathparam.$param}}", $value, $query);
         }
+
+        checkUnmetParams($query);
+
+        if ($resource['isarray'] === 'true') {
+            $queryResult = array_values($DB->get_records_sql($query));
+        } else {
+            $queryResult = $DB->get_record_sql($query);
+
+
+        }
+
     } else {
         throw new PreconditionsException();
     }
@@ -211,7 +260,16 @@ function broadecos_ws_type_platform_query($resource, $context, $params){
     return $queryResult;
 }
 
-function broadecos_ws_type_lrs_statement_post($resource, $context, $params){
+
+function checkUnmetParams($query)
+{
+    preg_match_all('/{{(.*?)}}/', $query, $matches);
+    if (!empty($matches[1])) {
+        throw new UnprocessableEntityException();
+    }
+}
+
+function broadecos_ws_type_lrs_statement_post($resource, $context, $params, $pathParams){
 
     $content = file_get_contents('php://input');
     $url = 'http://learninglocker/data/xAPI/statements';
@@ -230,7 +288,7 @@ function broadecos_ws_type_lrs_statement_post($resource, $context, $params){
     return array("id" => $result[0]);
 }
 
-function broadecos_ws_type_lrs_statement_get($resource, $context, $params){
+function broadecos_ws_type_lrs_statement_get($resource, $context, $params, $pathParams){
 
     $url = 'http://learninglocker/data/xAPI/statements?'.$_SERVER['QUERY_STRING'];
 
@@ -247,7 +305,7 @@ function broadecos_ws_type_lrs_statement_get($resource, $context, $params){
     return json_decode(file_get_contents($url, false, stream_context_create($options)), true);
 }
 
-function broadecos_ws_type_authorize($resource, $context, $params){
+function broadecos_ws_type_authorize($resource, $context, $params, $pathParams){
     global $DB;
 
     if ($params['response_type']!=='code') {
@@ -347,7 +405,7 @@ function checkOfflineAccessAllowed($scopes)
     }
 }
 
-function broadecos_ws_type_token($resource, $context, $params){
+function broadecos_ws_type_token($resource, $context, $params, $pathParams){
     global $DB;
     $data = array();
 

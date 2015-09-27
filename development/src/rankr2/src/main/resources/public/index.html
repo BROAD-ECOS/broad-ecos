@@ -1,141 +1,173 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="rankr">
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<meta charset="utf-8">
-		<title>Rankr</title>
-		<meta name="generator" content="Bootply" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link href="css/bootstrap.min.css" rel="stylesheet">
+<html  ng-app="rankr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description"
+          content="Metro, a sleek, intuitive, and powerful framework for faster and easier web development for Windows Metro Style.">
+    <meta name="keywords" content="HTML, CSS, JS, JavaScript, framework, metro, front-end, frontend, web development">
+    <meta name="author" content="Sergey Pimenov and Metro UI CSS contributors">
 
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
-		<!--[if lt IE 9]>
-			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-		<link href="css/styles.css" rel="stylesheet">
-	</head>
-	<body>
-<div id="masthead">
-  <div ng-controller="mainCtrl">
-  </div>
+    <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico'/>
 
-  <div class="container" ng-controller="profileHeaderCtrl">
-    <div class="row headerrow">
-      <div class="col-md-2">
-          <img src="img/header2.png" />
-      </div>
-      <div class="col-md-5">
-          <h1> Rankr
-          <p class="lead">Quadro de Líderes</p>
-        </h1>
-      </div>
-      <div class="col-md-5">
-        <div class="well well-lg"> 
-          <div class="row">
-            <div class="col-sm-2">
-                <br />
-                <span style="font-size: 4em">#1</span>
-                <span class="badge badge-big"><i class="fa fa-trophy fa fg"></i> 29839 pts</span>
-            </div>
-            <div class="col-sm-2">
-                <br />
-                <img ng-src="{{user.participantProfile.picture}}" class="img-circle" height="64px" data-holder-rendered="true" />
-            </div>
-            <div class="col-sm-8">
-                <h3>{{user.fullName}} </h3>
-                <div class="row">
-                    <div class="col-xs-9">
-                        <div class="rating">
-                            <rating ng-model="user.rating" max="5" readonly="isReadonly"></rating>
-                        </div>
+    <title>Rankr2 :: Quadro de Líderes</title>
 
-                        <h4>
-                            <small style="font-family:courier,'new courier',serif; ">
-                                <a href="#" style="color: white;">Meu Perfil</a>
-                            </small>
-                        </h4>
-                    </div>
-                    <div class="col-xs-3"></div>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> 
-  </div>
-  
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="top-spacer"> </div>
-      </div>
-    </div> 
-  </div>
-  
+    <link href="css/metro.css" rel="stylesheet">
+    <link href="css/metro-icons.css" rel="stylesheet">
+    <link href="css/metro-responsive.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/metro.js"></script>
+    <script src="js/ga.js"></script>
+
+</head>
+<body>
+<div ng-controller="mainCtrl">
 </div>
-
 
 <div class="container">
-    <ng-view />
-</div>
-                                                
+    <header class="margin20 no-margin-left no-margin-right">
+        <div class="clear-float">
+            <div class="place-right">
+                <form>
+                    <div class="input-control text margin20" style="width: 300px">
+                        <input type="text" name="q" placeholder="Search...">
+                        <button class="button"><span class="mif-search"></span></button>
+                    </div>
+                </form>
+            </div>
+            <a class="place-left" href="#" title="">
+                <h1 style="font-size: 4em">Rankr</h1>
+            </a>
+        </div>
 
-<footer>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6">
-        <ul class="list-inline">
-          <li><i class="icon-facebook icon-2x"></i></li>
-          <li><i class="icon-twitter icon-2x"></i></li>
-          <li><i class="icon-google-plus icon-2x"></i></li>
-          <li><i class="icon-pinterest icon-2x"></i></li>
-        </ul>
-        
-      </div>
-      <div class="col-sm-6">
-          <p class="pull-right">Built with <i class="icon-heart-empty"></i> at <a href="http://www.bootply.com">Bootply</a></p>      
-      </div>
+        <div class="main-menu-wrapper">
+            <ul class="horizontal-menu" style="margin-left: -20px">
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Ranking</a></li>
+                <li><a href="#">Últimas atualizações</a></li>
+                <li class="place-right">
+                    <a href="#" class="dropdown-toggle">Meu Perfil</a>
+                    <ul class="d-menu place-right" data-role="dropdown">
+                        <li><a href="#">Minhas Conquistas</a></li>
+                        <li><a href="#">Preferências</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <hr />
+    <div class="main-content clear-float">
+        <div class="flex-grid ">
+            <div class="row">
+                <div class="cell colspan2">
+                    <div class="tile-large bg-blue tile-super-y ol-transparent"  ng-controller="profileHeaderCtrl">
+                        <div class="tile-content">
+                            <div class="brand padding10">
+                                <h4 class="fg-white"><span class="mif-user"></span> Meu Perfil</h4>
+                                <hr />
+                                <div style="text-align: center">
+                                    <img  ng-src="{{user.participantProfile.picture}}"
+                                          width="100px" style="border-width: 5px; border-color: white;">
+
+                                    <h2 class="fg-white">#1 - {{user.fullName}}</h2>
+                                </div>
+                                <hr/>
+                                <div class="row">
+                                    <div class="cell colspan12">
+                                        <table class="table fg-white" id="main_table_demo">
+                                            <tbody>
+                                            <tr>
+                                                <td>Pontos</td>
+                                                <td>121212</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Conquistas</td>
+                                                <td>2323</td>
+                                            </tr>
+                                            <tr>
+                                                <td># Ranking</td>
+                                                <td>2323</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td># Curso</td>
+                                                <td>2323</td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>Principal Serviço</td>
+                                                <td>2323</td>
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+
+                                        <hr/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cell colspan9">
+                    <ng-view />
+                </div>
+
+            </div>
+        </div>
+        <hr/>
+        <footer>
+            <div class="bottom-menu-wrapper">
+                <ul class="horizontal-menu compact">
+                    <li><a>&copy; 2015 Rankr - nEnc - PGCC - UFJF</a></li>
+                </ul>
+            </div>
+        </footer>
     </div>
-  </div>
-</footer>
-	<!-- script references -->
+</div>
 
-    <!-- Libs-->
-    <script src="app/lib/jquery.min.js"></script>
-    <script src="app/lib/bootstrap.min.js"></script>
-    <script src="app/lib/ie10-viewport-bug-workaround.js"></script>
-    <script src="app/lib/ripples.min.js"></script>
-    <script src="app/lib/material.min.js"></script>
-    <script src="app/lib/moment-with-locales.min.js"></script>
-    <script src="app/lib/underscore-min.js"></script>
+<!-- script references -->
 
-
-    <!-- Angular -->
-    <script src="app/lib/angular.js"></script>
-    <script src="app/lib/angular-route.js"></script>
-    <script src="app/lib/angular-resource.js"></script>
-    <script src="app/lib/angular-cookies.js"></script>
-    <script src="app/lib/angular-local-storage.js"></script>
-    <script src="app/lib/angular-sanitize.js"></script>
-    <script src="app/lib/ui-bootstrap-tpls-0.13.3.js"></script>
-
-    <!-- App -->
-    <script src="app/app.js"></script>
-    <script src="app/cntrl/indexCtrl.js"></script>
-    <script src="app/cntrl/profileCtrl.js"></script>
-    <script src="app/resource/user.js"></script>
-    <script src="app/resource/notification.js"></script>
-
-    <script src="app/service/broad.js"></script>
-    <script src="app/service/broadEcosService.js"></script>
-    <script src="app/service/moment.js"></script>
-
-    <script src="app/service/mainCtrl.js"></script>
-    <script src="app/service/profileheaderCtrl.js"></script>
-
-    <script src="app/interceptor/broadEcosContextInterceptor.js"></script>
+<!-- Libs-->
+<script src="app/lib/jquery.min.js"></script>
+<script src="app/lib/bootstrap.min.js"></script>
+<script src="app/lib/ie10-viewport-bug-workaround.js"></script>
+<script src="app/lib/ripples.min.js"></script>
+<script src="app/lib/material.min.js"></script>
+<script src="app/lib/moment-with-locales.min.js"></script>
+<script src="app/lib/underscore-min.js"></script>
 
 
-	</body>
+<!-- Angular -->
+<script src="app/lib/angular.js"></script>
+<script src="app/lib/angular-route.js"></script>
+<script src="app/lib/angular-resource.js"></script>
+<script src="app/lib/angular-cookies.js"></script>
+<script src="app/lib/angular-local-storage.js"></script>
+<script src="app/lib/angular-sanitize.js"></script>
+<script src="app/lib/ui-bootstrap-tpls-0.13.3.js"></script>
+
+<!-- App -->
+<script src="app/app.js"></script>
+<script src="app/cntrl/indexCtrl.js"></script>
+<script src="app/cntrl/profileCtrl.js"></script>
+<script src="app/resource/user.js"></script>
+<script src="app/resource/notification.js"></script>
+<script src="app/resource/ranking.js"></script>
+<script src="app/resource/conquest.js"></script>
+
+<script src="app/service/broad.js"></script>
+<script src="app/service/broadEcosService.js"></script>
+<script src="app/service/moment.js"></script>
+
+<script src="app/service/mainCtrl.js"></script>
+<script src="app/cntrl/profileheaderCtrl.js"></script>
+
+<script src="app/interceptor/broadEcosContextInterceptor.js"></script>
+</body>
 </html>

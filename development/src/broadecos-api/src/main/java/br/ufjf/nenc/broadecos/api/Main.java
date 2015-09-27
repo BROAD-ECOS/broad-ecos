@@ -4,10 +4,12 @@ import br.ufjf.nenc.broadecos.api.experience.ExperienceRequest;
 import br.ufjf.nenc.broadecos.api.experience.ExperienceResponse;
 import br.ufjf.nenc.broadecos.api.experience.ExperienceStatement;
 import br.ufjf.nenc.broadecos.api.model.Metadata;
+import br.ufjf.nenc.broadecos.api.model.ParticipantProfile;
 import br.ufjf.nenc.broadecos.api.model.Scope;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 public class Main {
 
@@ -35,7 +37,13 @@ public class Main {
 
         BroadEcosApi api = broadEcosApi.withContext(context);
 
-        ExperienceResponse statements = api.getExperience(ExperienceRequest.builder()
+        Optional<ParticipantProfile> profile = api.getParticipant("3");
+
+        System.out.print(profile);
+
+
+
+        /*ExperienceResponse statements = api.getExperience(ExperienceRequest.builder()
                 .verbId(URI.create("http://wordnet-rdf.princeton.edu/wn31/202294200-v"))
                 .build()
         );
@@ -43,7 +51,7 @@ public class Main {
 
         System.out.print(statements);
         System.out.print(statements.getStatements().get(0).getStored());
-        System.out.print(statements.getStatements().get(0).getTimestamp());
+        System.out.print(statements.getStatements().get(0).getTimestamp());*/
 
     }
 }
