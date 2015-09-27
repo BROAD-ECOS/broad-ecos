@@ -1,6 +1,7 @@
 package br.ufjf.nenc.thautology.service;
 
 import br.ufjf.nenc.broadecos.api.BroadEcosApi;
+import br.ufjf.nenc.broadecos.api.BroadEcosApiProvider;
 import br.ufjf.nenc.broadecos.api.Context;
 import br.ufjf.nenc.broadecos.api.model.Course;
 import br.ufjf.nenc.broadecos.api.model.PlatformInfo;
@@ -11,18 +12,18 @@ import org.springframework.stereotype.Service;
 public class BroadService {
 
     @Autowired
-    private final BroadEcosApi broadEcosApi;
+    private final BroadEcosApiProvider broadEcosApiProvider;
 
     @Autowired
-    public BroadService(BroadEcosApi broadEcosApi) {
-        this.broadEcosApi = broadEcosApi;
+    public BroadService(BroadEcosApiProvider broadEcosApiProvider) {
+        this.broadEcosApiProvider = broadEcosApiProvider;
     }
 
     public PlatformInfo getPlatformInfo(Context context){
-        return broadEcosApi.withContext(context).getPlatFormInfo();
+        return broadEcosApiProvider.withContext(context).getPlatFormInfo();
     }
 
     public Course getCurrentCourse(Context context) {
-        return broadEcosApi.withContext(context).getCurrentCourse();
+        return broadEcosApiProvider.withContext(context).getCurrentCourse();
     }
 }

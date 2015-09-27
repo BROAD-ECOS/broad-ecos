@@ -1,6 +1,7 @@
 package br.ufjf.nenc.thautology.service;
 
 import br.ufjf.nenc.broadecos.api.BroadEcosApi;
+import br.ufjf.nenc.broadecos.api.BroadEcosApiProvider;
 import br.ufjf.nenc.broadecos.api.model.Course;
 import br.ufjf.nenc.broadecos.api.model.ParticipantProfile;
 import br.ufjf.nenc.thautology.model.Classmate;
@@ -24,7 +25,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 @Log4j
 public class ClassmateService {
 
-    private final BroadEcosApi broadEcosApi;
+    private final BroadEcosApiProvider broadEcosApiProvider;
 
     private final ClassmateRepository classmateRepository;
 
@@ -33,8 +34,8 @@ public class ClassmateService {
     private final CourseService courseService;
 
     @Autowired
-    public ClassmateService(BroadEcosApi broadEcosApi, ClassmateRepository classmateRepository, UserService userService, CourseService courseService) {
-        this.broadEcosApi = broadEcosApi;
+    public ClassmateService(BroadEcosApiProvider broadEcosApiProvider, ClassmateRepository classmateRepository, UserService userService, CourseService courseService) {
+        this.broadEcosApiProvider = broadEcosApiProvider;
         this.classmateRepository = classmateRepository;
         this.userService = userService;
         this.courseService = courseService;
@@ -74,7 +75,7 @@ public class ClassmateService {
     }
 
     private List<ParticipantProfile> getCurrentCourseParticipants(CurrentUser user) {
-        return broadEcosApi.withContext(user.getContext()).getCurrentCourseParticipants();
+        return broadEcosApiProvider.withContext(user.getContext()).getCurrentCourseParticipants();
     }
 
 }

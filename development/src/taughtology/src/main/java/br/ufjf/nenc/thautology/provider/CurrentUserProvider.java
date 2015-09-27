@@ -1,6 +1,7 @@
 package br.ufjf.nenc.thautology.provider;
 
 import br.ufjf.nenc.broadecos.api.BroadEcosApi;
+import br.ufjf.nenc.broadecos.api.BroadEcosApiProvider;
 import br.ufjf.nenc.broadecos.api.Context;
 import br.ufjf.nenc.broadecos.api.model.ParticipantProfile;
 import br.ufjf.nenc.thautology.model.CurrentUser;
@@ -12,21 +13,21 @@ import org.springframework.stereotype.Component;
 public class CurrentUserProvider {
 
     @Autowired
-    private final BroadEcosApi broadEcosApi;
+    private final BroadEcosApiProvider broadEcosApiProvider;
 
     @Autowired
     private final UserService userService;
 
     @Autowired
-    public CurrentUserProvider(BroadEcosApi broadEcosApi, UserService userService) {
-        this.broadEcosApi = broadEcosApi;
+    public CurrentUserProvider(BroadEcosApiProvider broadEcosApiProvider, UserService userService) {
+        this.broadEcosApiProvider = broadEcosApiProvider;
         this.userService = userService;
     }
 
     // @Cacheable(cacheResolver = "TOKEN_CACHE")
     public CurrentUser currentUser(Context context){
 
-        ParticipantProfile profile = broadEcosApi
+        ParticipantProfile profile = broadEcosApiProvider
                 .withContext(context)
                 .getParticipant();
 

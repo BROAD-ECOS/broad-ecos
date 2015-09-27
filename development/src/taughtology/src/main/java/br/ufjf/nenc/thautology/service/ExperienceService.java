@@ -1,6 +1,7 @@
 package br.ufjf.nenc.thautology.service;
 
 import br.ufjf.nenc.broadecos.api.BroadEcosApi;
+import br.ufjf.nenc.broadecos.api.BroadEcosApiProvider;
 import br.ufjf.nenc.broadecos.api.Context;
 import br.ufjf.nenc.broadecos.api.experience.ExperienceStatement;
 import br.ufjf.nenc.broadecos.api.model.Reference;
@@ -21,11 +22,11 @@ import java.util.Optional;
 @Service
 public class ExperienceService {
 
-    private final BroadEcosApi broadEcosApi;
+    private final BroadEcosApiProvider broadEcosApiProvider;
 
     @Autowired
-    public ExperienceService(BroadEcosApi broadEcosApi) {
-        this.broadEcosApi = broadEcosApi;
+    public ExperienceService(BroadEcosApiProvider broadEcosApiProvider) {
+        this.broadEcosApiProvider = broadEcosApiProvider;
     }
 
     public Optional<Reference> sendAchievementExperienced(AnswerAchievement achievement, Context context) {
@@ -66,7 +67,7 @@ public class ExperienceService {
 
     public Reference send(ExperienceStatement statement, Context context) {
         log.info("Experience Statement: [" + statement + "], context: [" + context + "]");
-        return broadEcosApi.withContext(context)
+        return broadEcosApiProvider.withContext(context)
                 .sendExperience(statement);
     }
 }
