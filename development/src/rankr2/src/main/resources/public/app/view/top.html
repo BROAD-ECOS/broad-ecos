@@ -1,0 +1,31 @@
+<h3 class="fg-green text-light margin5">Quadro de Líderes</h3>
+<a href="#/index" class="button primary" style="float:right"><span class="mif-chevron-left"></span> Voltar</a>
+<div class="tile-group no-margin no-padding" style="width: 100%;">
+    <div class="tile tile-wide" style="width: 290px; height: 120px" ng-repeat="top in tops.content track by $index">
+        <div class="tile-content">
+            <div class="row">
+                <div class="padding5" >
+                    <div class="padding5 bg-white">
+                        <img ng-src="{{top.participantProfile.picture}}"
+                              class="padding5" width="64px" style="border-width: 5px; border-color: white;">
+                    </div>
+                </div>
+                <div class="colspan9">
+                    <h4 style="  text-overflow: '...'; white-space: nowrap; overflow: hidden;">
+                        #{{$index+1}} - {{top.participantProfile.firstName}} {{top.participantProfile.lastName}}
+                    </h4>
+                    <div class="rating static" data-role="rating" data-show-score="false" data-stars="5" data-value="4"  data-static="true">
+                        <span class="star on"></span>
+                        <span class="star on"></span>
+                        <span class="star on"></span>
+                        <span class="star on"></span>
+                        <span class="star"></span>
+                    </div><br/>
+                    <span class="tag success"><strong># Pontos</strong> {{top.points}}</span>
+                    <span class="tag info"><strong># Conquistas</strong> {{top.conquestsCount.count}}</span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

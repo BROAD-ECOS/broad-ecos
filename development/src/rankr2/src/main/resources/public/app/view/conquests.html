@@ -1,0 +1,23 @@
+<h3 class="fg-orange text-light margin5">Últimas atualizações</h3>
+<a href="#/index" class="button primary" style="float:right"><span class="mif-chevron-left"></span> Voltar</a>
+<div class="tile-group no-margin no-padding" style="width: 100%;">
+    <div class="tile tile-wide" style="width: 290px; height: 120px" ng-repeat="conquest in conquests.content">
+        <div class="tile-content">
+            <div class="row">
+                <div class="padding5" >
+                    <div class="padding5 bg-white">
+                        <img ng-src="{{conquest.user.participantProfile.picture}}"
+                             class="padding5" width="64px" style="border-width: 5px; border-color: white;">
+                    </div>
+                </div>
+                <div class="colspan9">
+                    <h5>
+                        {{conquest.title}}
+                    </h5>
+                    <span class="tag info"><strong>Pontos obtidos:</strong> {{conquest.points}}</span>
+                    {{fromNow(conquest.created)}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

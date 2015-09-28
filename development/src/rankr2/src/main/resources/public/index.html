@@ -39,15 +39,16 @@
                 </form>
             </div>
             <a class="place-left" href="#" title="">
-                <h1 style="font-size: 4em">Rankr</h1>
+
+                <h1 style="font-size: 4em"><span class="mif-trophy"></span> Rankr</h1>
             </a>
         </div>
 
         <div class="main-menu-wrapper">
             <ul class="horizontal-menu" style="margin-left: -20px">
-                <li><a href="#">Início</a></li>
-                <li><a href="#">Ranking</a></li>
-                <li><a href="#">Últimas atualizações</a></li>
+                <li><a href="#/">Início</a></li>
+                <li><a href="#/top">Ranking</a></li>
+                <li><a href="#/conquests">Últimas atualizações</a></li>
                 <li class="place-right">
                     <a href="#" class="dropdown-toggle">Meu Perfil</a>
                     <ul class="d-menu place-right" data-role="dropdown">
@@ -66,13 +67,20 @@
                     <div class="tile-large bg-blue tile-super-y ol-transparent"  ng-controller="profileHeaderCtrl">
                         <div class="tile-content">
                             <div class="brand padding10">
-                                <h4 class="fg-white"><span class="mif-user"></span> Meu Perfil</h4>
+                                <h4 class="fg-white"><strong><span class="mif-user"></span> Meu Perfil</strong></h4>
                                 <hr />
                                 <div style="text-align: center">
                                     <img  ng-src="{{user.participantProfile.picture}}"
                                           width="100px" style="border-width: 5px; border-color: white;">
 
-                                    <h2 class="fg-white">#1 - {{user.fullName}}</h2>
+                                    <h2 class="fg-white">{{user.fullName}}</h2>
+                                    <div class="rating static large" data-role="rating" data-show-score="false" data-stars="5" data-value="4"  data-static="true">
+                                        <span class="star on"></span>
+                                        <span class="star on"></span>
+                                        <span class="star on"></span>
+                                        <span class="star on"></span>
+                                        <span class="star"></span>
+                                    </div><br/>
                                 </div>
                                 <hr/>
                                 <div class="row">
@@ -80,33 +88,21 @@
                                         <table class="table fg-white" id="main_table_demo">
                                             <tbody>
                                             <tr>
-                                                <td>Pontos</td>
-                                                <td>121212</td>
+                                                <td><strong><span class="mif-medal"></span> Pontos</strong></td>
+                                                <td style="text-align: right">{{user.points}}</td>
                                             </tr>
                                             <tr>
-                                                <td>Conquistas</td>
-                                                <td>2323</td>
+                                                <td><strong><span class="mif-trophy"></span> Conquistas</strong></td>
+                                                <td style="text-align: right">{{conquestsCount.count}}</td>
                                             </tr>
-                                            <tr>
-                                                <td># Ranking</td>
-                                                <td>2323</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td># Curso</td>
-                                                <td>2323</td>
-                                            </tr>
-
-
-                                            <tr>
-                                                <td>Principal Serviço</td>
-                                                <td>2323</td>
-                                            </tr>
-
                                             </tbody>
                                         </table>
 
                                         <hr/>
+
+                                        <p class="fg-white"><span class="mif-library"></span> {{platformInfo.name}}</p>
+                                        <p class="fg-white"><span class="mif-school"></span> {{course.fullName}}</p>
+
                                     </div>
 
                                 </div>
@@ -156,17 +152,21 @@
 <script src="app/app.js"></script>
 <script src="app/cntrl/indexCtrl.js"></script>
 <script src="app/cntrl/profileCtrl.js"></script>
+<script src="app/service/mainCtrl.js"></script>
+<script src="app/cntrl/profileheaderCtrl.js"></script>
+<script src="app/cntrl/topCtrl.js"></script>
+<script src="app/cntrl/conquestsCtrl.js"></script>
+
 <script src="app/resource/user.js"></script>
 <script src="app/resource/notification.js"></script>
 <script src="app/resource/ranking.js"></script>
 <script src="app/resource/conquest.js"></script>
+<script src="app/resource/conquestCount.js"></script>
 
 <script src="app/service/broad.js"></script>
 <script src="app/service/broadEcosService.js"></script>
 <script src="app/service/moment.js"></script>
 
-<script src="app/service/mainCtrl.js"></script>
-<script src="app/cntrl/profileheaderCtrl.js"></script>
 
 <script src="app/interceptor/broadEcosContextInterceptor.js"></script>
 </body>

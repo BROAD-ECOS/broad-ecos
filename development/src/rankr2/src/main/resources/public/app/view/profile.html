@@ -1,60 +1,100 @@
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel">
-            <div class="panel-body" style="padding-top: 0px;">
-                <div class="row user-menu-container square" style="margin-top: 0px;">
-                    <div class="col-md-7 user-details">
-                        <div class="row coralbg white">
-                            <div class="col-md-6 no-pad">
-                                <div class="user-pad">
-                                    <h3>Bem vindo, {{profile.fullName}}</h3>
-                                    <h4 class="white"><i class="fa fa-university fa-fg"></i> Universidade Federal de Juiz de Fora (UFJF)</h4>
-                                    <h4 class="white"><i class="fa fa-twitter"></i> Curso X</h4>
-                                </div>
-                            </div>
-                            <div class="col-md-6 no-pad">
-                                <div class="user-image">
-                                    <img ng-src="{{profile.picture}}" class="img-responsive thumbnail">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row overview">
-                            <div class="col-md-4 user-pad text-center">
-                                <h3>TOTAL</h3>
-                                <h4>2,784</h4>
-                            </div>
-                            <div class="col-md-4 user-pad text-center">
-                                <h3>ÚLTIMOS 7 DIAS</h3>
-                                <h4>456</h4>
-                            </div>
-                            <div class="col-md-4 user-pad text-center">
-                                <h3>ÚLTIMAS 24 HORAS</h3>
-                                <h4>4,901</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <h2>Medalhas</h2>
-                    </div>
-                </div>
+<h3 class="fg-gray text-light margin5">Perfil de {{user.participantProfile.firstName}} {{user.participantProfile.lastName}} <span class="mif-chevron-right mif-2x" style="vertical-align: top !important;"></span></h3>
+<div class="tile-area no-padding" style="height: 350px;">
+    <div class="tile-container bg-grayLighter" style="width: 888px">
+        <div class="tile-large bg-gray" data-role="tile">
+            <div class="brand padding10">
+                <div style="text-align: center">
+                    <img  ng-src="{{user.participantProfile.picture}}"
+                          width="124px" style="border-width: 5px; border-color: white;">
 
-            </div>
-            <div class="row" style="margin-left: 0px; margin-right: 0px;">
-                <div class="col-md-12">
-                    <h2>Conquistas</h2>
-                    <hr />
+                    <h2 class="fg-white">{{user.fullName}}</h2>
+                    <div class="rating static large" data-role="rating" data-show-score="false" data-stars="5" data-value="4"  data-static="true">
+                        <span class="star on"></span>
+                        <span class="star on"></span>
+                        <span class="star on"></span>
+                        <span class="star on"></span>
+                        <span class="star"></span>
+                    </div><br/>
                 </div>
             </div>
-            <div class="row" style="margin-left: 0px; margin-right: 0px;">
-                <div class="col-md-4">
-                    <div class="list-group">
-                        <a href="#" class="list-group-item">
-                            <h4 class="list-group-item-heading">List group item heading</h4>
-                            <p class="list-group-item-text">
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </p>
-                        </a>
+        </div>
+        <div class="tile-wide bg-lightGreen" data-role="tile">
+            <table class="table fg-white" style="font-size: 1.6em" id="main_table_demo">
+                <tbody>
+                <tr>
+                    <td><strong><span class="mif-medal"></span> Pontos</strong></td>
+                    <td style="text-align: right">{{user.points}}</td>
+                </tr>
+                <tr>
+                    <td><strong><span class="mif-trophy"></span> Conquistas</strong></td>
+                    <td style="text-align: right">{{conquestsCount.count}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tile-square bg-yellow" data-role="tile">
+            <div class="tile-content iconic">
+                <span class="icon mif-star-half"></span>
+                <span class="tile-badge bg-black fg-white">4</span>
+                <span class="tile-label"><strong>Estrelas</strong></span>
+            </div>
+        </div>
+        <div class="tile-small bg-grayLight" data-role="tile">
+            <div class="tile-content iconic">
+                <span class="icon mif-dice"></span>
+            </div>
+        </div>
+        <div class="tile-small bg-grayLight" data-role="tile">
+            <div class="tile-content iconic">
+                <span class="icon mif-gamepad"></span>
+            </div>
+        </div>
+
+        <div class="tile-wide bg-red padding10" data-role="tile">
+            <h4 class="fg-white"><strong>Última conquista</strong></h4>
+        </div>
+        <div class="tile-square bg-violet fg-white" data-role="tile">
+            <div class="tile-content iconic">
+                <span class="icon mif-calendar"></span>
+                <span class="tile-label" style="text-align: center"><strong>80 pts esta semana</strong></span>
+            </div>
+        </div>
+        <div class="tile-small bg-grayLight" data-role="tile">
+            <div class="tile-content iconic">
+                <span class="icon mif-tablet"></span>
+            </div>
+        </div>
+        <div class="tile-small bg-grayLight" data-role="tile">
+            <div class="tile-content iconic">
+                <span class="icon mif-chart-dots"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="clear:both;" />
+<h3 class="fg-gray text-light margin5">Conquistas <span class="mif-chevron-right mif-2x" style="vertical-align: top !important;"></span></h3>
+
+<div class="tile-group no-margin no-padding" style="width: 100%;" ng-if="conquests.totalElements==0">
+    <div class="tile tile-wide padding5" style="width: 100%; height: 70px">
+        <h4><span class="mif-notification"></span> Este perfil ainda não tem nenhuma conquista.</h4>
+    </div>
+</div>
+<div class="tile-group no-margin no-padding" style="width: 100%;" ng-if="conquests.totalElements>0">
+    <div class="tile tile-wide" style="width: 290px; height: 120px" ng-repeat="conquest in conquests.content">
+        <div class="tile-content">
+            <div class="row">
+                <div class="padding5" >
+                    <div class="padding5 bg-white">
+                        <img ng-src="{{conquest.user.participantProfile.picture}}"
+                             class="padding5" width="64px" style="border-width: 5px; border-color: white;">
                     </div>
+                </div>
+                <div class="colspan9">
+                    <h5>
+                        {{conquest.title}}
+                    </h5>
+                    <span class="tag info"><strong>Pontos obtidos:</strong> {{conquest.points}}</span>
+                    {{fromNow(conquest.created)}}
                 </div>
             </div>
         </div>

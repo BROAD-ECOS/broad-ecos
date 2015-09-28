@@ -1,7 +1,8 @@
 <h3 class="fg-green text-light margin5">Top 6 Líderes <span class="mif-chevron-right mif-2x" style="vertical-align: top !important;"></span></h3>
+
 <div class="tile-group no-margin no-padding" style="width: 100%;">
-    <div class="tile tile-wide" style="width: 290px; height: 120px" ng-repeat="top in tops.content track by $index">
-        <div class="tile-content">
+    <div class="tile tile-wide" style="width: 290px; height: 120px" ng-repeat="top in tops.content track by $index" >
+        <div class="tile-content" ng-click="go('/profile/'+top.id)">
             <div class="row">
                 <div class="padding5" >
                     <div class="padding5 bg-white">
@@ -21,14 +22,14 @@
                         <span class="star"></span>
                     </div><br/>
                     <span class="tag success"><strong># Pontos</strong> {{top.points}}</span>
-                    <span class="tag info"><strong># Conquistas</strong> x</span>
+                    <span class="tag info"><strong># Conquistas</strong> {{top.conquestsCount.count}}</span>
 
                 </div>
             </div>
         </div>
     </div>
 </div>
-<button class="button primary" style="float:right">Ver todos <span class="mif-chevron-right"></span></button>
+<a href="#/top" class="button primary" style="float:right">Ver todos <span class="mif-chevron-right"></span></a>
 <div style="clear:both;" />
 <br />
 <br />
@@ -47,7 +48,6 @@
                     <h5>
                         {{conquest.title}}
                     </h5>
-                    <span class="tag success"><strong>Pontos obtidos:</strong> {{conquest.points}}</span>
                     <span class="tag info"><strong>Pontos obtidos:</strong> {{conquest.points}}</span>
                     {{fromNow(conquest.created)}}
                 </div>
@@ -55,4 +55,4 @@
         </div>
     </div>
 </div>
-<button class="button primary" style="float:right">Ver todos <span class="mif-chevron-right"></span></button>
+<a href="#/conquests" class="button primary" style="float:right">Ver todas <span class="mif-chevron-right"></span></a>

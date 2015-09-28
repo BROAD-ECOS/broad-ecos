@@ -492,3 +492,5 @@ Error code: dmlreadexception
 Error code: dmlreadexception
 * line 443 of /lib/dml/moodle_database.php: dml_read_exception thrown
 *" while reading upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/mod/broadecosmod/ws.php/me/profile HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2015/09/27 23:54:41 [error] 6#0: *1987 FastCGI sent in stderr: "Unable to open primary script: /var/www/html/index.php (No such file or directory)" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /app/geoip.js HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "j.maxmind.com", referrer: "http://buzzerg.com/362971-summer-id-186328.htm"
+2015/09/27 23:54:43 [error] 6#0: *1987 FastCGI sent in stderr: "Unable to open primary script: /var/www/html/index.php (No such file or directory)" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /app/geoip.js HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "j.maxmind.com", referrer: "http://buzzerg.com/"

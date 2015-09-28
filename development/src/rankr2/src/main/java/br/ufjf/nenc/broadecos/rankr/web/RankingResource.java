@@ -35,7 +35,7 @@ public class RankingResource {
     }
 
     @RequestMapping(value = "/top", method = GET)
-    public Page<User> top(@RequestParam("page") Integer page, @RequestParam("pageSize") Integer pageSize){
+    public Page<User> top(@RequestParam(value = "page", defaultValue = "0") Integer page, @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize){
         final PageRequest pageRequest = new PageRequest(page, pageSize);
         return rankingService.getTop(pageRequest);
     }

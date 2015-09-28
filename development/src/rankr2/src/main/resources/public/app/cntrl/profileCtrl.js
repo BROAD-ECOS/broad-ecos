@@ -2,15 +2,10 @@
 
 (function() {
     var app = angular.module('rankr');
-    app.controller('ProfileCtrl', ['$scope', '$location', 'broadcontext', function ($scope, broadcontext, $location) {
+    app.controller('ProfileCtrl', ['$scope', 'Conquest', 'user', 'ConquestCount', function ($scope, Conquest, user, ConquestCount) {
 
-        $scope.profile = {
-            fullName: "Jhon Doe",
-            picture: "http://api.randomuser.me/portraits/thumb/men/58.jpg",
-            points: 5443,
-            rating: 4,
-            lastUpdated: new Date()
-        };
-
+        $scope.user = user;
+        $scope.conquestsCount = ConquestCount.get({id: user.id});
+        $scope.conquests = Conquest.get({userId:user.id, page:0, pageSize:100})
     }]);
 })();
