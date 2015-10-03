@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper=false)
 @NoArgsConstructor
 public class PlatformCourse extends Entity {
 

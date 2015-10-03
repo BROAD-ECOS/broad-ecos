@@ -42,4 +42,8 @@ public class BroadService {
 
         return platformCourse.orElseGet(platformCourseSupplier);
     }
+
+    public void completeAuthRequest(String platform, String course, String code) {
+        broadEcosApiProvider.completeAuthRequest(platform, course, code);
+    }
 }

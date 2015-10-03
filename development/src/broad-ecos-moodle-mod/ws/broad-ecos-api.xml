@@ -192,11 +192,13 @@
         </required-scopes>
         <parameters>
             <param>
+                <name>since</name>
+                <required>false</required>
+            </param>
+            <param>
                 <name>verb</name>
                 <required>false</required>
-                <default>0</default>
             </param>
-            <param />
         </parameters>
         <query>
 

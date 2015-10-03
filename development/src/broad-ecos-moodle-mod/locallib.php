@@ -102,6 +102,22 @@ function startsWith($haystack, $needle) {
     return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
 }
 
+
+function rest_get($url, $headers=array()) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    $server_output = curl_exec ($ch);
+
+    curl_close ($ch);
+
+    return $server_output;
+}
+
+
 function isAuthPath($serverInfo) {
     return strpos($serverInfo['PATH_INFO'], '/auth/') === 0;
 }
@@ -302,7 +318,14 @@ function broadecos_ws_type_lrs_statement_get($resource, $context, $params, $path
         ),
     );
 
-    return json_decode(file_get_contents($url, false, stream_context_create($options)), true);
+    $headers = array();
+    $headers[] = 'Content-Type: application/json';
+    $headers[] = 'X-Experience-API-Version: 1.0.0';
+    $headers[] = 'Authorization: Basic NDFhMGU2ZDQ1MzQzZjk3NjE3NmRmMmY4ZmVmYzYwMjBlZDhiNDAwYzozMzk3MTBjNzkwM2Q3MzUzNGVhYmI1NTZlNGU3NDllMGZiZDc0N2M1';
+
+    $response = rest_get($url, $headers);
+
+    return json_decode($response, true);
 }
 
 function broadecos_ws_type_authorize($resource, $context, $params, $pathParams){
@@ -427,3 +450,5 @@ function broadecos_ws_type_token($resource, $context, $params, $pathParams){
 
     return $data;
 }
+
+

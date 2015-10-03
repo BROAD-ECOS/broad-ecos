@@ -34,6 +34,7 @@ public class ConquestService {
 
     public Page<Conquest> all(Optional<String> userId, PageRequest pageRequest) {
         final Page<Conquest> conquests;
+
         if (userId.isPresent()) {
             conquests = allById(userId.get(), pageRequest);
         } else {

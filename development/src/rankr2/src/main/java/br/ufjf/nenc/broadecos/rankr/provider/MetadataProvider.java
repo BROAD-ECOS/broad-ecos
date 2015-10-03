@@ -15,6 +15,7 @@ public class MetadataProvider {
                  .name("Rankr")
                  .description("Shows conquest informations.")
                  .entryPoint("http://dev.broadecos:8090/#/index")
+                 .redirectURI("http://dev.broadecos:8090/authorization/code")
                  .scope(Scope.PARTICIPANT_PROFILE)
                  .scope(Scope.COURSES_CURRENT)
                  .scope(Scope.EXPERIENCES_READ)

@@ -13,7 +13,7 @@ import static java.lang.String.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper=false)
 @ToString
 public class Conquest extends Entity{
 

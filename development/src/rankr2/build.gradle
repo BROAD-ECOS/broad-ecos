@@ -39,7 +39,7 @@ repositories {
 
 
 dependencies {
-    compile("br.ufjf.nenc.broadecos:broadecos-api:1.0.4")
+    compile("br.ufjf.nenc.broadecos:broadecos-api:1.0.18")
 
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     compile("org.springframework.boot:spring-boot-starter-web")
