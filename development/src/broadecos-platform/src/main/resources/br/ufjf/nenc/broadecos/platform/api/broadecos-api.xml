@@ -1,0 +1,265 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<api>
+    <resource>
+        <method>GET</method>
+        <path>/me/profile</path>
+        <type>platform_query</type>
+        <required-scopes>
+            <required-scope>participant.profile</required-scope>
+            <required-scope/>
+        </required-scopes>
+        <parameters>
+            <param>
+                <name>id</name>
+                <required>false</required>
+                <default>1=1</default>
+            </param>
+            <param />
+        </parameters>
+        <query><![CDATA[
+            select
+                u.id,
+                u.firstname as `firstName`,
+                u.lastname  as `lastName`,
+                CONCAT(
+                    '{{context.baseUrl}}{{context.baseImagePath}}','/',
+                    f.contextId,'/',
+                    f.component,'/',
+                    f.filearea,
+                    f.filepath,
+                    f.filename) as 'picture',
+                u.lang as 'locale'
+
+            from
+                {user} u
+            left join
+                {files} f on f.id = u.picture AND f.filename like 'f1%'
+            where
+                u.id={{context.participant_id}}
+        ]]></query>
+        <isarray>false</isarray>
+    </resource>
+    <resource>
+        <method>GET</method>
+        <path>/participants/{id}</path>
+        <type>platform_query</type>
+        <required-scopes>
+            <required-scope>platform.participants</required-scope>
+            <required-scope/>
+        </required-scopes>
+        <parameters>
+            <param>
+                <name>id</name>
+                <required>false</required>
+                <default>1=1</default>
+            </param>
+            <param />
+        </parameters>
+        <query><![CDATA[
+            select
+                u.id,
+                u.firstname as `firstName`,
+                u.lastname  as `lastName`,
+                CONCAT(
+                    '{{context.baseUrl}}{{context.baseImagePath}}','/',
+                    f.contextId,'/',
+                    f.component,'/',
+                    f.filearea,
+                    f.filepath,
+                    f.filename) as 'picture',
+                u.lang as 'locale'
+
+            from
+                {user} u
+            left join
+                {files} f on f.id = u.picture AND f.filename like 'f1%'
+            where
+                u.id={{pathparam.id}}
+        ]]></query>
+        <isarray>false</isarray>
+    </resource>
+    <resource>
+        <method>GET</method>
+        <path>/platform-info</path>
+        <type>platform_query</type>
+        <required-scopes>
+            <required-scope/>
+            <required-scope/>
+        </required-scopes>
+        <parameters>
+            <param />
+            <param />
+        </parameters>
+        <query><![CDATA[
+            select
+                '{{context.baseUrl}}' as url,
+                '{{context.platformName}}' as name,
+                '{{context.platformLogo}}' as logo,
+                '{{context.moreInfo}}' as moreInfo
+        ]]></query>
+        <isarray>false</isarray>
+    </resource>
+    <resource>
+        <method>GET</method>
+        <path>/courses/current</path>
+        <type>platform_query</type>
+        <required-scopes>
+            <required-scope>courses.current</required-scope>
+            <required-scope/>
+        </required-scopes>
+        <parameters>
+            <param />
+            <param />
+        </parameters>
+        <query><![CDATA[
+          select
+              id,
+              fullname,
+              shortname,
+              summary,
+              startdate,
+              lang as 'language'
+            from
+              {course}
+            where
+              id = {{context.course_id}}
+
+        ]]></query>
+        <isarray>false</isarray>
+    </resource>
+    <resource>
+        <method>GET</method>
+        <path>/courses/current/participants</path>
+        <type>platform_query</type>
+        <required-scopes>
+            <required-scope>courses.current.participants</required-scope>
+            <required-scope/>
+        </required-scopes>
+        <parameters>
+            <param />
+            <param />
+        </parameters>
+        <query><![CDATA[
+          SELECT
+            u.id,
+            u.firstname as `firstName`,
+            u.lastname  as `lastName`,
+            CONCAT(
+                '{{context.baseUrl}}{{context.baseImagePath}}','/',
+                f.contextId,'/',
+                f.component,'/',
+                f.filearea,
+                f.filepath,
+                f.filename) as 'picture',
+            u.lang as 'locale'
+
+          FROM {user} u
+            JOIN {role_assignments} ra ON u.id = ra.userid
+            JOIN {role} r ON ra.roleid = r.id
+            JOIN {context} c ON ra.contextid = c.id
+            left join {files} f on f.id = u.picture AND f.filename like 'f1%'
+          WHERE c.contextlevel = 50
+            AND c.instanceid = {{context.course_id}}
+            AND r.archetype = "student"
+
+        ]]></query>
+        <isarray>true</isarray>
+    </resource>
+    <resource>
+        <method>POST</method>
+        <path>/experiences</path>
+        <type>lrs_statement_post</type>
+        <required-scopes>
+            <required-scope>experience.write</required-scope>
+            <required-scope/>
+        </required-scopes>
+        <parameters>
+            <param />
+            <param />
+        </parameters>
+        <query>
+
+        </query>
+        <isarray>true</isarray>
+    </resource>
+    <resource>
+        <method>GET</method>
+        <path>/experiences</path>
+        <type>lrs_statement_get</type>
+        <required-scopes>
+            <required-scope>experience.read</required-scope>
+            <required-scope/>
+        </required-scopes>
+        <parameters>
+            <param>
+                <name>since</name>
+                <required>false</required>
+            </param>
+            <param>
+                <name>verb</name>
+                <required>false</required>
+            </param>
+        </parameters>
+        <query>
+
+        </query>
+        <isarray>true</isarray>
+    </resource>
+
+    <resource>
+        <method>GET</method>
+        <path>/auth/authorize</path>
+        <type>authorize</type>
+        <required-scopes>
+            <required-scope/>
+            <required-scope/>
+        </required-scopes>
+        <parameters>
+            <param>
+                <name>client_id</name>
+                <required>true</required>
+            </param>
+            <param>
+                <name>course_id</name>
+                <required>true</required>
+            </param>
+            <param>
+                <name>response_type</name>
+                <required>false</required>
+                <default>code</default>
+            </param>
+            <param>
+                <name>redirect_uri</name>
+                <required>true</required>
+            </param>
+        </parameters>
+        <query />
+        <isarray>true</isarray>
+    </resource>
+
+    <resource>
+        <method>GET</method>
+        <path>/auth/token</path>
+        <type>token</type>
+        <required-scopes>
+            <required-scope/>
+            <required-scope/>
+        </required-scopes>
+        <parameters>
+            <param>
+                <name>code</name>
+                <required>true</required>
+            </param>
+            <param>
+                <name>client_id</name>
+                <required>true</required>
+            </param>
+            <param>
+                <name>course_id</name>
+                <required>true</required>
+            </param>
+        </parameters>
+        <query />
+        <isarray>true</isarray>
+    </resource>
+</api>

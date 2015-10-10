@@ -18,7 +18,7 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot' 
 
 jar {
-    baseName = 'broadecos-platform'broadecos-platform
+    baseName = 'broadecos-platform'
     version = '0.0.1-SNAPSHOT'
 }
 sourceCompatibility = 1.8
@@ -32,10 +32,14 @@ repositories {
 
 
 dependencies {
+///    compile("br.ufjf.nenc.broadecos:broadecos-api:1.0.18")
+    compile('com.javaslang:javaslang:1.2.2')
     compile('org.springframework.boot:spring-boot-starter-jdbc')
     compile('org.projectlombok:lombok')
     compile('org.springframework.boot:spring-boot-starter-ws')
-    testCompile('org.springframework.boot:spring-boot-starter-test') 
+    
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+
 }
 
 dependencyManagement {
