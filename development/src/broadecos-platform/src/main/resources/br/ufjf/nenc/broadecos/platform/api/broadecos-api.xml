@@ -45,15 +45,13 @@
         <type>platform_query</type>
         <required-scopes>
             <required-scope>platform.participants</required-scope>
-            <required-scope/>
         </required-scopes>
         <parameters>
             <param>
                 <name>id</name>
-                <required>false</required>
+                <required>true</required>
                 <default>1=1</default>
             </param>
-            <param />
         </parameters>
         <query><![CDATA[
             select
@@ -70,11 +68,11 @@
                 u.lang as 'locale'
 
             from
-                {user} u
+                mdl_user u
             left join
-                {files} f on f.id = u.picture AND f.filename like 'f1%'
+                mdl_files f on f.id = u.picture AND f.filename like 'f1%'
             where
-                u.id={{pathparam.id}}
+                u.id=:url_id
         ]]></query>
         <isarray>false</isarray>
     </resource>

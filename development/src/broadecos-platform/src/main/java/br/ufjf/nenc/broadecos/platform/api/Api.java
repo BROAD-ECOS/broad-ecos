@@ -14,6 +14,6 @@ import java.util.List;
 public class Api {
 
     @XmlElement( name="resource" )
-    private List<Resource> requiredScope;
+    private List<Resource> resources;
 
 }

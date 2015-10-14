@@ -1,6 +1,12 @@
 package br.ufjf.nenc.broadecos.platform.excp;
 
+import javaslang.control.Try;
+
 public class PlatformException extends RuntimeException {
+
+    public static <T> T reThrow(Throwable t) {
+        throw new PlatformException(t);
+    }
 
     public PlatformException() {
     }

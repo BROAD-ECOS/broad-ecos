@@ -12,7 +12,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Data
 public class Param {
     private String name;
+
     private Boolean required;
+
     @XmlElement( name="default" )
     private String defaultValue;
 }

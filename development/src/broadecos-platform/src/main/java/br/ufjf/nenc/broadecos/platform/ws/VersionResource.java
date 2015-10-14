@@ -19,7 +19,6 @@ public class VersionResource {
         this.processor = processor;
     }
 
-
     @RequestMapping("/api")
     public Api getApi(){
         InputStream inputStream = getClass().getResourceAsStream("/br/ufjf/nenc/broadecos/platform/api/broadecos-api.xml");
