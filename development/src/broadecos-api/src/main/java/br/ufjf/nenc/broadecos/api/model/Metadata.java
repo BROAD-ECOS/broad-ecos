@@ -21,17 +21,25 @@ public class Metadata {
 
     private String description;
 
+    private String version;
+
     private String entryPoint;
+
+    private String authURI;
 
     private String redirectURI;
 
+    private Icon icon;
+
+    private Maintainer maintainer;
+
+    private String moreInfo;
+
     @Singular
-    @JsonIgnore
-    private Set<Scope> scopes;
+    private Set<RequestedScope> scopes;
 
-    @JsonProperty
-    public Set<String> getScopes(){
-        return scopes.stream().map(Scope::scope).collect(Collectors.toSet());
-    }
+    @Singular
+    private Set<RequestedExtensions> extensions;
 
+    private Object lom;
 }

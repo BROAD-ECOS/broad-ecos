@@ -1,14 +1,10 @@
 package br.ufjf.nenc.broadecos.api;
 
-import br.ufjf.nenc.broadecos.api.experience.ExperienceRequest;
-import br.ufjf.nenc.broadecos.api.experience.ExperienceResponse;
-import br.ufjf.nenc.broadecos.api.experience.ExperienceStatement;
 import br.ufjf.nenc.broadecos.api.model.Metadata;
 import br.ufjf.nenc.broadecos.api.model.ParticipantProfile;
+import br.ufjf.nenc.broadecos.api.model.RequestedScope;
 import br.ufjf.nenc.broadecos.api.model.Scope;
 
-import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 public class Main {
@@ -21,10 +17,7 @@ public class Main {
                 .description("Shows conquest informations.")
                 .entryPoint("http://dev.broadecos:8090/#/index")
                 .redirectURI("http://dev.broadecos:8090/auth/code")
-                .scope(Scope.PARTICIPANT_PROFILE)
-                .scope(Scope.COURSES_CURRENT)
-                .scope(Scope.EXPERIENCES_READ)
-                .scope(Scope.OFFLINE_ACCESS)
+                .scope(new RequestedScope(Scope.PARTICIPANT_PROFILE, true, ""))
                 .build();
 
         BroadEcosApiProvider broadEcosApi = BroadEcosApiProvider
