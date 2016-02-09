@@ -27,6 +27,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+define('STUDENT', 5);
+
 abstract class BroadEcosAPIException extends Exception {
 
     private $statusCode;
@@ -89,6 +91,24 @@ class UnprocessableEntityException extends BroadEcosAPIException {
 
     }
 }
+
+
+function getParams() {
+    return  json_decode(file_get_contents(dirname(__FILE__).'/config/params.json'), true);
+}
+
+function getLRSUrl() {
+    $params =  getParams();
+    return $params["learning-locker"]["url"];
+}
+
+
+function getLRSAuthorizationHash() {
+    $params = getParams();
+    return base64_encode($params["learning-locker"]["username"].':'.$params["learning-locker"]["password"]);
+}
+
+
 
 function randCode($size, $str = "", $chr = 'ACEFHJKMNPRTUVWXY0123456789') {
     $length = strlen($chr);
@@ -215,6 +235,8 @@ function pathMatch($resource, $pathInfo)
 
 function getParameters($resource, $request)
 {
+    if (!is_array($resource['parameters']))
+            var_dump($resource);
     $params = array();
     foreach ($resource['parameters']['param'] as $param) {
         if (!array_key_exists('name', $param))
@@ -236,6 +258,54 @@ function getParameters($resource, $request)
     return $params;
 }
 
+function parse_json_fields($resource, $e) {
+    if (array_key_exists('json',$resource)) {
+        foreach ($resource['json']['field'] as $i=>$field) {
+            if ($field)
+                $e->$field = json_decode($e->$field);
+        }
+    }
+    return $e;
+}
+
+function broadecos_ws_type_xenroll($resource, $context, $params, $pathParams) {
+    global $DB;
+
+    if ($resource['method']=='POST') {
+        $enrollments = json_decode(file_get_contents('php://input'));
+        if (array_key_exists('courseId',$enrollments) && array_key_exists('participantIds',$enrollments)) {
+            $result = $DB->get_records_sql("select
+                    c.id as context,
+                    e.id as enroll
+                FROM
+                    mdl_context c
+                JOIN
+                    mdl_enrol e ON c.instanceid = e.courseid and e.enrol = 'manual'
+                WHERE
+                    contextlevel=50 and instanceid = ".($enrollments->courseId));
+            $courseContext = array_pop($result) ;
+
+            foreach($enrollments->participantIds as $i => $id) {
+                $userEnroll = new stdClass();
+                $userEnroll->enrolid = $courseContext->enroll;
+                $userEnroll->userid = $id;
+                $DB->insert_record('user_enrolments', $userEnroll);
+
+                $roleAssign = new stdClass();
+                $roleAssign->roleid = STUDENT ;
+                $roleAssign->contextid = $courseContext->context;
+                $roleAssign->userid = $id;
+                $DB->insert_record('role_assignments', $roleAssign);
+            }
+
+        } else {
+            throw new PreconditionsException();
+        }
+    } else {
+        throw new PreconditionsException();
+    }
+    return $enrollments;
+}
 
 
 function broadecos_ws_type_platform_query($resource, $context, $params, $pathParams){
@@ -262,13 +332,14 @@ function broadecos_ws_type_platform_query($resource, $context, $params, $pathPar
         checkUnmetParams($query);
 
         if ($resource['isarray'] === 'true') {
-            $queryResult = array_values($DB->get_records_sql($query));
+            $queryResult = array();
+            foreach (array_values($DB->get_records_sql($query)) as $value) {
+                array_push($queryResult, parse_json_fields($resource, $value));
+            }
+
         } else {
-            $queryResult = $DB->get_record_sql($query);
-
-
+            $queryResult = parse_json_fields($resource, $DB->get_record_sql($query));
         }
-
     } else {
         throw new PreconditionsException();
     }
@@ -288,13 +359,13 @@ function checkUnmetParams($query)
 function broadecos_ws_type_lrs_statement_post($resource, $context, $params, $pathParams){
 
     $content = file_get_contents('php://input');
-    $url = 'http://learninglocker/data/xAPI/statements';
+    $url = 'http://'.getLRSUrl().'/data/xAPI/statements';
 
     $options = array(
         'http' => array(
             'header'  => "Content-Type: application/json\r\n".
                 "X-Experience-API-Version: 1.0.0\r\n".
-                "Authorization: Basic NDFhMGU2ZDQ1MzQzZjk3NjE3NmRmMmY4ZmVmYzYwMjBlZDhiNDAwYzozMzk3MTBjNzkwM2Q3MzUzNGVhYmI1NTZlNGU3NDllMGZiZDc0N2M1\r\n",
+                "Authorization: Basic ".getLRSAuthorizationHash()."\r\n",
             'method'  => 'POST',
             'content' => $content,
         ),
@@ -306,22 +377,13 @@ function broadecos_ws_type_lrs_statement_post($resource, $context, $params, $pat
 
 function broadecos_ws_type_lrs_statement_get($resource, $context, $params, $pathParams){
 
-    $url = 'http://learninglocker/data/xAPI/statements?'.$_SERVER['QUERY_STRING'];
+    $url = 'http://'.getLRSUrl().'/data/xAPI/statements?'.$_SERVER['QUERY_STRING'];
 
-
-    $options = array(
-        'http' => array(
-            'header'  => "Content-Type: application/json\r\n".
-                "X-Experience-API-Version: 1.0.0\r\n".
-                "Authorization: Basic NDFhMGU2ZDQ1MzQzZjk3NjE3NmRmMmY4ZmVmYzYwMjBlZDhiNDAwYzozMzk3MTBjNzkwM2Q3MzUzNGVhYmI1NTZlNGU3NDllMGZiZDc0N2M1\r\n",
-            'method'  => 'GET'
-        ),
-    );
 
     $headers = array();
     $headers[] = 'Content-Type: application/json';
     $headers[] = 'X-Experience-API-Version: 1.0.0';
-    $headers[] = 'Authorization: Basic NDFhMGU2ZDQ1MzQzZjk3NjE3NmRmMmY4ZmVmYzYwMjBlZDhiNDAwYzozMzk3MTBjNzkwM2Q3MzUzNGVhYmI1NTZlNGU3NDllMGZiZDc0N2M1';
+    $headers[] = 'Authorization: Basic '.getLRSAuthorizationHash();
 
     $response = rest_get($url, $headers);
 

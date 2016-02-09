@@ -1,7 +1,7 @@
-package br.ufjf.nenc.broadecos.platform.service;
+package br.ufjf.nenc.broadecos.platform.component;
 
-import br.ufjf.nenc.broadecos.platform.api.Resource;
 import br.ufjf.nenc.broadecos.platform.api.ResourceType;
+import br.ufjf.nenc.broadecos.platform.component.Resources;
 import br.ufjf.nenc.broadecos.platform.excp.PreconditionsFailedException;
 import br.ufjf.nenc.broadecos.platform.excp.ResourceNotFoundException;
 import br.ufjf.nenc.broadecos.platform.excp.UnauthorizedResourceException;

@@ -1,6 +1,5 @@
 package br.ufjf.nenc.thautology.service;
 
-import br.ufjf.nenc.broadecos.api.BroadEcosApi;
 import br.ufjf.nenc.broadecos.api.BroadEcosApiProvider;
 import br.ufjf.nenc.broadecos.api.model.Course;
 import br.ufjf.nenc.broadecos.api.model.ParticipantProfile;

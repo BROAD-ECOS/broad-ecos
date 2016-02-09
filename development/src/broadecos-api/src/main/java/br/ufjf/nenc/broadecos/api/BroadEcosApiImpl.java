@@ -42,6 +42,35 @@ public class BroadEcosApiImpl implements BroadEcosApi {
         this.wsClient = new SecureWSClient(context);
     }
 
+    private String buildExperiencePath(ExperienceRequest request) {
+        checkArgument(isNotNull(request));
+
+        return tryOf(()-> {
+            String experiencePath = "/experiences";
+            Optional<String> params = request.params().stream()
+                    .map(this::buildParamString)
+                    .reduce((a, b) -> a + '&' + b);
+
+            if (params.isPresent()) {
+                experiencePath += '?' + params.get();
+            }
+
+            return experiencePath;
+        });
+    }
+
+    private String buildParamString(ExperienceRequest.Param p) {
+        return tryOf(() -> format("%s=%s", p.getName(), encode(p.getValue(), "UTF-8")));
+    }
+
+    private <T> T tryOf(Try.CheckedSupplier<T> block) {
+        try {
+            return block.get();
+        } catch (Throwable t) {
+            throw new BroadEcosApiException(t);
+        }
+    }
+
     @Override
     public ParticipantProfile getCurrentParticipant() {
         return tryOf(()-> wsClient.get("/me/profile", ParticipantProfile.class));
@@ -79,8 +108,15 @@ public class BroadEcosApiImpl implements BroadEcosApi {
     public List<ParticipantProfile> getCurrentCourseParticipants() {
         return tryOf(() -> {
             ClientResponse clientResponse = wsClient.getList("/courses/current/participants");
-            return clientResponse.getEntity(new GenericType<List<ParticipantProfile>>() {
-            });
+            return clientResponse.getEntity(new GenericType<List<ParticipantProfile>>() {});
+        });
+    }
+
+    @Override
+    public List<ParticipantProfile> getAllParticipants() {
+        return tryOf(() -> {
+            ClientResponse clientResponse = wsClient.getList("/participants");
+            return clientResponse.getEntity(new GenericType<List<ParticipantProfile>>() {});
         });
     }
 
@@ -97,32 +133,23 @@ public class BroadEcosApiImpl implements BroadEcosApi {
         });
     }
 
-    private String buildExperiencePath(ExperienceRequest request) {
-        checkArgument(isNotNull(request));
+    @Override
+    public <T> T get(String url, Class<T> returnType) {
+        return tryOf(()-> wsClient.get(url, returnType));
+    }
 
-        return tryOf(()-> {
-            String experiencePath = "/experiences";
-            Optional<String> params = request.params().stream()
-                    .map(this::buildParamString)
-                    .reduce((a, b) -> a + '&' + b);
-
-            if (params.isPresent()) {
-                experiencePath += '?' + params.get();
-            }
-
-            return experiencePath;
+    @Override
+    public <T> List<T> getList(String url, Class<T> returnType) {
+        return  tryOf(() -> {
+            ClientResponse clientResponse = wsClient.getList(url);
+            return clientResponse.getEntity(new GenericType<List<T>>() {});
         });
     }
 
-    private String buildParamString(ExperienceRequest.Param p) {
-        return tryOf(() -> format("%s=%s", p.getName(), encode(p.getValue(), "UTF-8")));
+    @Override
+    public <T> T post(String url, T content) {
+        return wsClient.post(url, content);
     }
 
-    private <T> T tryOf(Try.CheckedSupplier<T> block) {
-         try {
-             return block.get();
-         } catch (Throwable t) {
-             throw new BroadEcosApiException(t);
-         }
-    }
+
 }

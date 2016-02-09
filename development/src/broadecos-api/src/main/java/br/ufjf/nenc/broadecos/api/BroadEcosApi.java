@@ -23,8 +23,16 @@ public interface BroadEcosApi {
 
     List<ParticipantProfile> getCurrentCourseParticipants();
 
+    List<ParticipantProfile> getAllParticipants();
+
     Reference sendExperience(ExperienceStatement statement);
 
     ExperienceResponse getExperience(ExperienceRequest experienceRequest);
+
+    <T> T get(String url, Class<T> returnType);
+
+    <T> List<T> getList(String url, Class<T> returnType);
+
+    <T> T post(String url, T content);
 
 }

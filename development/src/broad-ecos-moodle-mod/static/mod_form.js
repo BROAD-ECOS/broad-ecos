@@ -85,6 +85,17 @@
     '</div>';
 
 
+    var EXTENSIONS_TEMPLATE = '<div class="fitem fitem_fcheckbox servicemetadata">'+
+        '<div class="fitemtitle">'+
+        '<label >Este serviço solicita os seguintes escopos de extensões:</label>'+
+        '</div>'+
+        '<div id="extensions" class="felement fcheckbox servicemetadata" >'+
+        '</div>'+
+        '</div>';
+
+
+
+
     function loadServiceMetadata(serviceUri, changed, callback) {
         callback = callback || function(){};
         if (serviceUri){
@@ -103,6 +114,7 @@
                     infos.push(replaceAll(':value', metadata.name, replaceAll(':metadata', 'Nome', INFO_TEXT_TEMPLATE)));
                     infos.push(replaceAll(':value', metadata.description, replaceAll(':metadata', 'Descrição', INFO_TEXT_TEMPLATE)));
                     infos.push(SCOPES_TEMPLATE);
+                    infos.push(EXTENSIONS_TEMPLATE);
 
 
                     Jquery.each(infos, function(i, it){
@@ -110,6 +122,7 @@
                     });
 
                     var scopes = [];
+                    var xscopes = [];
                     var previdousApprovedScopes = [];
 
                     if (!changed) {
@@ -118,14 +131,38 @@
 
                     Jquery.each(metadata.scopes, function(i, scope){
                         var cheched = '';
-                        console.log(i, scope, previdousApprovedScopes,Jquery.inArray(scope, previdousApprovedScopes));
+
+                        if (Jquery.isPlainObject(scope))
+                            scope = scope.id;
+
                         if (Jquery.inArray(scope, previdousApprovedScopes)!= -1){
                             cheched = 'checked="checked"';
                         }
+
                         scopes.push('<span><input name="'+scope+'" '+cheched+' class="broadescosscope" type="checkbox" value="'+scope+'" id="'+scope+'">'+scope+'</span>');
                     });
 
                     Jquery('#scopes').html(scopes.join('<br />'));
+
+                    console.log(metadata);
+                    Jquery.each(metadata.extensions, function(i, extension){
+                        var cheched = '';
+
+                        Jquery.each(extension.scopes, function(e, xscope) {
+
+                            if (Jquery.isPlainObject(xscope))
+                                xscope = xscope.id;
+
+
+                            if (Jquery.inArray(xscope, previdousApprovedScopes) != -1) {
+                                cheched = 'checked="checked"';
+                            }
+
+                            xscopes.push('<span><input name="'+xscope+'" '+cheched+' class="broadescosscope" type="checkbox" value="'+xscope+'" id="'+xscope+'">('+extension.id+') - '+xscope+'</span>');
+                        });
+                    });
+
+                    Jquery('#extensions').html(xscopes.join('<br />'));
 
                     $scopes = Jquery('.broadescosscope');
                     $scopes.change(function(){

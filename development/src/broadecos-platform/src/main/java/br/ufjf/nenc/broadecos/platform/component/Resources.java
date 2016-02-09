@@ -1,4 +1,4 @@
-package br.ufjf.nenc.broadecos.platform.service;
+package br.ufjf.nenc.broadecos.platform.component;
 
 import br.ufjf.nenc.broadecos.platform.api.Api;
 import br.ufjf.nenc.broadecos.platform.api.Method;

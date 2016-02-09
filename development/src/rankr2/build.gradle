@@ -21,11 +21,11 @@ apply plugin: "info.robotbrain.lombok"
 
 
 group 'br.ufjf.nenc.broadecos'
-version '2.0-SNAPSHOT'
+version '2.0'
 
 jar {
     baseName = 'rankr'
-    version = '2.0-SNAPSHOT'
+    version = '2.0'
 }
 sourceCompatibility = 1.8
 targetCompatibility = 1.8

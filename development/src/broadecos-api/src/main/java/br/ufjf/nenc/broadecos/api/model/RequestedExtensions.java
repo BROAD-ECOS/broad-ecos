@@ -8,14 +8,14 @@ import java.util.Set;
 import static com.google.common.base.Preconditions.checkArgument;
 
 @Data
-@JsonRootName("scope")
+@JsonRootName("extensions")
 public class RequestedExtensions {
 
-    private final Scope id;
+    private final String id;
     private final Set<RequestedScope> scopes;
     private final String reason;
 
-    public RequestedExtensions(Scope id, Set<RequestedScope> scopes, String reason) {
+    public RequestedExtensions(String id, Set<RequestedScope> scopes, String reason) {
         checkArgument(id!=null);
         checkArgument(scopes!=null);
         checkArgument(reason!=null);

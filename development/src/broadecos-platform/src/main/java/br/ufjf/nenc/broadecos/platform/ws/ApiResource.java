@@ -4,7 +4,7 @@ import br.ufjf.nenc.broadecos.platform.api.Method;
 import br.ufjf.nenc.broadecos.platform.model.ApiRequest;
 import br.ufjf.nenc.broadecos.platform.model.RequestParams;
 import br.ufjf.nenc.broadecos.platform.model.TokenContext;
-import br.ufjf.nenc.broadecos.platform.service.ApiRequestHandler;
+import br.ufjf.nenc.broadecos.platform.component.ApiRequestHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
