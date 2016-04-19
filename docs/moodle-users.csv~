@@ -1,4 +1,4 @@
 username,password,firstname,lastname,email,course1
 jonest,verysecret,Tom,Jones,jonest@someplace.edu,History of GNU Linux
 reznort,somesecret,Trent,Reznor,reznort@someplace.edu,History of GNU Linux
-estudante3,@@@S3cr3t,Estudante,III,estudante3@someplace.edu,History of GNU Linux
+estudante3,mysecret,Estudante,III,estudante3@someplace.edu,History of GNU Linux

@@ -1,6 +1,5 @@
 * Carregar as informações no Rankr
 
-[ ] Taughtology: Corrigir exibição das imagens
 [ ] [env] Corrigir portas mapeadas
 [ ] [mod_broad] Adiconar ícones e formalizar metadados
 [ ] [mod_broad] Refatorar scripts do mod_form.js
@@ -23,3 +22,16 @@ broadecosadmin
 
 
 http://dev.broadecos/moodle/mod/broadecosmod/ws.php/auth?client_id=Rankr&course_id=3&redirect_uri=http://dev.broadecos:8090/authorization/code&response_type=code&
+
+broad-ecos-platform	
+http://dev.broadecos/moodle/mod/broadecosmod/ws.php
+broad-ecos-token	
+2b0543999c653bb3e6fc90891500cfea
+
+
+Verificar hipóteses
+Tirar foco da API
+Dar visibilidade da integração  exibir adaptadores
+Deixar claro a função de gamificação no projeto.
+Produto x Serviço x Recurso educacional
+

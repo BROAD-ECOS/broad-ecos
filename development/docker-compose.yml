@@ -25,6 +25,7 @@ moodle:
     - ./src/broad-ecos-moodle-mod:/var/www/html/moodle/mod/broadecosmod
     - ./infra/containers/moodle/config/config.php:/var/www/html/moodle/config.php
     - ./infra/containers/moodle/data/moodledata:/var/www/moodledata
+  dns: 172.17.42.1
 
 mariadb:
   build: infra/containers/mariadb
@@ -47,23 +48,21 @@ learninglocker:
     - "8079:80"
     - "27018:27017"
   volumes:
-#    - ./infra/containers/learninglocker/config/database.php:/var/www/html/learninglocker/app/config/database.php 
     - ./infra/containers/learninglocker/data/data:/data/db
-#   - ./infra/containers/learninglocker/data/storage:/var/www/html/learninglocker/app/storage
 
 redis:
   build: infra/containers/redis
   ports:
     - "6379:6379"
 
-postgresql:
-  build: infra/containers/postgresql
-  ports:
-    - "5433:5432"
-  volumes:
-    - ./infra/containers/postgresql/data:/var/lib/postgresql
-  env_file:
-    - ./infra/envvars/postgresql.env
+#postgresql:
+#  build: infra/containers/postgresql
+#  ports:
+#    - "5433:5432"
+#  volumes:
+#    - ./infra/containers/postgresql/data:/var/lib/postgresql
+#  env_file:
+#    - ./infra/envvars/postgresql.env
 
 mongodb:
   build: infra/containers/mongodb
@@ -72,14 +71,14 @@ mongodb:
   ports:
     - "27017:27017"
 
-#broadauth:
-#  build: infra/containers/broadecos_auth
+#rankr:
+#  build: infra/containers/rankr
 #  links:
-#    - postgresql
+#    - mongodb
 #  ports:
-#    - "9999:9999"
+#    - "8090:8090"
 #  volumes:
-#    - ./src/broad-ecos-auth-service/build/libs/demo-0.0.1.jar:/opt/app.jar
+#    - ./src/rankr2/build/libs/rankr-2.0.jar:/opt/app.jar
 #  env_file:
 #    - ./infra/envvars/broad_auth.env
-
+#  dns: 172.17.42.1

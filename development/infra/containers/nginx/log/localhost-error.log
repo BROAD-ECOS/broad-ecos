@@ -503,3 +503,80 @@ Error code: dmlreadexception
 Error code: generalexceptionmessage
 * line 233 of /mod/broadecosmod/locallib.php: PreconditionsException thrown
 * line 30 of /mod/broadecosmod/ws.php: call to getParameters()" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /moodle/mod/broadecosmod/ws.php/experiences?verb=http%3A%2F%2Fwordnet-rdf.princeton.edu%2Fwn31%2F301455267-a&since=2015-10-01T07%3A21%2B00%3A00 HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2015/10/09 08:47:03 [error] 9#0: *1 directory index of "/var/www/html/" is forbidden, client: 172.17.42.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost"
+2015/10/09 08:47:03 [error] 9#0: *1 FastCGI sent in stderr: "Unable to open primary script: /var/www/html/index.php (No such file or directory)" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://172.17.0.8:9000", host: "localhost"
+2015/10/09 08:50:34 [error] 6#0: *1 FastCGI sent in stderr: "Unable to open primary script: /var/www/html/index.php (No such file or directory)" while reading response header from upstream, client: 172.17.42.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://172.17.0.15:9000", host: "dev.broadecos"
+2015/11/16 21:20:45 [error] 5#0: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.17.0.1, server: localhost, request: "GET /moodle/ HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2015/11/16 21:20:46 [error] 5#0: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.17.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2015/11/16 21:28:56 [error] 5#0: *43 FastCGI sent in stderr: "Unable to open primary script: /var/www/html/index.php (No such file or directory)" while reading response header from upstream, client: 172.17.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/mod/broadecosmod/ws.php/me/profile"
+2016/01/10 20:50:04 [error] 7#0: *1 FastCGI sent in stderr: "Unable to open primary script: /var/www/html/index.php (No such file or directory)" while reading response header from upstream, client: 172.17.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "localhost", referrer: "http://localhost/moodle/"
+2016/02/03 10:27:01 [error] 5#0: *424 FastCGI sent in stderr: "Unable to open primary script: /var/www/html/index.php (No such file or directory)" while reading response header from upstream, client: 172.17.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2016/02/03 10:27:02 [error] 5#0: *424 FastCGI sent in stderr: "Unable to open primary script: /var/www/html/index.php (No such file or directory)" while reading response header from upstream, client: 172.17.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2016/02/03 10:39:14 [error] 5#0: *529 FastCGI sent in stderr: "PHP message: [client 172.17.0.1]  http://dev.broadecos/moodle  Failed Login:  jonest  Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:43.0) Gecko/20100101 Firefox/43.0" while reading response header from upstream, client: 172.17.0.1, server: localhost, request: "POST /moodle/login/index.php HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/login/index.php"
+2016/02/03 10:39:21 [error] 5#0: *529 FastCGI sent in stderr: "PHP message: [client 172.17.0.1]  http://dev.broadecos/moodle  Failed Login:  reznort  Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:43.0) Gecko/20100101 Firefox/43.0" while reading response header from upstream, client: 172.17.0.1, server: localhost, request: "POST /moodle/login/index.php HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/login/index.php"
+2016/02/03 10:39:30 [error] 5#0: *529 FastCGI sent in stderr: "PHP message: [client 172.17.0.1]  http://dev.broadecos/moodle  Failed Login:  jonest  Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:43.0) Gecko/20100101 Firefox/43.0" while reading response header from upstream, client: 172.17.0.1, server: localhost, request: "POST /moodle/login/index.php HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/login/index.php"
+2016/02/03 23:20:45 [error] 5#0: *199 FastCGI sent in stderr: "PHP message: Default exception handler: Sorry, but you do not currently have permissions to do that (Manage activities) Debug: 
+Error code: nopermissions
+* line 786 of /lib/accesslib.php: required_capability_exception thrown
+* line 427 of /course/modlib.php: call to require_capability()
+* line 139 of /course/modedit.php: call to can_update_moduleinfo()" while reading response header from upstream, client: 172.17.0.1, server: localhost, request: "GET /moodle/course/modedit.php?update=18&return=0&sr=0 HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/course/view.php?id=3&notifyeditingon=1"
+2016/02/07 22:44:45 [error] 6#0: *3 directory index of "/var/www/html/" is forbidden, client: 172.17.0.1, server: localhost, request: "GET / HTTP/1.1", host: "dev.broadecos"
+2016/02/07 22:44:45 [error] 6#0: *3 FastCGI sent in stderr: "Unable to open primary script: /var/www/html/index.php (No such file or directory)" while reading response header from upstream, client: 172.17.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2016/02/08 10:56:55 [error] 6#0: *538 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 172.17.0.1, server: localhost, request: "GET /moodle/mod/broadecosmod/ws.php/auth/authorize?client_id=rankr&course_id=3&redirect_uri=http://dev.broadecos:8090/authorization/code&response_type=code HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2016/02/08 14:14:00 [error] 6#0: *590 FastCGI sent in stderr: "Unable to open primary script: /var/www/html/index.php (No such file or directory)" while reading response header from upstream, client: 172.17.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2016/02/08 17:25:08 [error] 6#0: *1258 FastCGI sent in stderr: "PHP message: Default exception handler: Incorrect sesskey submitted, form not accepted! Debug: 
+Error code: invalidsesskey
+* line 481 of /lib/setuplib.php: moodle_exception thrown
+* line 33 of /lib/ajax/setuserpref.php: call to print_error()" while reading response header from upstream, client: 172.17.0.1, server: localhost, request: "GET /moodle/lib/ajax/setuserpref.php?sesskey=63lwNzfqYz&pref=docked_block_instance_5&value=0 HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos", referrer: "http://dev.broadecos/moodle/mod/broadecosmod/view.php?id=19"
+2016/02/08 23:47:50 [error] 6#0: *1776 FastCGI sent in stderr: "PHP message: Default exception handler: Error writing to database Debug: Column 'enrolid' cannot be null
+INSERT INTO mdl_user_enrolments (enrolid,userid) VALUES(?,?)
+[array (
+  0 => NULL,
+  1 => '5',
+)]
+Error code: dmlwriteexception
+* line 446 of /lib/dml/moodle_database.php: dml_write_exception thrown
+* line 1164 of /lib/dml/mysqli_native_moodle_database.php: call to moodle_database->query_end()
+* line 1210 of /lib/dml/mysqli_native_moodle_database.php: call to mysqli_native_moodle_database->insert_record_raw()
+* line 294 of /mod/broadecosmod/locallib.php: call to mysqli_native_moodle_database->insert_record()
+* line ? of unknownfile: call to broadecos_ws_type_xenroll()
+* line 35 of /mod/broadecosmod/ws.php: call to call_user_func_array()" while reading upstream, client: 172.17.0.1, server: localhost, request: "POST /moodle/mod/broadecosmod/ws.php/ext/enroll HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2016/02/08 23:49:13 [error] 6#0: *1782 FastCGI sent in stderr: "PHP message: Default exception handler: Error writing to database Debug: Column 'enrolid' cannot be null
+INSERT INTO mdl_user_enrolments (enrolid,userid) VALUES(?,?)
+[array (
+  0 => NULL,
+  1 => '5',
+)]
+Error code: dmlwriteexception
+* line 446 of /lib/dml/moodle_database.php: dml_write_exception thrown
+* line 1164 of /lib/dml/mysqli_native_moodle_database.php: call to moodle_database->query_end()
+* line 1210 of /lib/dml/mysqli_native_moodle_database.php: call to mysqli_native_moodle_database->insert_record_raw()
+* line 292 of /mod/broadecosmod/locallib.php: call to mysqli_native_moodle_database->insert_record()
+* line ? of unknownfile: call to broadecos_ws_type_xenroll()
+* line 35 of /mod/broadecosmod/ws.php: call to call_user_func_array()" while reading upstream, client: 172.17.0.1, server: localhost, request: "POST /moodle/mod/broadecosmod/ws.php/ext/enroll HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2016/02/08 23:50:09 [error] 6#0: *1785 FastCGI sent in stderr: "PHP message: Default exception handler: Error writing to database Debug: Column 'enrolid' cannot be null
+INSERT INTO mdl_user_enrolments (enrolid,userid) VALUES(?,?)
+[array (
+  0 => NULL,
+  1 => '5',
+)]
+Error code: dmlwriteexception
+* line 446 of /lib/dml/moodle_database.php: dml_write_exception thrown
+* line 1164 of /lib/dml/mysqli_native_moodle_database.php: call to moodle_database->query_end()
+* line 1210 of /lib/dml/mysqli_native_moodle_database.php: call to mysqli_native_moodle_database->insert_record_raw()
+* line 292 of /mod/broadecosmod/locallib.php: call to mysqli_native_moodle_database->insert_record()
+* line ? of unknownfile: call to broadecos_ws_type_xenroll()
+* line 35 of /mod/broadecosmod/ws.php: call to call_user_func_array()" while reading upstream, client: 172.17.0.1, server: localhost, request: "POST /moodle/mod/broadecosmod/ws.php/ext/enroll HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
+2016/02/08 23:50:33 [error] 6#0: *1788 FastCGI sent in stderr: "PHP message: Default exception handler: Error writing to database Debug: Column 'enrolid' cannot be null
+INSERT INTO mdl_user_enrolments (enrolid,userid) VALUES(?,?)
+[array (
+  0 => NULL,
+  1 => '5',
+)]
+Error code: dmlwriteexception
+* line 446 of /lib/dml/moodle_database.php: dml_write_exception thrown
+* line 1164 of /lib/dml/mysqli_native_moodle_database.php: call to moodle_database->query_end()
+* line 1210 of /lib/dml/mysqli_native_moodle_database.php: call to mysqli_native_moodle_database->insert_record_raw()
+* line 292 of /mod/broadecosmod/locallib.php: call to mysqli_native_moodle_database->insert_record()
+* line ? of unknownfile: call to broadecos_ws_type_xenroll()
+* line 35 of /mod/broadecosmod/ws.php: call to call_user_func_array()" while reading upstream, client: 172.17.0.1, server: localhost, request: "POST /moodle/mod/broadecosmod/ws.php/ext/enroll HTTP/1.1", upstream: "fastcgi://172.17.0.7:9000", host: "dev.broadecos"
