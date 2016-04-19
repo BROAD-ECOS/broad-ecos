@@ -28,10 +28,5 @@ http://dev.broadecos/moodle/mod/broadecosmod/ws.php
 broad-ecos-token	
 2b0543999c653bb3e6fc90891500cfea
 
-
-Verificar hipóteses
-Tirar foco da API
-Dar visibilidade da integração  exibir adaptadores
-Deixar claro a função de gamificação no projeto.
-Produto x Serviço x Recurso educacional
-
+- 01/2015- Fornecedores.
+- 01/2015- Fornecedores > instrutores

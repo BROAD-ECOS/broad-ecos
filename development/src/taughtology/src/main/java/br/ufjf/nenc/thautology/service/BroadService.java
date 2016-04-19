@@ -20,6 +20,7 @@ public class BroadService {
     }
 
     public PlatformInfo getPlatformInfo(Context context){
+        System.out.println(context);
         return broadEcosApiProvider.withContext(context).getPlatFormInfo();
     }
 
