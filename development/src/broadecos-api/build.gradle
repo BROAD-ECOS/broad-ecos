@@ -34,7 +34,7 @@ dependencies {
 
 install {
     repositories.mavenInstaller {
-        pom.version = '1.0.27'
+        pom.version = '1.0.28'
         pom.artifactId = 'broadecos-api'
     }
 }

@@ -29,7 +29,7 @@ public class CurrentUserProvider {
 
         ParticipantProfile profile = broadEcosApiProvider
                 .withContext(context)
-                .getParticipant();
+                .getCurrentParticipant();
 
         profile.setPlatform(context.getPlatform());
 

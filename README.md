@@ -1,2 +1,23 @@
 # broad-ecos
 ## BROAD Ecosystem
+- Apache
+- PHP 5.6
+-- Módulos!
+-- Instalação do arquivo de configuração
+-- Configuração do diretório para dataroot
+- Visual Studio Code
+- JDK8
+- MySQL
+-- root:broad-ecos
+-mysql-workbench
+- Mongo
+- robomongo
+- Moodle
+  - localhost/moodle
+  - admin Adm!n2015
+  - Habilitar módulo broad-ecos Plugins > Plugin
+- Learning Locker
+     - Instalar e baixar dependências.
+     - admin admin
+     - Criar LRS
+     - Configurar broad-ecos com os parâmetros.
