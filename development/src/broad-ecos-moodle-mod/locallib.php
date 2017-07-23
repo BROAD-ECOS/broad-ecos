@@ -153,12 +153,12 @@ function loadTokenInfo($server){
     } else  if (isAuthPath($server)) {
         $context = array(
             'isAuth' => true,
-            'baseUrl' => 'http://dev.broadecos/moodle',
+            'baseUrl' => 'http://localhost/moodle',
             'baseImagePath' => '/pluginfile.php',
             'platformName' => 'Universidade Federal de Juiz de Fora (UFJF)',
-            'platformLogo' => 'http://dev.broadecos/moodle/theme/image.php/clean/core/1439983890/moodlelogo',
-            'moreInfo' => 'http://dev.broadecos/moodle',
-            'apiURL' => 'http://dev.broadecos/moodle/mod/broadecosmod/ws.php',
+            'platformLogo' => 'http://localhost/moodle/theme/image.php/clean/core/1439983890/moodlelogo',
+            'moreInfo' => 'http://localhost/moodle',
+            'apiURL' => 'http://localhost/moodle/mod/broadecosmod/ws.php',
             'approved_scopes' => array()
         );
     }
@@ -179,12 +179,12 @@ function getTokenContext($server)
 
         $context = (array)array_merge(array(
             'isAuth' => false,
-            'baseUrl' => 'http://dev.broadecos/moodle',
+            'baseUrl' => 'http://localhost/moodle',
             'baseImagePath' => '/pluginfile.php',
             'platformName' => 'Universidade Federal de Juiz de Fora (UFJF)',
-            'platformLogo' => 'http://dev.broadecos/moodle/theme/image.php/clean/core/1439983890/moodlelogo',
-            'moreInfo' => 'http://dev.broadecos/moodle',
-            'apiURL' => 'http://dev.broadecos/moodle/mod/broadecosmod/ws.php',
+            'platformLogo' => 'http://localhost/moodle/theme/image.php/clean/core/1439983890/moodlelogo',
+            'moreInfo' => 'http://localhost/moodle',
+            'apiURL' => 'http://localhost/moodle/mod/broadecosmod/ws.php',
             'approved_scopes' => array()
         ), (array)$token);
     }

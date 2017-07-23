@@ -113,7 +113,7 @@ echo '<div class="singlebutton" style="float: right;">
         <form action="'.$broadecosmod->external_service_entrypoint.'" method="get" target="_blank">
             <div>
                 <input type="submit" value="Abrir em outra janela">
-                <input type="hidden" value="'.urlencode('http://dev.broadecos/moodle/mod/broadecosmod/ws.php').'" name="platform">
+                <input type="hidden" value="'.urlencode('http://localhost/moodle/mod/broadecosmod/ws.php').'" name="platform">
                 <input type="hidden" value="'.$token->token.'" name="token">
             </div>
         </form>
@@ -122,7 +122,7 @@ echo '<hr />';
 
 echo '<iframe src="'.($broadecosmod->external_service_entrypoint)
         .'?token='.$token->token
-        .'&platform='.urlencode('http://dev.broadecos/moodle/mod/broadecosmod/ws.php')
+        .'&platform='.urlencode('http://localhost/moodle/mod/broadecosmod/ws.php')
         .'"  width="100%" height="779px" frameborder="0"></iframe>';
 
 // Finish the page.
